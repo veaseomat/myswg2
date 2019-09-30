@@ -42,12 +42,36 @@ function VillageJediManagerHolocron.useTheHolocron(pSceneObject, pPlayer)
 	end
 
 	-- The holocrom hums softly as you feel your Force power replenish.
-	CreatureObject(pPlayer):sendSystemMessage("@jedi_spam:holocron_force_replenish")
-	PlayerObject(pGhost):setForcePower(PlayerObject(pGhost):getForcePowerMax());
-	CreatureObject(pPlayer):addCooldown(USEDHOLOCRON, HOLOCRONCOOLDOWNTIME)
+		
+	if CreatureObject(pPlayer):hasSkill("force_title_jedi_rank_03") then
+		local playerCouncil = JediTrials:getJediCouncil(pPlayer)
+	
+		if playerCouncil == JediTrials.COUNCIL_LIGHT and not CreatureObject(pPlayer):hasSkill("force_rank_light_novice") then
+			local sui = SuiMessageBox.new("KnightTrials", "noCallback")
+			sui.setTitle("FRS UNLOCK")
+			sui.setPrompt("Welcome to the Force ranking system. Completing BH missions and using more holocrons will earn FRS exp. You can learn FRS skills from trainers. There are also wild spawn dark jedi sentinels on every planet that drop higher tier loot when you are strong enough.")
+			sui.sendTo(pPlayer)
+		awardSkill(pPlayer, "force_rank_light_novice")
+		end
+
+		if playerCouncil == JediTrials.COUNCIL_DARK and not CreatureObject(pPlayer):hasSkill("force_rank_dark_novice") then
+			local sui = SuiMessageBox.new("KnightTrials", "noCallback")
+			sui.setTitle("FRS UNLOCK")
+			sui.setPrompt("Welcome to the Force ranking system. Completing BH missions and using more holocrons will earn FRS exp. You can learn FRS skills from trainers. There are also wild spawn dark jedi sentinels on every planet that drop higher tier loot when you are strong enough.")
+			sui.sendTo(pPlayer)
+		awardSkill(pPlayer, "force_rank_dark_novice")	
+		end		
+
+	CreatureObject(pPlayer):awardExperience("force_rank_xp", 5000, true)		
 
 	SceneObject(pSceneObject):destroyObjectFromWorld()
 	SceneObject(pSceneObject):destroyObjectFromDatabase()
+	CreatureObject(pPlayer):sendSystemMessage("The Holocron hums softly and begins to glow! You have absorbed the ancient knowledge of the holocron.")
+
+	else
+		CreatureObject(pPlayer):sendSystemMessage("The Holocron hums briefly but does nothing. Only a Jedi Knight can access the knowledge within.")
+	end
+	
 end
 
 -- Send message to the player that he cannot replenish the force.
@@ -68,15 +92,7 @@ end
 -- @param pSceneObject pointer to the holocron object.
 -- @param pPlayer pointer to the creature object that used the holocron.
 function VillageJediManagerHolocron.useHolocron(pSceneObject, pPlayer)
-	if VillageJediManagerHolocron.canUseHolocron(pPlayer) then
-		if VillageJediManagerHolocron.canReplenishForce(pPlayer) then
-			VillageJediManagerHolocron.useTheHolocron(pSceneObject, pPlayer)
-		else
-			VillageJediManagerHolocron.cannotReplenishForce(pPlayer)
-		end
-	else
-		VillageJediManagerHolocron.cannotUseHolocron(pPlayer)
-	end
+	VillageJediManagerHolocron.useTheHolocron(pSceneObject, pPlayer)
 end
 
 return VillageJediManagerHolocron

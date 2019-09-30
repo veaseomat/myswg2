@@ -65,17 +65,7 @@ void WearableObjectImplementation::fillAttributeList(AttributeListMessage* alm,
 		CreatureObject* object) {
 	TangibleObjectImplementation::fillAttributeList(alm, object);
 
-	if (socketsLeft() > 0)
-		alm->insertAttribute("sockets", socketsLeft());
 
-	for(int i = 0; i < wearableSkillMods.size(); ++i) {
-		String key = wearableSkillMods.elementAt(i).getKey();
-		String statname = "cat_skill_mod_bonus.@stat_n:" + key;
-		int value = wearableSkillMods.get(key);
-
-		if (value > 0)
-			alm->insertAttribute(statname, value);
-	}
 
 	//Anti Decay Kit
 	if(hasAntiDecayKit() && !isArmorObject()){

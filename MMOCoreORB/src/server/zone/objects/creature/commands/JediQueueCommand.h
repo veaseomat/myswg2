@@ -130,8 +130,7 @@ public:
 		if (res != SUCCESS)
 			return res;
 
-		if (isWearingArmor(creature))
-			return NOJEDIARMOR;
+
 
 		for (int i=0; i < blockingCRCs.size(); ++i) {
 			if (creature->hasBuff(blockingCRCs.get(i))) {
@@ -197,92 +196,23 @@ public:
 	int getFrsModifiedBuffValue(CreatureObject* player, int amount) const {
 		PlayerObject* ghost = player->getPlayerObject();
 
-		if (ghost == nullptr)
 			return amount;
 
-		Locker locker(player);
-
-		FrsData* playerData = ghost->getFrsData();
-		short councilType = playerData->getCouncilType();
-
-		locker.release();
-
-		float buffModifier = 0;
-		int controlModifier = 0;
-
-		if (councilType == FrsManager::COUNCIL_LIGHT) {
-			controlModifier = player->getSkillMod("force_control_light");
-			buffModifier = frsLightBuffModifier;
-		} else if (councilType == FrsManager::COUNCIL_DARK) {
-			controlModifier = player->getSkillMod("force_control_dark");
-			buffModifier = frsDarkBuffModifier;
-		}
-
-		if (controlModifier == 0 || buffModifier == 0)
-			return amount;
-
-		return amount + (int)((controlModifier * buffModifier) + 0.5f);
 	}
 
 
 	int getFrsModifiedForceCost(CreatureObject* creature) const {
 		ManagedReference<PlayerObject*> ghost = creature->getPlayerObject();
 
-		if (ghost == nullptr)
 			return forceCost;
 
-		Locker locker(creature);
-
-		FrsData* playerData = ghost->getFrsData();
-		int councilType = playerData->getCouncilType();
-
-		locker.release();
-
-		int manipulationMod = 0;
-		float frsModifier = 0;
-
-		if (councilType == FrsManager::COUNCIL_LIGHT) {
-			manipulationMod = creature->getSkillMod("force_manipulation_light");
-			frsModifier = frsLightForceCostModifier;
-		} else if (councilType == FrsManager::COUNCIL_DARK) {
-			manipulationMod = creature->getSkillMod("force_manipulation_dark");
-			frsModifier = frsDarkForceCostModifier;
-		}
-
-		if (manipulationMod == 0 || frsModifier == 0)
-			return forceCost;
-
-		return forceCost + (int)((manipulationMod * frsModifier) + .5);
 	}
 
 	float getFrsModifiedExtraForceCost(CreatureObject* creature, float val) const {
 		ManagedReference<PlayerObject*> ghost = creature->getPlayerObject();
 
-		if (ghost == nullptr)
 			return val;
 
-		Locker locker(creature);
-
-		FrsData* playerData = ghost->getFrsData();
-		int councilType = playerData->getCouncilType();
-
-		locker.release();
-
-		int manipulationMod = 0;
-		float frsModifier = 0;
-
-		if (councilType == FrsManager::COUNCIL_LIGHT) {
-			manipulationMod = creature->getSkillMod("force_manipulation_light");
-			frsModifier = frsLightExtraForceCostModifier;
-		} else if (councilType == FrsManager::COUNCIL_DARK) {
-			manipulationMod = creature->getSkillMod("force_manipulation_dark");
-			frsModifier = frsDarkExtraForceCostModifier;
-		}
-
-		if (manipulationMod == 0 || frsModifier == 0)
-			return val;
-
-		return val + ((float)manipulationMod * frsModifier);
 	}
 
 	void doForceCost(CreatureObject* creature) const {

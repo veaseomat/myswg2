@@ -636,7 +636,7 @@ bool LootManagerImplementation::createLootFromCollection(SceneObject* container,
 		if (lootChance <= 0)
 			continue;
 
-		int roll = System::random(10000000);
+		int roll = 1;
 
 		if (roll > lootChance)
 			continue;
@@ -644,6 +644,24 @@ bool LootManagerImplementation::createLootFromCollection(SceneObject* container,
 		int tempChance = 0; //Start at 0.
 
 		const LootGroups* lootGroups = entry->getLootGroups();
+
+		//Now we do the second roll to determine loot group.
+		roll = System::random(10000000);
+
+		//Select the loot group to use.
+		for (int i = 0; i < lootGroups->count(); ++i) {
+			const LootGroupEntry* entry = lootGroups->get(i);
+
+			tempChance += entry->getLootChance();
+
+			//Is this entry lower than the roll? If yes, then we want to try the next entry.
+			if (tempChance < roll)
+				continue;
+
+			createLoot(container, entry->getLootGroupName(), level);
+
+			break;
+		}
 
 		//Now we do the second roll to determine loot group.
 		roll = System::random(10000000);

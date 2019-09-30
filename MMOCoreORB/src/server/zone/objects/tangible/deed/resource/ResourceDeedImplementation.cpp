@@ -70,12 +70,5 @@ int ResourceDeedImplementation::useObject(CreatureObject* creature) {
 }
 
 void ResourceDeedImplementation::destroyDeed() {
-	if (parent.get() != NULL) {
-		destroyObjectFromWorld(true);
-	}
 
-	if (isPersistent())
-		destroyObjectFromDatabase(true);
-
-	generated = true;
 }

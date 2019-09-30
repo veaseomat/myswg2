@@ -510,10 +510,6 @@ void TangibleObjectImplementation::fillAttributeList(AttributeListMessage* alm, 
 		alm->insertAttribute("crafter", craftersName);
 	}
 
-	if (!objectSerial.isEmpty()) {
-		alm->insertAttribute("serial_number", objectSerial);
-	}
-
 	if (useCount > 1) {
 		if (gameObjectType == SceneObjectType::CRAFTINGTOOL)
 			alm->insertAttribute("craft_tool_time", useCount);
@@ -827,7 +823,7 @@ Reference<FactoryCrate*> TangibleObjectImplementation::createFactoryCrate(int ma
 
 	Locker locker(crate);
 
-	crate->setMaxCapacity(maxSize);
+	crate->setMaxCapacity(1000);
 
 
 	if (insertSelf) {

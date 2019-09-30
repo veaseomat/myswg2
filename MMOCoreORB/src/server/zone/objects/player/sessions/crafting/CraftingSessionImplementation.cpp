@@ -1188,12 +1188,12 @@ void CraftingSessionImplementation::createPrototype(int clientCounter, bool crea
 
 		if (createItem) {
 
-			startCreationTasks(manufactureSchematic->getComplexity() * 2, false);
+			startCreationTasks(manufactureSchematic->getComplexity() * 0, false);
 
 		} else {
 
 			// This is for practicing
-			startCreationTasks(manufactureSchematic->getComplexity() * 2, true);
+			startCreationTasks(manufactureSchematic->getComplexity() * 0, true);
 			xp = round(xp * 1.05f);
 		}
 

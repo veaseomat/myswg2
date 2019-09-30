@@ -41,20 +41,20 @@
 --which carries forward this exception.
 
 --Determines how often exceptional and legendary items can drop.
-yellowChance = 1000 -- 1 in 1,000
-exceptionalChance = 100000 --1 in 100,000
-legendaryChance = 1000000 --1 in 1,000,000
+yellowChance = 1000000 -- 1 in 1,000
+exceptionalChance = 1000000000 --1 in 100,000
+legendaryChance = 1000000000000 --1 in 1,000,000
 --yellowChance = 50 --1 in 50 for testing
 --exceptionalChance = 100 --1 in 100 for testing
 --legendaryChance = 1000 --1 in 1000 for testing
 
 --Determines how much of an increase in the base stats will be applied to the object.
-yellowModifier = 1.5
-exceptionalModifier = 2.5
-legendaryModifier = 5.0
+yellowModifier = 1.0
+exceptionalModifier = 1.0
+legendaryModifier = 1.0
 
 --The chance for random skill mods to be on looted weapons/wearables
-skillModChance = 500 -- 1 in 500
+skillModChance = 1000000000000 -- 1 in 500
 
 -- Value ranges for random dots on looted weapons (chance is set individually on the loot items)
 randomDotAttribute = {0, 8} -- See CreatureAttributes.h in src for numbers.
@@ -64,9 +64,14 @@ randomDotPotency = {1, 100}
 randomDotUses = {250, 9999}
 
 -- Modifier applied to min/max junk values found in loot item lua
-junkValueModifier = 5;
+junkValueModifier = 100;
 
 lootableArmorAttachmentStatMods = {
+	"combat_medicine_assembly",
+	"combat_medicine_experimentation",
+	"dna_harvesting",
+	"bio_engineer_assembly",
+	"bio_engineer_experimentation",
 	"aim",
 	"alert",
 	"berserk",
@@ -140,6 +145,9 @@ lootableArmorAttachmentStatMods = {
 }
 
 lootableClothingAttachmentStatMods = {
+	"dna_harvesting",
+	"bio_engineer_assembly",
+	"bio_engineer_experimentation",
 	"aim",
 	"alert",
 	"armor_assembly",
@@ -256,6 +264,9 @@ lootableClothingAttachmentStatMods = {
 }
 
 lootableArmorStatMods = {
+	"dna_harvesting",
+	"bio_engineer_assembly",
+	"bio_engineer_experimentation",
 	"aim",
 	"alert",
 	"armor_assembly",
@@ -367,6 +378,9 @@ lootableArmorStatMods = {
 }
 
 lootableClothingStatMods = {
+	"dna_harvesting",
+	"bio_engineer_assembly",
+	"bio_engineer_experimentation",
 	"aim",
 	"alert",
 	"armor_assembly",
@@ -804,39 +818,39 @@ lootableHeavyWeaponStatMods = {
 -- Values used to generate lightsaber crystal stats
 jediCrystalStats = {
 	lightsaber_module_force_crystal = {
-		minDamage = 0,
-		maxDamage = 50,
-		minHitpoints = 700,
-		maxHitpoints = 1400,
-		minHealthSac = 0,
-		maxHealthSac = -9,
-		minActionSac = 0,
-		maxActionSac = -9,
-		minMindSac = 0,
-		maxMindSac = -9,
-		minAttackSpeed = 0,
-		maxAttackSpeed = -0.6,
-		minForceCost = 0,
-		maxForceCost = -9.9,
-		minWoundChance = 0,
-		maxWoundChance = 4,
-	},
-	lightsaber_module_krayt_dragon_pearl = {
-		minDamage = 20,
-		maxDamage = 50,
+		minDamage = 1,
+		maxDamage = 125,
 		minHitpoints = 900,
 		maxHitpoints = 1400,
-		minHealthSac = -6,
-		maxHealthSac = -9,
-		minActionSac = -6,
-		maxActionSac = -9,
-		minMindSac = -6,
-		maxMindSac = -9,
-		minAttackSpeed = -0.3,
-		maxAttackSpeed = -0.6,
-		minForceCost = -5.0,
-		maxForceCost = -9.9,
-		minWoundChance = 2,
-		maxWoundChance = 4,
+		minHealthSac = 0,
+		maxHealthSac = 0,
+		minActionSac = 0,
+		maxActionSac = 0,
+		minMindSac = 0,
+		maxMindSac = 0,
+		minAttackSpeed = 0,
+		maxAttackSpeed = 0,
+		minForceCost = 0,
+		maxForceCost = 0,
+		minWoundChance = 0,
+		maxWoundChance = 0,
+	},
+	lightsaber_module_krayt_dragon_pearl = {
+		minDamage = 1,
+		maxDamage = 125,
+		minHitpoints = 900,
+		maxHitpoints = 1400,
+		minHealthSac = 0,
+		maxHealthSac = 0,
+		minActionSac = 0,
+		maxActionSac = 0,
+		minMindSac = 0,
+		maxMindSac = 0,
+		minAttackSpeed = 0,
+		maxAttackSpeed = 0,
+		minForceCost = 0,
+		maxForceCost = 0,
+		minWoundChance = 0,
+		maxWoundChance = 0,
 	}
 }

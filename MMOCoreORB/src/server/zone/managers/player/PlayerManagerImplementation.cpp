@@ -1035,7 +1035,7 @@ uint8 PlayerManagerImplementation::calculateIncapacitationTimer(CreatureObject* 
 	uint32 recoveryTime = (value / 5); //In seconds - 3 seconds is recoveryEvent timer
 
 	//Recovery time is gated between 10 and 60 seconds.
-	recoveryTime = Math::min(Math::max(recoveryTime, 10u), 60u);
+	recoveryTime = Math::min(Math::max(recoveryTime, 10u), 20u);
 
 	//Check for incap recovery food buff - overrides recovery time gate.
 	/*if (hasBuff(BuffCRC::FOOD_INCAP_RECOVERY)) {
@@ -1481,59 +1481,12 @@ void PlayerManagerImplementation::sendPlayerToCloner(CreatureObject* player, uin
 	uint64 preDesignatedFacilityOid = ghost->getCloningFacility();
 	ManagedReference<SceneObject*> preDesignatedFacility = server->getObject(preDesignatedFacilityOid);
 
-	if (preDesignatedFacility == NULL || preDesignatedFacility != cloner) {
-		player->addWounds(CreatureAttribute::HEALTH, 100, true, false);
-		player->addWounds(CreatureAttribute::ACTION, 100, true, false);
-		player->addWounds(CreatureAttribute::MIND, 100, true, false);
-		player->addShockWounds(100, true);
-	}
-
 	if (player->getFactionStatus() != FactionStatus::ONLEAVE && cbot->getFacilityType() != CloningBuildingObjectTemplate::FACTION_IMPERIAL && cbot->getFacilityType() != CloningBuildingObjectTemplate::FACTION_REBEL && !player->hasSkill("force_title_jedi_rank_03"))
 		player->setFactionStatus(FactionStatus::ONLEAVE);
 
 	SortedVector<ManagedReference<SceneObject*> > insurableItems = getInsurableItems(player, false);
 
 	// Decay
-	if (typeofdeath == 0 && insurableItems.size() > 0) {
-
-		ManagedReference<SuiListBox*> suiCloneDecayReport = new SuiListBox(player, SuiWindowType::CLONE_REQUEST_DECAY, SuiListBox::HANDLESINGLEBUTTON);
-		suiCloneDecayReport->setPromptTitle("DECAY REPORT");
-		suiCloneDecayReport->setPromptText("The following report summarizes the status of your items after the decay event.");
-		suiCloneDecayReport->addMenuItem("\\#00FF00DECAYED ITEMS");
-
-		for (int i = 0; i < insurableItems.size(); i++) {
-			SceneObject* item = insurableItems.get(i);
-
-			if (item != NULL && item->isTangibleObject()) {
-				ManagedReference<TangibleObject*> obj = cast<TangibleObject*>(item);
-
-				Locker clocker(obj, player);
-
-				if (obj->getOptionsBitmask() & OptionBitmask::INSURED) {
-					//1% Decay for insured items
-					obj->inflictDamage(obj, 0, 0.01 * obj->getMaxCondition(), true, true);
-					//Set uninsured
-					uint32 bitmask = obj->getOptionsBitmask() - OptionBitmask::INSURED;
-					obj->setOptionsBitmask(bitmask);
-				} else {
-					//5% Decay for uninsured items
-					obj->inflictDamage(obj, 0, 0.05 * obj->getMaxCondition(), true, true);
-				}
-
-				// Calculate condition percentage for decay report
-				int max = obj->getMaxCondition();
-				int min = max - obj->getConditionDamage();
-				int condPercentage = ( min / (float)max ) * 100.0f;
-				String line = " - " + obj->getDisplayedName() + " (@"+String::valueOf(condPercentage)+"%)";
-
-				suiCloneDecayReport->addMenuItem(line, item->getObjectID());
-			}
-		}
-
-		ghost->addSuiBox(suiCloneDecayReport);
-		player->sendMessage(suiCloneDecayReport->generateMessage());
-
-	}
 
 
 
@@ -1544,22 +1497,19 @@ void PlayerManagerImplementation::sendPlayerToCloner(CreatureObject* player, uin
 
 
 	// Jedi experience loss.
-	if (ghost->getJediState() >= 2) {
-		int jediXpCap = ghost->getXpCap("jedi_general");
-		int xpLoss = (int)(jediXpCap * -0.05);
-		int curExp = ghost->getExperience("jedi_general");
+	if (player->hasSkill("force_rank_light_master") or player->hasSkill("force_rank_dark_master")) {
 
-		int negXpCap = -10000000; // Cap on negative jedi experience
+		SkillManager::instance()->surrenderSkill("force_rank_light_master", player, true, true);
+		SkillManager::instance()->surrenderSkill("force_rank_dark_master", player, true, true);
 
-		if ((curExp + xpLoss) < negXpCap)
-			xpLoss = negXpCap - curExp;
+		ManagedReference<SuiMessageBox*> box = new SuiMessageBox(player, SuiWindowType::NONE);
+		box->setPromptTitle("Take a seat, young Skywalker");
+		box->setPromptText("You have lost your position as FRS council leader.");
 
-		awardExperience(player, "jedi_general", xpLoss, true);
-		StringIdChatParameter message("base_player","prose_revoke_xp");
-		message.setDI(xpLoss * -1);
-		message.setTO("exp_n", "jedi_general");
-		player->sendSystemMessage(message);
+		ghost->addSuiBox(box);
+		player->sendMessage(box->generateMessage());
 	}
+
 }
 
 void PlayerManagerImplementation::ejectPlayerFromBuilding(CreatureObject* player) {
@@ -1720,25 +1670,19 @@ void PlayerManagerImplementation::disseminateExperience(TangibleObject* destruct
 			for (int j = 0; j < entry->size(); ++j) {
 				uint32 damage = entry->elementAt(j).getValue();
 				String xpType = entry->elementAt(j).getKey();
-				float xpAmount = baseXp;
+				float xpAmount = 0;
 
-				xpAmount *= (float) damage / totalDamage;
+				xpAmount += totalDamage;
 
-				//Cap xp based on level
-				xpAmount = Math::min(xpAmount, calculatePlayerLevel(attacker, xpType) * 300.f);
+				//Cap xp 
 
 				//Apply group bonus if in group
-				if (group != NULL)
-					xpAmount *= groupExpMultiplier;
-
-				if (winningFaction == attacker->getFaction())
-					xpAmount *= gcwBonus;
 
 				//Jedi experience doesn't count towards combat experience, and is earned at 20% the rate of normal experience
 				if (xpType != "jedi_general")
 					combatXp += xpAmount;
 				else
-					xpAmount *= 0.2f;
+					xpAmount *= 1.f;
 
 				//Award individual expType
 				awardExperience(attacker, xpType, xpAmount);
@@ -5424,8 +5368,8 @@ bool PlayerManagerImplementation::doBurstRun(CreatureObject* player, float hamMo
 
 	uint32 crc = STRING_HASHCODE("burstrun");
 	float hamCost = 100.0f;
-	float duration = 30;
-	float cooldown = 300;
+	float duration = 120;
+	float cooldown = 60;
 
 	float burstRunMod = (float) player->getSkillMod("burst_run");
 	hamModifier += (burstRunMod / 100.f);
@@ -5465,8 +5409,8 @@ bool PlayerManagerImplementation::doBurstRun(CreatureObject* player, float hamMo
 
 	Locker locker(buff);
 
-	buff->setSpeedMultiplierMod(1.822f);
-	buff->setAccelerationMultiplierMod(1.822f);
+	buff->setSpeedMultiplierMod(1.5f);
+	buff->setAccelerationMultiplierMod(1.5f);
 
 	if (cooldownModifier == 0.f)
 		buff->setStartMessage(startStringId);

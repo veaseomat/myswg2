@@ -44,13 +44,14 @@
 SaberPolearmHit1Command = {
         name = "saberpolearmhit1",
             
-	damageMultiplier = 1.25,
-	speedMultiplier = 1.5,
+	damageMultiplier = 1.0,
+	speedMultiplier = 1.0,
 	healthCostMultiplier = 0,
 	actionCostMultiplier = 0,
 	mindCostMultiplier = 0,
 	forceCostMultiplier = 1.0,
 	visMod = 25,
+
 
 	animation = "combo_3a", 
 	animType = GENERATE_INTENSITY,
@@ -59,7 +60,7 @@ SaberPolearmHit1Command = {
 
 	poolsToDamage = RANDOM_ATTRIBUTE,
 
-	weaponType = POLEARMJEDIWEAPON,
+	weaponType = JEDIWEAPON,
 
 	range = -1
 }

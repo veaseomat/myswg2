@@ -44,8 +44,8 @@
 Saber1hHit1Command = {
         name = "saber1hhit1",
 
-	damageMultiplier = 1.25,
-	speedMultiplier = 1.25,
+	damageMultiplier = 1.0,
+	speedMultiplier = 1.0,
 	healthCostMultiplier = 0,
 	actionCostMultiplier = 0,
 	mindCostMultiplier = 0,
@@ -59,7 +59,7 @@ Saber1hHit1Command = {
 
 	poolsToDamage = RANDOM_ATTRIBUTE,
 
-	weaponType = ONEHANDJEDIWEAPON,
+	weaponType = JEDIWEAPON,
 
 	range = -1
 }

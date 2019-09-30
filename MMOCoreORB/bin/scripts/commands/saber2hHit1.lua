@@ -44,13 +44,14 @@
 Saber2hHit1Command = {
         name = "saber2hhit1",
 
-	damageMultiplier = 1.25,
-	speedMultiplier = 1.25,
+	damageMultiplier = 1.0,
+	speedMultiplier = 1.0,
 	healthCostMultiplier = 0,
 	actionCostMultiplier = 0,
 	mindCostMultiplier = 0,
 	forceCostMultiplier = 1.0,
 	visMod = 25,
+
 
 	animation = "combo_2c", 
 	animType = GENERATE_INTENSITY,
@@ -59,7 +60,7 @@ Saber2hHit1Command = {
 
 	poolsToDamage = RANDOM_ATTRIBUTE,
 
-	weaponType = TWOHANDJEDIWEAPON,
+	weaponType = JEDIWEAPON,
 
 	range = -1
 }

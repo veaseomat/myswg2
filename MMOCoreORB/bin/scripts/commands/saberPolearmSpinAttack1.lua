@@ -44,24 +44,25 @@
 SaberPolearmSpinAttack1Command = {
         name = "saberpolearmspinattack1",
 
-	damageMultiplier = 0.75,
-	speedMultiplier = 1.25,
+	damageMultiplier = 1.1,
+	speedMultiplier = 1.0,
 	healthCostMultiplier = 0,
 	actionCostMultiplier = 0,
 	mindCostMultiplier = 0,
-	forceCostMultiplier = 1.25,
-	areaAction = true,
-	areaRange = 16,
+	forceCostMultiplier = 1.0,
+	coneAngle = 90,
+	coneAction = true,
+	coneRange = 8,
 	visMod = 25,
 
-	animation = "counter_low_left", 
+	animation = "combo_3b", 
 	animType = GENERATE_INTENSITY,
 
 	combatSpam = "saberpolearmspinattack1",
 
 	poolsToDamage = RANDOM_ATTRIBUTE,
 
-	weaponType = POLEARMJEDIWEAPON,
+	weaponType = JEDIWEAPON,
 
 	range = -1
 }

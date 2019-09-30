@@ -44,56 +44,26 @@
 Saber2hFrenzyCommand = {
         name = "saber2hfrenzy",
         
-    damageMultiplier = 3.5,
-	speedMultiplier = 3.5,
+	damageMultiplier = 1.4,
+	speedMultiplier = 1.0,
 	healthCostMultiplier = 0,
 	actionCostMultiplier = 0,
 	mindCostMultiplier = 0,
+	areaRange = 8,
 	areaAction = true,
-	areaRange = 16,
-	forceCostMultiplier = 2.5,
+	forceCostMultiplier = 1.0,
 	visMod = 25,
 
-		stateEffects = {
-	   StateEffect( 
-		BLIND_EFFECT, 
-		{}, 
-		{ "blind_defense" }, 
-		{ "jedi_state_defense", "resistance_states" },
-		75, 
-		0, 
-		60
-	  ),
-	  StateEffect( 
-		DIZZY_EFFECT, 
-		{}, 
-		{ "dizzy_defense" }, 
-		{ "jedi_state_defense", "resistance_states" },
-		75, 
-		0, 
-		30
-	  ),
-	  StateEffect( 
-		STUN_EFFECT, 
-		{}, 
-		{ "stun_defense" }, 
-		{ "jedi_state_defense", "resistance_states" },
-		75, 
-		0, 
-		60
-	  )
-	},
-
-	animation = "showoff_2", 
+	animation = "showoff_1", 
 	animType = GENERATE_INTENSITY,
 
 	combatSpam = "saber2hfrenzy",
 	
 	poolsToDamage = RANDOM_ATTRIBUTE,
 	
-	weaponType = TWOHANDJEDIWEAPON,
+	weaponType = JEDIWEAPON,
 
-	range = -1
+	range = -1,
 }
 
 AddCommand(Saber2hFrenzyCommand)

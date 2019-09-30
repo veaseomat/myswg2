@@ -15,14 +15,7 @@ function KnightTrials:startKnightTrials(pPlayer)
 	JediTrials:setCurrentTrial(pPlayer, 0)
 	self:setTrialShrine(pPlayer, pRandShrine)
 
-	local suiPrompt = getStringId("@jedi_trials:knight_trials_intro_msg") .. " " .. getStringId("@jedi_trials:" .. randomShrinePlanet) .. " " .. getStringId("@jedi_trials:knight_trials_intro_msg_end")
-
-	local sui = SuiMessageBox.new("KnightTrials", "noCallback")
-	sui.setTitle("@jedi_trials:knight_trials_title")
-	sui.setPrompt(suiPrompt)
-	sui.setOkButtonText("@jedi_trials:button_close")
-	sui.hideCancelButton()
-	sui.sendTo(pPlayer)
+	KnightTrials:startNextKnightTrial(pPlayer)
 end
 
 function KnightTrials:noCallback(pPlayer, pSui, eventIndex, ...)
@@ -126,8 +119,8 @@ function KnightTrials:sendCouncilChoiceSui(pPlayer)
 	end
 
 	local sui = SuiMessageBox.new("KnightTrials", "handleCouncilChoice")
-	sui.setPrompt("@jedi_trials:council_choice_msg")
-	sui.setTitle("@jedi_trials:knight_trials_title")
+	sui.setPrompt("Its now time to choose your path Jedi, Light or Dark. The Force Ranking System here is extremely powerful and well worth it. Both Sides are balanced here, its only rebel/imperial permanent overt choice.")
+	sui.setTitle("JEDI KNIGHT")
 	sui.setCancelButtonText("@jedi_trials:button_cancel") -- Cancel
 	sui.setOtherButtonText("@jedi_trials:button_lightside") -- 	Light Jedi Council
 	sui.setOkButtonText("@jedi_trials:button_darkside") -- Dark Jedi Council
@@ -174,8 +167,8 @@ function KnightTrials:doCouncilDecision(pPlayer, choice)
 	if (choice == JediTrials.COUNCIL_LIGHT) then
 		if (playerFaction == FACTIONIMPERIAL) then
 			local sui = SuiMessageBox.new("KnightTrials", "noCallback")
-			sui.setTitle("@jedi_trials:knight_trials_title")
-			sui.setPrompt("@jedi_trials:faction_wrong_choice_light")
+			sui.setTitle("Light Side")
+			sui.setPrompt("Welcome Jedi Knight, to prove yourself to the council you must find and use a Holocron. Holocrons can be looted from Dark Jedi missions on the Bounty Hunter mission terminals.")
 			sui.setOkButtonText("@jedi_trials:button_close")
 			sui.hideCancelButton()
 			sui.sendTo(pPlayer)
@@ -187,8 +180,8 @@ function KnightTrials:doCouncilDecision(pPlayer, choice)
 	elseif (choice == JediTrials.COUNCIL_DARK) then
 		if (playerFaction == FACTIONREBEL) then
 			local sui = SuiMessageBox.new("KnightTrials", "noCallback")
-			sui.setTitle("@jedi_trials:knight_trials_title")
-			sui.setPrompt("@jedi_trials:faction_wrong_choice_dark")
+			sui.setTitle("Dark Side")
+			sui.setPrompt("Welcome Jedi Knight, to prove yourself to the council you must find and use a Holocron. Holocrons can be looted from Dark Jedi missions on the Bounty Hunter mission terminals.")
 			sui.setOkButtonText("@jedi_trials:button_close")
 			sui.hideCancelButton()
 			sui.sendTo(pPlayer)
@@ -201,7 +194,7 @@ function KnightTrials:doCouncilDecision(pPlayer, choice)
 
 	JediTrials:setJediCouncil(pPlayer, choice)
 	CreatureObject(pPlayer):playMusicMessage(musicFile)
-	CreatureObject(pPlayer):sendSystemMessage(successMsg)
+	CreatureObject(pPlayer):sendSystemMessage("Welcome Jedi Knight, to prove yourself to the council you must find and use a Holocron. Holocrons can be looted from NPC Jedi missions found on the Bounty Hunter mission terminals.")
 	local trialsCompleted = JediTrials:getTrialsCompleted(pPlayer) + 1
 	JediTrials:setTrialsCompleted(pPlayer, trialsCompleted)
 	self:startNextKnightTrial(pPlayer)

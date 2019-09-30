@@ -70,42 +70,42 @@ object_weapon_melee_unarmed_unarmed_default_player = object_weapon_melee_unarmed
 	weaponType = UNARMEDWEAPON,
 	
 	-- ENERGY, KINETIC, ELECTRICITY, STUN, BLAST, HEAT, COLD, ACID, LIGHTSABER
-	damageType = KINETIC,
+	damageType = LIGHTSABER,
 	
 	-- NONE, LIGHT, MEDIUM, HEAVY
-	armorPiercing = NONE, 
+	armorPiercing = MEDIUM, 
 	
 	-- combat_rangedspecialize_bactarifle, combat_rangedspecialize_rifle, combat_rangedspecialize_pistol, combat_rangedspecialize_heavy, combat_rangedspecialize_carbine
 	-- combat_meleespecialize_unarmed, combat_meleespecialize_twohand, combat_meleespecialize_polearm, combat_meleespecialize_onehand, combat_general,
 	-- combat_meleespecialize_twohandlightsaber, combat_meleespecialize_polearmlightsaber, combat_meleespecialize_onehandlightsaber
-	xpType = "combat_meleespecialize_unarmed",
+	xpType = "jedi_general",
 	       
 	-- See http://www.ocdsoft.com/files/certifications.xls
 	certificationsRequired = {  },
 
 	-- See http://www.ocdsoft.com/files/accuracy.xls
-	creatureAccuracyModifiers = { "unarmed_accuracy" },
+	creatureAccuracyModifiers = { "polearmlightsaber_accuracy" },
 	
 	-- See http://www.ocdsoft.com/files/defense.xls
 	defenderDefenseModifiers = { "melee_defense" },
 	
 	-- can be dodge, counterattack, or block or a combination
 	-- Secondary defense when equipped
-	defenderSecondaryDefenseModifiers = { "unarmed_passive_defense" },
+	defenderSecondaryDefenseModifiers = { "saber_block" },
 
-	defenderToughnessModifiers = { "unarmed_toughness" },
+	defenderToughnessModifiers = { "lightsaber_toughness" },
 	
 	-- See http://www.ocdsoft.com/files/speed.xls
-	speedModifiers = { "unarmed_speed" },
+	speedModifiers = { "polearmlightsaber_speed" },
 	
 	-- carbine_damage, onehandmelee_damage, pistol_damage, rifle_damage, twohandmelee_damage, unarmed_damage
-	damageModifiers = { "unarmed_damage" },
+
 	       
 	
 	-- The values below are the default values.  To be used for blue frog objects primarily
-	healthAttackCost = 10,
-	actionAttackCost = 10,
-        mindAttackCost = 10,
+	healthAttackCost = 0,
+	actionAttackCost = 0,
+  mindAttackCost = 0,
 	forceCost = 0,
 	
 	pointBlankAccuracy = 0,
@@ -120,7 +120,7 @@ object_weapon_melee_unarmed_unarmed_default_player = object_weapon_melee_unarmed
 	minDamage = 10,
 	maxDamage = 50,
 	
-	attackSpeed = 2,
+	attackSpeed = 1.5,
 	
 	woundsRatio = 5
 }

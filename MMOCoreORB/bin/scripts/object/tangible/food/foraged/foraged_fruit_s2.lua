@@ -44,30 +44,18 @@
 object_tangible_food_foraged_foraged_fruit_s2 = object_tangible_food_foraged_shared_foraged_fruit_s2:new {
 	templateType = CONSUMABLE,
 	
-	duration = 50,
+	duration = 1800,
 	filling = 0,
-	nutrition = 0,
+	nutrition = 10,
 
-	effectType = 1,
+	effectType = 2,
 
-	fillingMin = 0,
-	fillingMax = 0,
-
-	flavorMin = 0,
-	flavorMax = 0,
-	nutritionMin = 0,
-	nutritionMax = 0,
-	quantityMin = 0,
-	quantityMax = 0,
-	
-	modifiers = { "health", 50, "action", 50, "mind", 50 },
+	modifiers = { "dodge_attack", 0 },
 
 	buffName = "wild_snaff",
 	buffCRC = 0,
 	speciesRestriction = "",
-	
-	consumableType = 1,
-	foragedFood = 1
+
 
 }
 

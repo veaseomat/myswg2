@@ -13,7 +13,8 @@ public:
 	AvoidIncapacitationCommand(const String& name, ZoneProcessServer* server)
 : JediQueueCommand(name, server) {
 		 buffCRC = BuffCRC::JEDI_AVOID_INCAPACITATION;
-		 skillMods.put("avoid_incapacitation", 1);
+			skillMods.put("force_armor", 70);
+			skillMods.put("force_shield", 70);
 	}
 
 	int doQueueCommand(CreatureObject* creature, const uint64& target, const UnicodeString& arguments) const {

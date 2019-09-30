@@ -2003,7 +2003,9 @@ void PlayerObjectImplementation::activateForcePowerRegen() {
 	if (creature == nullptr)
 		return;
 
-	float regen = (float)creature->getSkillMod("jedi_force_power_regen");
+	float regen = (float)(creature->getSkillMod("jedi_force_power_regen") / 2);
+
+	regen += 15;
 
 	if(regen == 0.0f)
 		return;
@@ -2016,10 +2018,10 @@ void PlayerObjectImplementation::activateForcePowerRegen() {
 		int forceControlMod = 0, forceManipulationMod = 0;
 
 		if (creature->hasSkill("force_rank_light_novice")) {
-			forceControlMod = creature->getSkillMod("force_control_light");
+			forceControlMod = creature->getSkillMod("force_manipulation_light");
 			forceManipulationMod = creature->getSkillMod("force_manipulation_light");
 		} else if (creature->hasSkill("force_rank_dark_novice")) {
-			forceControlMod = creature->getSkillMod("force_power_dark");
+			forceControlMod = creature->getSkillMod("force_manipulation_dark");
 			forceManipulationMod = creature->getSkillMod("force_manipulation_dark");
 		}
 
@@ -2273,7 +2275,11 @@ void PlayerObjectImplementation::doForceRegen() {
 		Reference<ForceMeditateTask*> medTask = creature->getPendingTask("forcemeditate").castTo<ForceMeditateTask*>();
 
 		if (medTask != nullptr)
-			modifier = 3;
+			modifier = 5;
+	}
+
+	if (creature->isSitting()) {
+	modifier = 2;
 	}
 
 	uint32 forceTick = tick * modifier;

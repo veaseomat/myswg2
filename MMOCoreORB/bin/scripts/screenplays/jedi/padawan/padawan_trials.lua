@@ -14,7 +14,7 @@ function PadawanTrials:doPadawanTrialsSetup(pPlayer)
 		sui.setPrompt("@jedi_trials:padawan_trials_intro_msg")
 	end
 
-	sui.sendTo(pPlayer)
+
 end
 
 function PadawanTrials:startPadawanTrials(pObject, pPlayer)
@@ -22,7 +22,7 @@ function PadawanTrials:startPadawanTrials(pObject, pPlayer)
 		local sui = SuiMessageBox.new("JediTrials", "emptyCallback")
 		sui.setTitle("@jedi_trials:padawan_trials_title")
 		sui.setPrompt("@jedi_trials:padawan_trials_started_not_eligible")
-		sui.sendTo(pPlayer)
+		
 		return
 	end
 
@@ -32,7 +32,7 @@ function PadawanTrials:startPadawanTrials(pObject, pPlayer)
 	sui.setPrompt("@jedi_trials:padawan_trials_start_query")
 	sui.setOkButtonText("@jedi_trials:button_yes") -- Yes
 	sui.setCancelButtonText("@jedi_trials:button_no") -- No
-	sui.sendTo(pPlayer)
+	
 end
 
 function PadawanTrials:jediPadawanTrialsStartCallback(pPlayer, pSui, eventIndex, args)
@@ -50,7 +50,7 @@ function PadawanTrials:jediPadawanTrialsStartCallback(pPlayer, pSui, eventIndex,
 		local sui = SuiMessageBox.new("JediTrials", "emptyCallback")
 		sui.setTitle("@jedi_trials:padawan_trials_title")
 		sui.setPrompt("@jedi_trials:padawan_trials_started_not_eligible")
-		sui.sendTo(pPlayer)
+		
 		return
 	end
 
@@ -69,7 +69,7 @@ function PadawanTrials:restartCurrentPadawanTrial(pPlayer)
 	local sui = SuiMessageBox.new("PadawanTrials", "jediPadawanTrialsRestartCallback")
 	sui.setTitle("@jedi_trials:force_shrine_title")
 	sui.setPrompt("@jedi_trials:padawan_trials_restart_confirmation")
-	sui.sendTo(pPlayer)
+	
 end
 
 function PadawanTrials:jediPadawanTrialsRestartCallback(pPlayer, pSui, eventIndex, args)
@@ -94,7 +94,7 @@ function PadawanTrials:quitPadawanTrials(pPlayer)
 	local sui = SuiMessageBox.new("PadawanTrials", "jediPadawanTrialsAbortCallback")
 	sui.setTitle("@jedi_trials:force_shrine_title")
 	sui.setPrompt("@jedi_trials:padawan_trials_abort_confirmation")
-	sui.sendTo(pPlayer)
+	
 end
 
 function PadawanTrials:jediPadawanTrialsAbortCallback(pPlayer, pSui, eventIndex, args)
@@ -551,7 +551,7 @@ function PadawanTrials:sendSuiNotification(pPlayer)
 	sui.hideCancelButton()
 	sui.setTitle("@jedi_trials:force_shrine_title")
 	sui.setPrompt(msgFinal)
-	sui.sendTo(pPlayer)
+	
 
 	CreatureObject(pPlayer):sendSystemMessage("@jedi_trials:padawan_trials_tell_about_restart")
 end
@@ -999,7 +999,7 @@ function PadawanTrials:failTrial(pPlayer)
 	sui.hideCancelButton()
 	sui.setTitle("@jedi_trials:force_shrine_title")
 	sui.setPrompt(failAmountMsg)
-	sui.sendTo(pPlayer)
+	
 end
 
 function PadawanTrials:passTrial(pPlayer)
@@ -1024,7 +1024,7 @@ function PadawanTrials:passTrial(pPlayer)
 		end
 
 		sui.setOkButtonText("@jedi_trials:button_close")
-		sui.sendTo(pPlayer)
+		
 
 		self:resetAllPadawanTrials(pPlayer)
 		return
@@ -1100,7 +1100,7 @@ function PadawanTrials:showCurrentTrial(pShrine, pPlayer)
 		sui.setPrompt(suiPrompt)
 	end
 
-	sui.sendTo(pPlayer)
+	
 end
 
 function PadawanTrials:handleShowInfoChoice(pPlayer, pSui, eventIndex, ...)

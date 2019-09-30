@@ -4,14 +4,14 @@ bh_dark_adept = Creature:new {
 	randomNameTag = true,
 	socialGroup = "dark_jedi",
 	faction = "",
-	level = 120,
-	chanceHit = 4.75,
-	damageMin = 945,
-	damageMax = 1600,
-	baseXp = 13178,
-	baseHAM = 50000,
-	baseHAMmax = 61000,
-	armor = 2,
+	level = 300,
+	chanceHit = 30,
+	damageMin = 500,
+	damageMax = 1000,
+	baseXp = 50000,
+	baseHAM = 150000,
+	baseHAMmax = 200000,
+	armor = 3,
 	resists = {80,80,80,80,80,80,80,80,-1},
 	meatType = "",
 	meatAmount = 0,
@@ -22,58 +22,36 @@ bh_dark_adept = Creature:new {
 	milk = 0,
 	tamingChance = 0,
 	ferocity = 0,
-	pvpBitmask = ATTACKABLE,
+	pvpBitmask = AGGRESSIVE + ATTACKABLE + ENEMY,
 	creatureBitmask = KILLER,
 	optionsBitmask = AIENABLED,
 	diet = HERBIVORE,
 
-	templates = {" dark_jedi" },
+	templates = {"object/mobile/dressed_dark_jedi_human_male_01.iff"},
 	lootGroups = {
 		{
 			groups = {
-				{group = "junk", chance = 2500000},
-				{group = "tailor_components", chance = 500000},
-				{group = "loot_kit_parts", chance = 500000},
-				{group = "color_crystals", chance = 500000},
-				{group = "power_crystals", chance = 1000000},
-				{group = "wearables_all", chance = 1000000},
-				{group = "weapons_all", chance = 1000000},
-				{group = "armor_all", chance = 1000000},
-				{group = "clothing_attachments", chance = 1000000},
-				{group = "armor_attachments", chance = 1000000}
+				{group = "holocron_dark", chance = 3500000},
+				{group = "holocron_light", chance = 3500000},
+				{group = "color_crystals", chance = 3000000},
 			},
-			lootChance = 5400000
+			lootChance = 5000000
 		},
 		{
 			groups = {
-				{group = "junk", chance = 2500000},
-				{group = "tailor_components", chance = 500000},
-				{group = "loot_kit_parts", chance = 500000},
-				{group = "color_crystals", chance = 500000},
-				{group = "power_crystals", chance = 1000000},
-				{group = "wearables_all", chance = 1000000},
-				{group = "weapons_all", chance = 1000000},
-				{group = "armor_all", chance = 1000000},
-				{group = "clothing_attachments", chance = 1000000},
-				{group = "armor_attachments", chance = 1000000}
+				{group = "holocron_dark", chance = 3500000},
+				{group = "holocron_light", chance = 3500000},
+				{group = "color_crystals", chance = 3000000},
 			},
-			lootChance = 5400000
+			lootChance = 2000000
 		},
 		{
 			groups = {
-				{group = "junk", chance = 2500000},
-				{group = "tailor_components", chance = 500000},
-				{group = "loot_kit_parts", chance = 500000},
-				{group = "color_crystals", chance = 500000},
-				{group = "power_crystals", chance = 500000},
-				{group = "power_crystals", chance = 500000},
-				{group = "wearables_all", chance = 1000000},
-				{group = "weapons_all", chance = 1000000},
-				{group = "armor_all", chance = 1000000},
-				{group = "clothing_attachments", chance = 1000000},
-				{group = "armor_attachments", chance = 1000000}
+				{group = "holocron_dark", chance = 3500000},
+				{group = "holocron_light", chance = 3500000},
+				{group = "color_crystals", chance = 3000000},
 			},
-			lootChance = 5400000
+			lootChance = 1000000
 		},
 	},
 	weapons = {"dark_jedi_weapons_gen2"},

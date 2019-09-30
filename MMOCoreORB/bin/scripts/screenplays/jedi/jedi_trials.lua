@@ -29,7 +29,7 @@ function JediTrials:isEligibleForPadawanTrials(pPlayer)
 
 	local learnedBranches = VillageJediManagerCommon.getLearnedForceSensitiveBranches(pPlayer)
 
-	return CreatureObject(pPlayer):hasScreenPlayState(32, "VillageJediProgression") and not CreatureObject(pPlayer):hasSkill("force_title_jedi_rank_02") and learnedBranches >= 6 and tonumber(readScreenPlayData(pPlayer, "PadawanTrials", "completedTrials")) ~= 1
+	return CreatureObject(pPlayer):hasScreenPlayState(32, "VillageJediProgression") and not CreatureObject(pPlayer):hasSkill("force_title_jedi_rank_02") and learnedBranches >= 0 and tonumber(readScreenPlayData(pPlayer, "PadawanTrials", "completedTrials")) ~= 1
 end
 
 function JediTrials:isOnPadawanTrials(pPlayer)
@@ -120,7 +120,6 @@ function JediTrials:unlockJediPadawan(pPlayer, dontSendSui)
 		local sui = SuiMessageBox.new("JediTrials", "emptyCallback") -- No callback
 		sui.setTitle("@jedi_trials:padawan_trials_title")
 		sui.setPrompt("@jedi_trials:padawan_trials_completed")
-		sui.sendTo(pPlayer)
 	end
 
 	if (not CreatureObject(pPlayer):hasSkill("force_title_jedi_rank_01")) then
@@ -143,8 +142,6 @@ function JediTrials:unlockJediPadawan(pPlayer, dontSendSui)
 		local pInventory = CreatureObject(pPlayer):getSlottedObject("inventory")
 		local pItem = giveItem(pInventory, "object/tangible/wearables/robe/robe_jedi_padawan.iff", -1)
 	end
-
-	sendMail("system", "@jedi_spam:welcome_subject", "@jedi_spam:welcome_body", CreatureObject(pPlayer):getFirstName())
 end
 
 function JediTrials:unlockJediKnight(pPlayer)
@@ -195,8 +192,8 @@ function JediTrials:unlockJediKnight(pPlayer)
 	CreatureObject(pPlayer):setFaction(setFactionVal)
 
 	local sui = SuiMessageBox.new("JediTrials", "emptyCallback") -- No callback
-	sui.setTitle("@jedi_trials:knight_trials_title")
-	sui.setPrompt(unlockString)
+	sui.setTitle("Jedi Knight")
+	sui.setPrompt("Welcome Jedi Knight, to prove yourself to the council you must find and use a Holocron. Holocrons can be looted from NPC Jedi missions on the Bounty Hunter mission terminals.")
 	sui.sendTo(pPlayer)
 
 	local pInventory = SceneObject(pPlayer):getSlottedObject("inventory")
@@ -489,7 +486,7 @@ end
 function JediTrials:completePadawanForTesting(pPlayer)
 	writeScreenPlayData(pPlayer, "PadawanTrials", "startedTrials", 1)
 	self:setTrialsCompleted(pPlayer, #padawanTrialQuests)
-	self:unlockJediPadawan(pPlayer, true)
+	self:unlockJediPadawan(pPlayer, false)
 end
 
 function JediTrials:completeKnightForTesting(pPlayer, councilType)
@@ -497,16 +494,4 @@ function JediTrials:completeKnightForTesting(pPlayer, councilType)
 	writeScreenPlayData(pPlayer, "JediTrials", "JediCouncil", councilType)
 	self:setTrialsCompleted(pPlayer, #knightTrialQuests)
 	self:unlockJediKnight(pPlayer)
-
-	local enclaveLoc
-
-	if (isZoneEnabled("yavin4")) then
-		if (councilType == self.COUNCIL_LIGHT) then
-			enclaveLoc = { -5575, 0, 4905 }
-		else
-			enclaveLoc = { 5079, 0, 305 }
-		end
-
-		SceneObject(pPlayer):switchZone("yavin4", enclaveLoc[1], enclaveLoc[2], enclaveLoc[3], 0)
-	end
 end

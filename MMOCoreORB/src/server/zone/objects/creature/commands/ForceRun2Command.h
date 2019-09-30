@@ -21,14 +21,15 @@ public:
 		blockingCRCs.add(BuffCRC::JEDI_FORCE_RUN_3);
         
 		skillMods.put("force_run", 2);
-		skillMods.put("slope_move", 66);
+		skillMods.put("slope_move", 50);
 	}
 
 	int doQueueCommand(CreatureObject* creature, const uint64& target, const UnicodeString& arguments) const {
 		int res = creature->hasBuff(buffCRC) ? NOSTACKJEDIBUFF : doJediSelfBuffCommand(creature);
 
 		if (res == NOSTACKJEDIBUFF) {
-			creature->sendSystemMessage("@jedi_spam:already_force_running"); // You are already force running.
+			creature->sendSystemMessage("You slow down."); // You are already force running.
+			creature->removeBuff(BuffCRC::JEDI_FORCE_RUN_2);
 			return GENERALERROR;
 		}
 
@@ -45,7 +46,7 @@ public:
 
 		Locker locker(multBuff);
 
-		multBuff->setSkillModifier("private_damage_divisor", 20);
+		multBuff->setSkillModifier("private_damage_divisor", 1.1);
 
 		creature->addBuff(multBuff);
 

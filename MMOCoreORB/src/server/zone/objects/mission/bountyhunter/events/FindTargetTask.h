@@ -151,18 +151,18 @@ class FindTargetTask : public Task, public Logger {
 
 		long long successChance = player->getSkillMod(skillToUse) + player->getSkillModFromBuffs(skillToUse);
 
-		if (successChance < 0) {
-			successChance = 0;
+		if (successChance < 100) {
+			successChance = 100;
 		} else if (successChance > maximumSkillMod) {
 			successChance = maximumSkillMod;
 		}
 
 		successChance -= ((getTargetLevel(player, objective)) / 3);
 
-		if (successChance < 5) {
-			successChance = 5;
-		} else if (successChance > 95) {
-			successChance = 95;
+		if (successChance < 100) {
+			successChance = 100;
+		} else if (successChance > 100) {
+			successChance = 100;
 		}
 
 		int randomValue = System::random(100);
@@ -181,15 +181,15 @@ class FindTargetTask : public Task, public Logger {
 		long long skillMod = player->getSkillMod(skillToUse) + player->getSkillModFromBuffs(skillToUse);
 
 		int checkedSkillMod = skillMod;
-		if (checkedSkillMod < 0) {
-			checkedSkillMod = 0;
+		if (checkedSkillMod < 100) {
+			checkedSkillMod = 100;
 		} else if (checkedSkillMod > maximumSkillMod) {
 			checkedSkillMod = maximumSkillMod;
 		}
 
-		int time = 150 - checkedSkillMod;
+		int time = 30;
 
-		return time + System::random(time / 2);
+		return time;
 	}
 
 	int getTargetLevel(CreatureObject* player, BountyMissionObjective* objective) {

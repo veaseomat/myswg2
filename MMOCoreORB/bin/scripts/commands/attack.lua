@@ -43,8 +43,8 @@
 
 AttackCommand = {
         name = "attack",
-	damageMultiplier = 1,
-	speedMultiplier = 1,
+	damageMultiplier = 1.0,
+	speedMultiplier = 1.0,
 
 	combatSpam = "attack",
 	animation = "",
@@ -52,12 +52,10 @@ AttackCommand = {
 	healthCostMultiplier = 0,
 	actionCostMultiplier = 0,
 	mindCostMultiplier = 0,
-	forceCostMultiplier = 0,
+	forceCostMultiplier = 1.0,
 	visMod = 25,
 
 	range = -1,
-	
-	trails = NOTRAIL,
 
 	poolsToDamage = RANDOM_ATTRIBUTE
 }

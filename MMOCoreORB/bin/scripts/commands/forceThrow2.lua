@@ -44,23 +44,26 @@
 ForceThrow2Command = {
 	name = "forcethrow2",
 
-	minDamage = 250,
-	maxDamage = 500,
+	minDamage = 1000,
+	maxDamage = 2000,
 	speed = 4.0,
-	forceCost = 56,
+	forceCost = 100,
 	visMod = 25,
 	accuracySkillMod = "forcethrow_accuracy",
+	splashDamage = true,
+	areaAction = true,
+	areaRange = 16,
 
 	stateEffects = {
-		StateEffect(
-			STUN_EFFECT,
-			{},
-			{},
-			{ "jedi_state_defense" },
-			65,
-			0,
-			10
-		)
+	  StateEffect(
+		POSTUREDOWN_EFFECT,
+		{ "postureDownRecovery" },
+		{ "posture_change_down_defense" },
+		{},
+		100,
+		0,
+		0
+	  )
 	},
 
 	animation = "force_throw_1_particle_level_1",
@@ -71,12 +74,12 @@ ForceThrow2Command = {
 	poolsToDamage = RANDOM_ATTRIBUTE,
 
 	forceAttack = true,
-	damageType = KINETIC_DAMAGE,
+	damageType = LIGHTSABER_DAMAGE,
 
-	frsLightMinDamageModifier = 3,
-	frsLightMaxDamageModifier = 6,
-	frsDarkMinDamageModifier = 3,
-	frsDarkMaxDamageModifier = 6,
+	frsLightMinDamageModifier = 15,
+	frsLightMaxDamageModifier = 30,
+	frsDarkMinDamageModifier = 15,
+	frsDarkMaxDamageModifier = 30,
 
 	range = 32
 }

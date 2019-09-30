@@ -5,6 +5,7 @@ includeFile("groups/coa2_decoder_components.lua")
 includeFile("groups/coa2_rebel_message.lua")
 includeFile("groups/color_crystals.lua")
 includeFile("groups/power_crystals.lua")
+includeFile("groups/power_crystals2.lua")
 includeFile("groups/data_storage_unit_parts.lua")
 includeFile("groups/fenri_dalso_drop.lua")
 includeFile("groups/holocron_dark.lua")
@@ -21,6 +22,7 @@ includeFile("groups/sith_shadow_intro_theater_datapad.lua")
 includeFile("groups/skill_buffs.lua")
 includeFile("groups/tailor_components.lua")
 includeFile("groups/treasure_map_group.lua")
+includeFile("groups/bh_droid.lua")
 
 -- armor sub-folder
 includeFile("groups/armor/armor_all.lua")
@@ -38,6 +40,7 @@ includeFile("groups/armor/mabari_armor.lua")
 includeFile("groups/armor/padded_armor.lua")
 includeFile("groups/armor/tantel_armor.lua")
 includeFile("groups/armor/ubese_armor.lua")
+includeFile("groups/armor/m_armor.lua")
 
 -- bestine election sub-folder
 includeFile("groups/bestine_election/bestine_history_quest_reward.lua")
@@ -361,6 +364,7 @@ includeFile("groups/weapon/mines.lua")
 includeFile("groups/weapon/pistols.lua")
 includeFile("groups/weapon/rifles.lua")
 includeFile("groups/weapon/weapons_all.lua")
+includeFile("groups/weapon/melee_saber.lua")
 
 -- wearables sub-folder
 includeFile("groups/wearables/wearables_all.lua")

@@ -963,8 +963,7 @@ bool FrsManagerImplementation::isValidFrsBattle(CreatureObject* attacker, Creatu
 	PlayerObject* victimGhost = victim->getPlayerObject();
 
 	// No credit if they were killed by the attacker recently
-	if (attackerGhost == nullptr || victimGhost == nullptr)
-		return false;
+
 
 	FrsData* attackerData = attackerGhost->getFrsData();
 	int attackerRank = attackerData->getRank();

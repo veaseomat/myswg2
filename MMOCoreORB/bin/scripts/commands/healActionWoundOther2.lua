@@ -44,7 +44,7 @@
 HealActionWoundOther2Command = {
 	name = "healactionwoundother2",
 	healWoundAmount = 200,
-	forceCost = 75,
+	forceCost = 100,
 	forceCostMultiplier = 0.1,
 	defaultTime = 6,
 	woundAttributesToHeal = ACTION_ATTRIBUTE,

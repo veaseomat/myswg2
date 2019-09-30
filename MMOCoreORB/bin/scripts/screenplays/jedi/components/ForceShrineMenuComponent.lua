@@ -67,7 +67,7 @@ function ForceShrineMenuComponent:doMeditate(pObject, pPlayer)
 		if (currentTrial == 0 and trialsCompleted == 0) then
 			local sui = SuiMessageBox.new("KnightTrials", "startNextKnightTrial")
 			sui.setTitle("@jedi_trials:knight_trials_title")
-			sui.setPrompt("@jedi_trials:knight_trials_start_query")
+			sui.setPrompt("Are you ready to become a Jedi Knight and enter the OVERPOWERED Force Ranking System?")
 			sui.setOkButtonText("@jedi_trials:button_yes")
 			sui.setCancelButtonText("@jedi_trials:button_no")
 			sui.sendTo(pPlayer)
@@ -95,10 +95,35 @@ function ForceShrineMenuComponent:recoverRobe(pPlayer)
 	if (CreatureObject(pPlayer):hasSkill("force_title_jedi_rank_03")) then
 		local councilType = JediTrials:getJediCouncil(pPlayer)
 
-		if (councilType == JediTrials.COUNCIL_LIGHT) then
+		if (CreatureObject(pPlayer):hasSkill("force_rank_light_novice")) then
 			robeTemplate = "object/tangible/wearables/robe/robe_jedi_light_s01.iff"
-		else
+		end
+		if (CreatureObject(pPlayer):hasSkill("force_rank_light_rank_01")) then
+			robeTemplate = "object/tangible/wearables/robe/robe_jedi_light_s02.iff"
+		end
+		if (CreatureObject(pPlayer):hasSkill("force_rank_light_rank_05")) then
+			robeTemplate = "object/tangible/wearables/robe/robe_jedi_light_s03.iff"
+		end
+		if (CreatureObject(pPlayer):hasSkill("force_rank_light_rank_08")) then
+			robeTemplate = "object/tangible/wearables/robe/robe_jedi_light_s04.iff"
+		end
+		if (CreatureObject(pPlayer):hasSkill("force_rank_light_rank_10")) then
+			robeTemplate = "object/tangible/wearables/robe/robe_jedi_light_s05.iff"
+		end
+		if (CreatureObject(pPlayer):hasSkill("force_rank_dark_novice")) then
 			robeTemplate = "object/tangible/wearables/robe/robe_jedi_dark_s01.iff"
+		end
+		if (CreatureObject(pPlayer):hasSkill("force_rank_dark_rank_01")) then
+			robeTemplate = "object/tangible/wearables/robe/robe_jedi_dark_s02.iff"
+		end
+		if (CreatureObject(pPlayer):hasSkill("force_rank_dark_rank_05")) then
+			robeTemplate = "object/tangible/wearables/robe/robe_jedi_dark_s03.iff"
+		end
+		if (CreatureObject(pPlayer):hasSkill("force_rank_dark_rank_08")) then
+			robeTemplate = "object/tangible/wearables/robe/robe_jedi_dark_s04.iff"
+		end
+		if (CreatureObject(pPlayer):hasSkill("force_rank_dark_rank_10")) then
+			robeTemplate = "object/tangible/wearables/robe/robe_jedi_dark_s05.iff"
 		end
 	else
 		robeTemplate = "object/tangible/wearables/robe/robe_jedi_padawan.iff"

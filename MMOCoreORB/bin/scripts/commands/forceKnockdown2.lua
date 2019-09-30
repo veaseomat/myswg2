@@ -49,7 +49,7 @@ ForceKnockdown2Command = {
 	forceCost = 100,
 	visMod = 25,
 	accuracySkillMod = "forceknockdown_accuracy",
-	coneAngle = 40,
+	coneAngle = 45,
 	coneAction = true,
 
 	stateEffects = {
@@ -58,7 +58,7 @@ ForceKnockdown2Command = {
 		{ "knockdownRecovery", "lastKnockdown" },
 		{},
 		{},
-		65,
+		100,
 		0,
 		0
 	  )

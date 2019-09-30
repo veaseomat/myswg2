@@ -36,10 +36,10 @@ void CommandQueueEnqueueCallback::run() {
 	int commandCount = client->getCommandCount();
 	uint64 miliDifference = commandCooldown->miliDifference();
 
-	if (commandCount >= 5 && miliDifference < 1000) {
+	if (commandCount >= 3 && miliDifference < 500) {
 		//creature->clearQueueAction(actioncntr);
 		player->clearQueueAction(actionCount);
-		//player->sendSystemMessage("Please stop spamming commands");
+		player->sendSystemMessage("stop spamming commands");
 	} else {
 		ObjectController* objectController = server->getObjectController();
 
