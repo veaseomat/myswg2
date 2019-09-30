@@ -29,7 +29,7 @@ public:
 
 		ManagedReference<SceneObject*> targetObject = server->getZoneServer()->getObject(target);
 
-		if (targetObject == NULL || !targetObject->isCreatureObject()) {
+		if (targetObject == nullptr || !targetObject->isCreatureObject()) {
 			return INVALIDTARGET;
 		}
 
@@ -50,7 +50,7 @@ public:
 
 			creatureTarget->addBuff(buff);
 
-			CombatManager::instance()->broadcastCombatSpam(creature, creatureTarget, NULL, 0, "cbt_spam", combatSpam + "_hit", 1);
+			CombatManager::instance()->broadcastCombatSpam(creature, creatureTarget, nullptr, 0, "cbt_spam", combatSpam + "_hit", 1);
 		}
 
 		return res;

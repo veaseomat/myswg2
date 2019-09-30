@@ -62,12 +62,12 @@ void LightsaberCrystalComponentImplementation::notifyLoadFromDatabase() {
 void LightsaberCrystalComponentImplementation::generateCrystalStats() {
 	ManagedReference<LootManager*> lootManager = getZoneServer()->getLootManager();
 
-	if (lootManager == NULL)
+	if (lootManager == nullptr)
 		return;
 
 	const CrystalData* crystalData = lootManager->getCrystalData(getObjectTemplate()->getTemplateFileName());
 
-	if (crystalData == NULL) {
+	if (crystalData == nullptr) {
 		error("Unable to find crystal stats for " + getObjectTemplate()->getTemplateFileName());
 		return;
 	}
@@ -114,12 +114,12 @@ void LightsaberCrystalComponentImplementation::generateCrystalStats() {
 void LightsaberCrystalComponentImplementation::validateCrystalStats() {
 	ManagedReference<LootManager*> lootManager = getZoneServer()->getLootManager();
 
-	if (lootManager == NULL)
+	if (lootManager == nullptr)
 		return;
 
 	const CrystalData* crystalData = lootManager->getCrystalData(getObjectTemplate()->getTemplateFileName());
 
-	if (crystalData == NULL) {
+	if (crystalData == nullptr) {
 		error("Unable to find crystal stats for " + getObjectTemplate()->getTemplateFileName());
 		return;
 	}
@@ -300,7 +300,7 @@ void LightsaberCrystalComponentImplementation::fillObjectMenuResponse(ObjectMenu
 	}
 
 	PlayerObject* ghost = player->getPlayerObject();
-	if (ghost != NULL && ghost->isPrivileged()) {
+	if (ghost != nullptr && ghost->isPrivileged()) {
 		menuResponse->addRadialMenuItem(129, 3, "Staff Commands");
 
 		if (getColor() == 31)
@@ -328,7 +328,7 @@ int LightsaberCrystalComponentImplementation::handleObjectMenuSelect(CreatureObj
 	}
 
 	PlayerObject* ghost = player->getPlayerObject();
-	if (ghost != NULL && ghost->isPrivileged()){
+	if (ghost != nullptr && ghost->isPrivileged()){
 		if (selectedID == 130 && getColor() == 31) {
 			generateCrystalStats();
 		} else if (selectedID == 131 && ownerID != 0) {
@@ -353,10 +353,10 @@ bool LightsaberCrystalComponentImplementation::hasPlayerAsParent(CreatureObject*
 	SceneObject* bank = player->getSlottedObject("bank");
 
 	// Check if crystal is inside a wearable container in bank or inventory
-	if (wearableParent != NULL) {
+	if (wearableParent != nullptr) {
 		ManagedReference<WearableContainerObject*> wearable = cast<WearableContainerObject*>(wearableParent.get());
 
-		if (wearable != NULL) {
+		if (wearable != nullptr) {
 			SceneObject* parentOfWearableParent = wearable->getParent().get();
 
 			if (parentOfWearableParent == inventory || parentOfWearableParent == bank)
@@ -380,7 +380,7 @@ void LightsaberCrystalComponentImplementation::tuneCrystal(CreatureObject* playe
 	if (getColor() == 31) {
 		ManagedReference<PlayerObject*> ghost = player->getPlayerObject();
 
-		if (ghost == NULL)
+		if (ghost == nullptr)
 			return;
 
 		int tuningCost = (quality * 25);
@@ -449,7 +449,7 @@ int LightsaberCrystalComponentImplementation::inflictDamage(TangibleObject* atta
 	if (isDestroyed()) {
 		ManagedReference<WeaponObject*> weapon = cast<WeaponObject*>(_this.getReferenceUnsafeStaticCast()->getParent().get()->getParent().get().get());
 
-		if (weapon != NULL) {
+		if (weapon != nullptr) {
 			if (getColor() == 31) {
 				weapon->setMinDamage(weapon->getMinDamage() - getDamage());
 				weapon->setMaxDamage(weapon->getMaxDamage() - getDamage());

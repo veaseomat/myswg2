@@ -1,0 +1,41 @@
+jedi_apprentice = Creature:new {
+	objectName = "a Jedi Apprentice",
+	socialGroup = "rebel",
+	faction = "rebel",
+	level = 375,
+	chanceHit = 4.75,
+	damageMin = 770,
+	damageMax = 1250,
+	baseXp = 11859,
+	baseHAM = 50000,
+	baseHAMmax = 61000,
+	armor = 2,
+	resists = {50,50,50,50,50,50,50,50,-1},
+	meatType = "",
+	meatAmount = 0,
+	hideType = "",
+	hideAmount = 0,
+	boneType = "",
+	boneAmount = 0,
+	milk = 0,
+	tamingChance = 0,
+	ferocity = 0,
+	pvpBitmask = ATTACKABLE + OVERT,
+	creatureBitmask = PACK + KILLER,
+	optionsBitmask = AIENABLED,
+	diet = NONE,
+
+	templates = {
+		"object/mobile/dressed_jedi_trainer_old_human_male_01.iff",
+		"object/mobile/dressed_jedi_trainer_chiss_male_01.iff",
+		"object/mobile/dressed_jedi_trainer_nikto_male_01.iff",
+		"object/mobile/dressed_jedi_trainer_twilek_female_01.iff",
+		"object/mobile/dressed_tiberus_anderlock.iff",
+		"object/mobile/dressed_neja_bertolo.iff"},
+	weapons = {"dark_jedi_weapons_gen4"},
+	lootGroups = {},
+	conversationTemplate = "",
+	attacks = merge(lightsabermaster,forcepowermaster)
+}
+
+CreatureTemplates:addCreatureTemplate(jedi_apprentice, "jedi_apprentice")

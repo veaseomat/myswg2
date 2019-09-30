@@ -27,13 +27,13 @@ public:
 		if (creature->hasAttackDelay())
 			return GENERALERROR;
 
-
-		// Bonus is in between 250-350.
-		int forceRandom = System::random(100);
-		int forceBonus = 250 + (forceRandom);
-
 		ManagedReference<PlayerObject*> playerObject = creature->getPlayerObject();
-		if (playerObject == NULL)
+		// Bonus is in between 250-350.
+		int forceRandom = playerObject->getForcePowerMax();
+		int forceBonus = 100 + (forceRandom / 100);
+
+
+		if (playerObject == nullptr)
 			return GENERALERROR;
 
 		// Do not execute if the player's force bar is full.
@@ -50,8 +50,8 @@ public:
 
 		// Setup buffs.
 
-		ManagedReference<CreatureObject*> player = creature->asCreatureObject();
-		player->playEffect("clienteffect/pl_force_channel.cef", "");
+		creature->playEffect("clienteffect/pl_force_channel.cef", "");
+
 
 		return SUCCESS;
 	}

@@ -102,7 +102,7 @@ void WeaponObjectImplementation::sendContainerTo(CreatureObject* player) {
 
 		ManagedReference<SceneObject*> saberInv = getSlottedObject("saber_inv");
 
-		if (saberInv != NULL) {
+		if (saberInv != nullptr) {
 			saberInv->sendDestroyTo(player);
 			//saberInv->closeContainerTo(player, true);
 
@@ -120,13 +120,13 @@ void WeaponObjectImplementation::createChildObjects() {
 	for (int i = 0; i < templateObject->getChildObjectsSize(); ++i) {
 		ChildObject* child = templateObject->getChildObject(i);
 
-		if (child == NULL)
+		if (child == nullptr)
 			continue;
 
 		ManagedReference<SceneObject*> obj = zoneServer->createObject(
 				child->getTemplateFile().hashCode(), getPersistenceLevel());
 
-		if (obj == NULL)
+		if (obj == nullptr)
 			continue;
 
 		ContainerPermissions* permissions = obj->getContainerPermissionsForUpdate();
@@ -441,35 +441,35 @@ void WeaponObjectImplementation::fillAttributeList(AttributeListMessage* alm, Cr
 }
 
 int WeaponObjectImplementation::getPointBlankAccuracy(bool withPup) const {
-	if(powerupObject != NULL && withPup)
+	if(powerupObject != nullptr && withPup)
 		return pointBlankAccuracy + (abs(pointBlankAccuracy) * powerupObject->getPowerupStat("pointBlankAccuracy"));
 
 	return pointBlankAccuracy;
 }
 
 int WeaponObjectImplementation::getPointBlankRange(bool withPup) const {
-	if(powerupObject != NULL && withPup)
+	if(powerupObject != nullptr && withPup)
 		return pointBlankRange + (abs(pointBlankRange) * powerupObject->getPowerupStat("pointBlankRange"));
 
 	return pointBlankRange;
 }
 
 int WeaponObjectImplementation::getIdealRange(bool withPup) const {
-	if(powerupObject != NULL && withPup)
+	if(powerupObject != nullptr && withPup)
 		return idealRange + (abs(idealRange) * powerupObject->getPowerupStat("idealRange"));
 
 	return idealRange;
 }
 
 int WeaponObjectImplementation::getMaxRange(bool withPup) const {
-	if(powerupObject != NULL && withPup)
+	if(powerupObject != nullptr && withPup)
 		return maxRange + (abs(maxRange) * powerupObject->getPowerupStat("maxRange"));
 
 	return maxRange;
 }
 
 int WeaponObjectImplementation::getIdealAccuracy(bool withPup) const {
-	if(powerupObject != NULL && withPup)
+	if(powerupObject != nullptr && withPup)
 		return idealAccuracy + (abs(idealAccuracy) * powerupObject->getPowerupStat("idealAccuracy"));
 
 	return idealAccuracy;
@@ -477,7 +477,7 @@ int WeaponObjectImplementation::getIdealAccuracy(bool withPup) const {
 
 
 int WeaponObjectImplementation::getMaxRangeAccuracy(bool withPup) const {
-	if(powerupObject != NULL && withPup)
+	if(powerupObject != nullptr && withPup)
 		return maxRangeAccuracy + (abs(maxRangeAccuracy) * powerupObject->getPowerupStat("maxRangeAccuracy"));
 
 	return maxRangeAccuracy;
@@ -489,7 +489,7 @@ float WeaponObjectImplementation::getAttackSpeed(bool withPup) const {
 	if(sliced)
 		speed *= speedSlice;
 
-	if(powerupObject != NULL && withPup)
+	if(powerupObject != nullptr && withPup)
 		speed -= (speed * powerupObject->getPowerupStat("attackSpeed"));
 
 	float calcSpeed = speed + getConditionReduction(speed);
@@ -507,7 +507,7 @@ float WeaponObjectImplementation::getMaxDamage(bool withPup) const {
 	if(sliced)
 		damage *= damageSlice;
 
-	if(powerupObject != NULL && withPup) {
+	if(powerupObject != nullptr && withPup) {
 		damage += (damage * powerupObject->getPowerupStat("maxDamage"));
 		return damage - getConditionReduction(damage);
 	}
@@ -521,7 +521,7 @@ float WeaponObjectImplementation::getMinDamage(bool withPup) const {
 	if(sliced)
 		damage *= damageSlice;
 
-	if(powerupObject != NULL && withPup) {
+	if(powerupObject != nullptr && withPup) {
 		damage += (damage * powerupObject->getPowerupStat("minDamage"));
 		return damage - getConditionReduction(damage);
 	}
@@ -530,14 +530,14 @@ float WeaponObjectImplementation::getMinDamage(bool withPup) const {
 }
 
 float WeaponObjectImplementation::getWoundsRatio(bool withPup) const {
-	if(powerupObject != NULL && withPup)
+	if(powerupObject != nullptr && withPup)
 		return woundsRatio + (woundsRatio * powerupObject->getPowerupStat("woundsRatio"));
 
 	return woundsRatio;
 }
 
 float WeaponObjectImplementation::getDamageRadius(bool withPup) const {
-	if(powerupObject != NULL && withPup)
+	if(powerupObject != nullptr && withPup)
 		return damageRadius + (damageRadius * powerupObject->getPowerupStat("damageRadius"));
 
 	return damageRadius;
@@ -545,21 +545,21 @@ float WeaponObjectImplementation::getDamageRadius(bool withPup) const {
 
 
 int WeaponObjectImplementation::getHealthAttackCost(bool withPup) const {
-	if(powerupObject != NULL && withPup)
+	if(powerupObject != nullptr && withPup)
 		return healthAttackCost - (abs(healthAttackCost) * powerupObject->getPowerupStat("healthAttackCost"));
 
 	return healthAttackCost;
 }
 
 int WeaponObjectImplementation::getActionAttackCost(bool withPup) const {
-	if(powerupObject != NULL && withPup)
+	if(powerupObject != nullptr && withPup)
 		return actionAttackCost - (abs(actionAttackCost) * powerupObject->getPowerupStat("actionAttackCost"));
 
 	return actionAttackCost;
 }
 
 int WeaponObjectImplementation::getMindAttackCost(bool withPup) const {
-	if(powerupObject != NULL && withPup)
+	if(powerupObject != nullptr && withPup)
 		return mindAttackCost - (abs(mindAttackCost) * powerupObject->getPowerupStat("mindAttackCost"));
 
 	return mindAttackCost;
@@ -640,7 +640,7 @@ void WeaponObjectImplementation::updateCraftingValues(CraftingValues* values, bo
 bool WeaponObjectImplementation::isCertifiedFor(CreatureObject* object) const {
 	ManagedReference<PlayerObject*> ghost = object->getPlayerObject();
 
-	if (ghost == NULL)
+	if (ghost == nullptr)
 		return false;
 
 	const auto certificationsRequired = weaponTemplate->getCertificationsRequired();
@@ -667,7 +667,7 @@ void WeaponObjectImplementation::decreasePowerupUses(CreatureObject* player) {
 			player->sendSystemMessage(message);
 
 			ManagedReference<PowerupObject*> pup = removePowerup();
-			if(pup != NULL) {
+			if(pup != nullptr) {
 				Locker plocker(pup);
 
 				pup->destroyObjectFromWorld( true );
@@ -704,18 +704,19 @@ String WeaponObjectImplementation::repairAttempt(int repairChance) {
 
 void WeaponObjectImplementation::decay(CreatureObject* user) {
 		return;
+
 }
 
 bool WeaponObjectImplementation::isEquipped() {
 	ManagedReference<SceneObject*> parent = getParent().get();
-	if (parent != NULL && parent->isPlayerCreature())
+	if (parent != nullptr && parent->isPlayerCreature())
 		return true;
 
 	return false;
 }
 
 void WeaponObjectImplementation::applySkillModsTo(CreatureObject* creature) const {
-	if (creature == NULL) {
+	if (creature == nullptr) {
 		return;
 	}
 
@@ -731,7 +732,7 @@ void WeaponObjectImplementation::applySkillModsTo(CreatureObject* creature) cons
 }
 
 void WeaponObjectImplementation::removeSkillModsFrom(CreatureObject* creature) {
-	if (creature == NULL) {
+	if (creature == nullptr) {
 		return;
 	}
 
@@ -754,7 +755,7 @@ bool WeaponObjectImplementation::applyPowerup(CreatureObject* player, PowerupObj
 
 	powerupObject = pup;
 
-	if(pup->getParent() != NULL) {
+	if(pup->getParent() != nullptr) {
 		Locker clocker(pup, player);
 		pup->destroyObjectFromWorld(true);
 	}
@@ -766,10 +767,10 @@ bool WeaponObjectImplementation::applyPowerup(CreatureObject* player, PowerupObj
 
 PowerupObject* WeaponObjectImplementation::removePowerup() {
 	if(!hasPowerup())
-		return NULL;
+		return nullptr;
 
 	PowerupObject* pup = powerupObject;
-	powerupObject = NULL;
+	powerupObject = nullptr;
 
 	removeMagicBit(true);
 

@@ -26,7 +26,7 @@ public:
 
 		ManagedReference<SceneObject*> targetObject = server->getZoneServer()->getObject(target);
 
-		if (targetObject == NULL || !targetObject->isCreatureObject()) {
+		if (targetObject == nullptr || !targetObject->isCreatureObject()) {
 			return INVALIDTARGET;
 		}
 

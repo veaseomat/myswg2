@@ -13,7 +13,7 @@ int SaberInventoryContainerComponent::canAddObject(SceneObject* sceneObject, Sce
 
 	ManagedReference<SceneObject*> p = sceneObject->getParent().get();
 
-	if (p != NULL){
+	if (p != nullptr){
 		int containment = p->getContainmentType();
 
 		if (containment == 4) {
@@ -36,10 +36,7 @@ int SaberInventoryContainerComponent::canAddObject(SceneObject* sceneObject, Sce
 
 	ManagedReference<CreatureObject*> creature = crystal->getParentRecursively(SceneObjectType::PLAYERCREATURE).castTo<CreatureObject*>();
 
-	if (crystal->isDestroyed()) {
-		errorDescription = "You cannot add a broken crystal to your lightsaber.";
-		return TransferErrorCode::INVALIDTYPE;
-	}
+
 
 	if (sceneObject->getContainerObjectsSize() >= sceneObject->getContainerVolumeLimit()) {
 		errorDescription = "@container_error_message:container03"; //This container is full.
@@ -117,14 +114,14 @@ int SaberInventoryContainerComponent::notifyObjectRemoved(SceneObject* sceneObje
 bool SaberInventoryContainerComponent::checkContainerPermission(SceneObject* sceneObject, CreatureObject* creature, uint16 permission) const {
 	ManagedReference<WeaponObject*> saber = cast<WeaponObject*>( sceneObject->getParent().get().get());
 
-	if (saber == NULL)
+	if (saber == nullptr)
 		return false;
 
 
 	if (saber->isJediWeapon() && saber->isEquipped()) {
 		ManagedReference<CreatureObject*> player = saber->getParentRecursively(SceneObjectType::PLAYERCREATURE).castTo<CreatureObject*>();
 
-		if (player == NULL)
+		if (player == nullptr)
 			return false;
 
 		player->sendSystemMessage("@jedi_spam:saber_not_while_equpped"); // You cannot modify the crystals in this lightsaber while it is equipped.

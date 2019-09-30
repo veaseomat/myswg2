@@ -28,7 +28,7 @@ void CommandQueueEnqueueCallback::parse(Message* message) {
 void CommandQueueEnqueueCallback::run() {
 	ManagedReference<CreatureObject*> player = client->getPlayer();
 
-	if (player == NULL)
+	if (player == nullptr)
 		return;
 
 	//ObjectController* objectController = server->getZoneServer()->getObjectController();
@@ -36,11 +36,12 @@ void CommandQueueEnqueueCallback::run() {
 	int commandCount = client->getCommandCount();
 	uint64 miliDifference = commandCooldown->miliDifference();
 
-	if (commandCount >= 3 && miliDifference < 500) {
+	if (commandCount >= 0 && miliDifference < 100) {
 		//creature->clearQueueAction(actioncntr);
 		player->clearQueueAction(actionCount);
-		player->sendSystemMessage("stop spamming commands");
-	} else {
+		player->sendSystemMessage("too fast for combatQ");
+	}
+	else {
 		ObjectController* objectController = server->getObjectController();
 
 		if (objectController) {
@@ -59,6 +60,7 @@ void CommandQueueEnqueueCallback::run() {
 		}
 
 		player->enqueueCommand(actionCRC, actionCount, targetID, arguments, -1, actionCount&0x3FFFFFFF);
+
 	}
 }
 
