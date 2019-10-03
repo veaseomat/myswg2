@@ -68,7 +68,7 @@ int SaberInventoryContainerComponent::notifyObjectInserted(SceneObject* sceneObj
 		ManagedReference<LightsaberCrystalComponent*> crystal = cast<LightsaberCrystalComponent*>( object);
 		if (crystal->getColor() == 31){
 			weao->setMinDamage(weao->getMinDamage() + crystal->getDamage());
-			weao->setMaxDamage(weao->getMaxDamage() + crystal->getDamage());
+			weao->setMaxDamage(weao->getMaxDamage() + crystal->getSacHealth());
 		}
 
 		if (crystal->getColor() != 31) {
@@ -99,7 +99,7 @@ int SaberInventoryContainerComponent::notifyObjectRemoved(SceneObject* sceneObje
 
 			if (crystal->getColor() == 31){
 				weao->setMinDamage(weao->getMinDamage() - crystal->getDamage());
-				weao->setMaxDamage(weao->getMaxDamage() - crystal->getDamage());
+				weao->setMaxDamage(weao->getMaxDamage() - crystal->getSacHealth());
 			}
 
 			if (crystal->getColor() != 31) {

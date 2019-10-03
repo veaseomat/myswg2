@@ -452,7 +452,7 @@ int LightsaberCrystalComponentImplementation::inflictDamage(TangibleObject* atta
 		if (weapon != nullptr) {
 			if (getColor() == 31) {
 				weapon->setMinDamage(weapon->getMinDamage() - getDamage());
-				weapon->setMaxDamage(weapon->getMaxDamage() - getDamage());
+				weapon->setMaxDamage(weapon->getMaxDamage() - getSacHealth());
 			}
 
 			if (getColor() != 31) {

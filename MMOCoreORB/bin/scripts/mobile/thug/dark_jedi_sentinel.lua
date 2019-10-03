@@ -32,8 +32,7 @@ dark_jedi_sentinel = Creature:new {
 		{
 			groups = {
 				{group = "melee_saber", chance = 5000000},
-				{group = "holocron_dark", chance = 2500000},
-				{group = "holocron_light", chance = 2500000},
+				{group = "holocron_dark2", chance = 500000},
 			},
 			lootChance = 10000000
 		},

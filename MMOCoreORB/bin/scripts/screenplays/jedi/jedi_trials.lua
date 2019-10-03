@@ -41,11 +41,11 @@ function JediTrials:isOnPadawanTrials(pPlayer)
 end
 
 function JediTrials:isEligibleForKnightTrials(pPlayer)
-	if (pPlayer == nil or not self.knightTrialsEnabled) then
+	if (pPlayer == nil) then
 		return false
 	end
 
-	if (CreatureObject(pPlayer):hasSkill("force_rank_light_novice") or CreatureObject(pPlayer):hasSkill("force_rank_dark_novice")) or tonumber(readScreenPlayData(pPlayer, "KnightTrials", "completedTrials")) == 1 then
+	if (CreatureObject(pPlayer):hasSkill("force_title_jedi_rank_03")) then
 		return false
 	end
 
@@ -193,7 +193,7 @@ function JediTrials:unlockJediKnight(pPlayer)
 
 	local sui = SuiMessageBox.new("JediTrials", "emptyCallback") -- No callback
 	sui.setTitle("Jedi Knight")
-	sui.setPrompt("Welcome Jedi Knight, to prove yourself to the council you must find and use a Holocron. Holocrons can be looted from NPC Jedi missions on the Bounty Hunter mission terminals.")
+	sui.setPrompt("Welcome to the Force Ranking System. Knights gain FRS skill boxes from Holocrons. Holocrons can be looted from NPC BH missions, dark jedi sentinels, nightsister elders, spiderclan elders, SMC councilwomen, and extremely rarely from anything in the game. Bounty hunter NPCs located in cities drop BH droids to use on missions. When a rank11 (leader) dies he can *prestige* by cloning (or has to if he has no way to revive himself), which is to reroll with a small permanent increase to skills. Doing so will also add an * to your first name each time so others can see how many times you have prestiged. Welcome to mySWG Force Ranking System.")
 	sui.sendTo(pPlayer)
 
 	local pInventory = SceneObject(pPlayer):getSlottedObject("inventory")

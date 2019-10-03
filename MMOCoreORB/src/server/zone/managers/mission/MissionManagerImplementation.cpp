@@ -1001,16 +1001,19 @@ void MissionManagerImplementation::randomizeGenericBountyMission(CreatureObject*
 			mission->setTargetOptionalTemplate("");
 
 			ManagedReference<CreatureObject*> creature = server->getObject(target->getTargetPlayerID()).castTo<CreatureObject*>();
-			String name = "unknown";
+			String name = "player jedi";
 
 			if (creature != nullptr) {
 
-				name = "unknown";
+				name = "player jedi";
 			}
 
 			mission->setMissionTargetName(name);
-			mission->setMissionDifficulty(75);
-			mission->setRewardCredits(getRealBountyReward(creature, target));
+			mission->setMissionDifficulty(100);
+
+
+			int reward = (50000 + System::random(50000));
+			mission->setRewardCredits(reward);
 
 			// Set the Title, Creator, and Description of the mission.
 
@@ -1039,7 +1042,7 @@ void MissionManagerImplementation::randomizeGenericBountyMission(CreatureObject*
 			}
 
 			mission->setCreatorName(creatorName);
-			mission->setMissionTitle(stfFile, "m" + String::valueOf(randTexts) + "t");
+			mission->setMissionTitle(stfFile, "***PLAYER BOUNTY***");
 			mission->setMissionDescription(stfFile, "m" + String::valueOf(randTexts) + "d");
 		}
 	} else {
@@ -1058,20 +1061,9 @@ void MissionManagerImplementation::randomizeGenericBountyMission(CreatureObject*
 
 		CreatureTemplate* creoTemplate = CreatureTemplateManager::instance()->getTemplate(mission->getTargetOptionalTemplate());
 
-		int reward = 1000;
-		int creoLevel = 1;
 
-		if (creoTemplate != nullptr) {
-			creoLevel = creoTemplate->getLevel();
-		}
+		int reward = (50000 + System::random(50000));
 
-		if (level == 1) {
-			reward = creoLevel * (200 + System::random(200));
-		} else if (level == 2) {
-			reward = creoLevel * (250 + System::random(250));
-		} else if (level == 3) {
-			reward = creoLevel * (300 + System::random(300));
-		}
 
 		mission->setRewardCredits(reward);
 
@@ -1100,7 +1092,7 @@ void MissionManagerImplementation::randomizeGenericBountyMission(CreatureObject*
 		}
 
 		mission->setMissionNumber(randTexts);
-		mission->setMissionDifficulty(3 * creoLevel + 7);
+		mission->setMissionDifficulty(100);
 
 		UnicodeString possibleCreatorName = StringIdManager::instance()->getStringId(String::hashCode("@" + stfFile + diffString + ":" + "m" + String::valueOf(randTexts) + "o"));
 		String creatorName = "";

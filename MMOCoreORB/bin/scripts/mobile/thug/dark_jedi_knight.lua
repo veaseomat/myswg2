@@ -31,8 +31,7 @@ dark_jedi_knight = Creature:new {
 	lootGroups = {
 		{
 			groups = {
-				{group = "holocron_dark", chance = 600000},
-				{group = "holocron_light", chance = 600000},
+				{group = "holocron_dark", chance = 100000},
 				{group = "power_crystals", chance = 600000},
 				{group = "rifles", chance = 1300000},
 				{group = "pistols", chance = 1300000},

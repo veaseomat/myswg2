@@ -5,7 +5,7 @@ krayt_tissue_common = {
 	minimumLevel = 0,
 	maximumLevel = 0,
 	lootItems = {
-
+		{groupTemplate = "d_armor", weight = 10000000}
 	}
 }
 

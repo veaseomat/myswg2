@@ -36,10 +36,10 @@ void CommandQueueEnqueueCallback::run() {
 	int commandCount = client->getCommandCount();
 	uint64 miliDifference = commandCooldown->miliDifference();
 
-	if (commandCount >= 0 && miliDifference < 100) {
+	if (commandCount >= 5 && miliDifference < 1000) {
 		//creature->clearQueueAction(actioncntr);
 		player->clearQueueAction(actionCount);
-		player->sendSystemMessage("too fast for combatQ");
+		player->sendSystemMessage("too many commands");
 	}
 	else {
 		ObjectController* objectController = server->getObjectController();

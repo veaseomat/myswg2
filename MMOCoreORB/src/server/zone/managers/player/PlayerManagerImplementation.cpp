@@ -56,6 +56,7 @@
 #include "server/zone/objects/player/sui/listbox/SuiListBox.h"
 #include "server/zone/objects/cell/CellObject.h"
 #include "server/zone/managers/skill/SkillManager.h"
+#include "server/zone/managers/skill/SkillModManager.h"
 #include "server/zone/objects/player/FactionStatus.h"
 #include "server/zone/managers/planet/PlanetManager.h"
 
@@ -90,6 +91,7 @@
 #include "server/zone/objects/player/sui/callbacks/ConfirmDivorceSuiCallback.h"
 
 #include "server/zone/managers/stringid/StringIdManager.h"
+#include "server/zone/objects/creature/CreatureObject.h"
 #include "server/zone/objects/creature/buffs/PowerBoostBuff.h"
 #include "server/zone/objects/creature/buffs/ForceWeakenDebuff.h"
 #include "server/zone/objects/creature/ai/Creature.h"
@@ -798,22 +800,22 @@ String PlayerManagerImplementation::setFirstName(CreatureObject* creature, const
 		return "First names may not be empty.";
 		break;
 	case NameManagerResult::DECLINED_RACE_INAPP:
-		return "That name is inappropriate for the player's species.";
+
 		break;
 	case NameManagerResult::DECLINED_PROFANE:
-		return "That name is profane.";
+
 		break;
 	case NameManagerResult::DECLINED_DEVELOPER:
-		return "That is a developer's name.";
+
 		break;
 	case NameManagerResult::DECLINED_FICT_RESERVED:
-		return "That name is a reserved fictional name.";
+
 		break;
 	case NameManagerResult::DECLINED_RESERVED:
-		return "That name is reserved.";
+
 		break;
 	case NameManagerResult::DECLINED_SYNTAX:
-		return "That name contains invalid syntax.";
+
 		break;
 	}
 
@@ -1283,7 +1285,7 @@ void PlayerManagerImplementation::sendActivateCloneRequest(CreatureObject* playe
 
 	ManagedReference<SuiListBox*> cloneMenu = new SuiListBox(player, SuiWindowType::CLONE_REQUEST);
 	cloneMenu->setCallback(new CloningRequestSuiCallback(player->getZoneServer(), typeofdeath));
-	cloneMenu->setPromptTitle("@base_player:revive_title");
+	cloneMenu->setPromptTitle("Revive Locations");
 
 	uint64 preDesignatedFacilityOid = ghost->getCloningFacility();
 	ManagedReference<SceneObject*> preDesignatedFacility = server->getObject(preDesignatedFacilityOid);
@@ -1347,15 +1349,14 @@ void PlayerManagerImplementation::sendActivateCloneRequest(CreatureObject* playe
 	}
 
 	StringBuffer promptText;
-	promptText << "Closest:\t\t " << closestName << "\n"
+	promptText
 			<< "Pre-Designated: " << predesignatedName << "\n"
-			<< "Cash Balance:\t " << player->getCashCredits() << "\n\n"
-			<< "Select the desired option and click OK.";
+
+			<< "Rest easy son, you've had a busy day. Select the location you would like to revive at. You may only clone at Force Shrines unless you store your clone data at a city cloning facility.";
 
 	cloneMenu->setPromptText(promptText.toString());
 
-	if (closestCloning != nullptr)
-		cloneMenu->addMenuItem("@base_player:revive_closest", closestCloning->getObjectID());
+
 
 	if (preDesignatedFacility != nullptr && preDesignatedFacility->getZone() == zone)
 		cloneMenu->addMenuItem("@base_player:revive_bind", preDesignatedFacility->getObjectID());
@@ -1387,6 +1388,21 @@ void PlayerManagerImplementation::sendActivateCloneRequest(CreatureObject* playe
 
 	ghost->addSuiBox(cloneMenu);
 	player->sendMessage(cloneMenu->generateMessage());
+
+	if (player->hasSkill("force_rank_light_master")) {
+		ManagedReference<SuiMessageBox*> box = new SuiMessageBox(player, SuiWindowType::NONE);
+		box->setPromptTitle("prestige*");
+		box->setPromptText("***ATTENTION JEDI CHANCELLOR*** You have learned all there is to know about the force... or have you? If you choose to clone, you will lose ALL of your skills and start over. Why would anyone do this? because you gain a small damage increase every time you do this, so you can infinitely grow your character. If you do not want to lose ALL YOUR SKILLS, then please use the regain consciousness force power. If you do not have enough force power to use the regain consciousness ability, then I'm sorry friend, you have no choice. There is no death, there is the force.");
+		ghost->addSuiBox(box);
+		player->sendMessage(box->generateMessage());
+	}
+	if (player->hasSkill("force_rank_dark_master")) {
+		ManagedReference<SuiMessageBox*> box = new SuiMessageBox(player, SuiWindowType::NONE);
+		box->setPromptTitle("prestige*");
+		box->setPromptText("***ATTENTION DARK JEDI OVERLORD*** You have learned all there is to know about the force... or have you? If you choose to clone, you will lose ALL of your skills and start over. Why would anyone do this? because you gain a small damage increase every time you do this, so you can infinitely grow your character. If you do not want to lose ALL YOUR SKILLS, then please use the regain consciousness force power. If you do not have enough force power to use the regain consciousness ability, then I'm sorry friend, you have no choice. The force shall free me.");
+		ghost->addSuiBox(box);
+		player->sendMessage(box->generateMessage());
+	}
 }
 
 bool PlayerManagerImplementation::isValidClosestCloner(CreatureObject* player, SceneObject* cloner) {
@@ -1497,16 +1513,87 @@ void PlayerManagerImplementation::sendPlayerToCloner(CreatureObject* player, uin
 
 	player->notifyObservers(ObserverEventType::PLAYERCLONED, player, 0);
 
-
 	// Jedi experience loss.
-	if (player->hasSkill("force_rank_light_master") or player->hasSkill("force_rank_dark_master")) {
+	if (player->hasSkill("force_rank_light_master")) {
 
 		SkillManager::instance()->surrenderSkill("force_rank_light_master", player, true, true);
-		SkillManager::instance()->surrenderSkill("force_rank_dark_master", player, true, true);
+		SkillManager::instance()->surrenderSkill("force_rank_light_rank_10", player, true, true);
+		SkillManager::instance()->surrenderSkill("force_rank_light_rank_09", player, true, true);
+		SkillManager::instance()->surrenderSkill("force_rank_light_rank_08", player, true, true);
+		SkillManager::instance()->surrenderSkill("force_rank_light_rank_07", player, true, true);
+		SkillManager::instance()->surrenderSkill("force_rank_light_rank_06", player, true, true);
+		SkillManager::instance()->surrenderSkill("force_rank_light_rank_05", player, true, true);
+		SkillManager::instance()->surrenderSkill("force_rank_light_rank_04", player, true, true);
+		SkillManager::instance()->surrenderSkill("force_rank_light_rank_03", player, true, true);
+		SkillManager::instance()->surrenderSkill("force_rank_light_rank_02", player, true, true);
+		SkillManager::instance()->surrenderSkill("force_rank_light_rank_01", player, true, true);
+		SkillManager::instance()->surrenderSkill("force_rank_light_novice", player, true, true);
+
+		SkillManager::instance()->surrenderSkill("force_title_jedi_rank_03", player, true, true);
+
+		SkillManager::instance()->surrenderAllSkills(player, true, true);
+
+		SkillManager::instance()->surrenderSkill("force_title_jedi_master", player, true, true);
+		SkillManager::instance()->surrenderSkill("force_title_jedi_rank_04", player, true, true);
+		SkillManager::instance()->surrenderSkill("force_title_jedi_rank_03", player, true, true);
+
+		ghost->setJediState(2);
+
+		awardExperience(player, "jedi_general", -20000000, true);
+		awardExperience(player, "force_rank_xp", -20000000, true);
+
+		player->addSkillMod(SkillModManager::PERMANENTMOD, "force_manipulation_light", 80, true);
+
+		String oldFirstName = player->getFirstName();
+		String newFirstName = (oldFirstName + "*");
+		setFirstName(player, newFirstName);
 
 		ManagedReference<SuiMessageBox*> box = new SuiMessageBox(player, SuiWindowType::NONE);
-		box->setPromptTitle("Take a seat, young Skywalker");
-		box->setPromptText("You have lost your position as FRS council leader.");
+		box->setPromptTitle("prestige*");
+		box->setPromptText("You have taken your first steps into a larger world...");
+
+		ghost->addSuiBox(box);
+		player->sendMessage(box->generateMessage());
+	}
+
+	// Jedi experience loss.
+	if (player->hasSkill("force_rank_dark_master")) {
+
+		SkillManager::instance()->surrenderSkill("force_rank_dark_master", player, true, true);
+		SkillManager::instance()->surrenderSkill("force_rank_dark_rank_10", player, true, true);
+		SkillManager::instance()->surrenderSkill("force_rank_dark_rank_09", player, true, true);
+		SkillManager::instance()->surrenderSkill("force_rank_dark_rank_08", player, true, true);
+		SkillManager::instance()->surrenderSkill("force_rank_dark_rank_07", player, true, true);
+		SkillManager::instance()->surrenderSkill("force_rank_dark_rank_06", player, true, true);
+		SkillManager::instance()->surrenderSkill("force_rank_dark_rank_05", player, true, true);
+		SkillManager::instance()->surrenderSkill("force_rank_dark_rank_04", player, true, true);
+		SkillManager::instance()->surrenderSkill("force_rank_dark_rank_03", player, true, true);
+		SkillManager::instance()->surrenderSkill("force_rank_dark_rank_02", player, true, true);
+		SkillManager::instance()->surrenderSkill("force_rank_dark_rank_01", player, true, true);
+		SkillManager::instance()->surrenderSkill("force_rank_dark_novice", player, true, true);
+
+		SkillManager::instance()->surrenderSkill("force_title_jedi_rank_03", player, true, true);
+
+		SkillManager::instance()->surrenderAllSkills(player, true, true);
+
+		ghost->setJediState(2);
+
+		SkillManager::instance()->surrenderSkill("force_title_jedi_master", player, true, true);
+		SkillManager::instance()->surrenderSkill("force_title_jedi_rank_04", player, true, true);
+		SkillManager::instance()->surrenderSkill("force_title_jedi_rank_03", player, true, true);
+
+		awardExperience(player, "jedi_general", -20000000, true);
+		awardExperience(player, "force_rank_xp", -20000000, true);
+
+		player->addSkillMod(SkillModManager::PERMANENTMOD, "force_manipulation_dark", 80, true);
+
+		String oldFirstName = player->getFirstName();
+		String newFirstName = (oldFirstName + "*");
+		setFirstName(player, newFirstName);
+
+		ManagedReference<SuiMessageBox*> box = new SuiMessageBox(player, SuiWindowType::NONE);
+		box->setPromptTitle("prestige*");
+		box->setPromptText("You have taken your first steps into a larger world...");
 
 		ghost->addSuiBox(box);
 		player->sendMessage(box->generateMessage());
@@ -1674,7 +1761,8 @@ void PlayerManagerImplementation::disseminateExperience(TangibleObject* destruct
 				String xpType = entry->elementAt(j).getKey();
 				float xpAmount = 0;
 
-				xpAmount += totalDamage;
+				xpAmount += (totalDamage / 2);
+				xpAmount += 500;
 
 				//Cap xp 
 
@@ -1685,7 +1773,7 @@ void PlayerManagerImplementation::disseminateExperience(TangibleObject* destruct
 				if (xpType != "jedi_general")
 					combatXp += xpAmount;
 				else
-					xpAmount *= 1.f;
+					xpAmount *= .6f;
 
 				//Award individual expType
 				awardExperience(attacker, xpType, xpAmount);
@@ -1899,25 +1987,25 @@ void PlayerManagerImplementation::awardBadge(PlayerObject* ghost, const Badge* b
 	BadgeList* badgeList = BadgeList::instance();
 	switch (ghost->getNumBadges()) {
 	case 5:
-		awardBadge(ghost, badgeList->get("count_5"));
+
 		break;
 	case 10:
-		awardBadge(ghost, badgeList->get("count_10"));
+
 		break;
 	case 25:
-		awardBadge(ghost, badgeList->get("count_25"));
+
 		break;
 	case 50:
-		awardBadge(ghost, badgeList->get("count_50"));
+
 		break;
 	case 75:
-		awardBadge(ghost, badgeList->get("count_75"));
+
 		break;
 	case 100:
-		awardBadge(ghost, badgeList->get("count_100"));
+
 		break;
 	case 125:
-		awardBadge(ghost, badgeList->get("count_125"));
+
 		break;
 	default:
 		break;
@@ -1926,19 +2014,19 @@ void PlayerManagerImplementation::awardBadge(PlayerObject* ghost, const Badge* b
 	if (badge->getType() == Badge::EXPLORATION) {
 		switch (ghost->getBadgeTypeCount(static_cast<uint8>(Badge::EXPLORATION))) {
 		case 10:
-			awardBadge(ghost, badgeList->get("bdg_exp_10_badges"));
+
 			break;
 		case 20:
-			awardBadge(ghost, badgeList->get("bdg_exp_20_badges"));
+
 			break;
 		case 30:
-			awardBadge(ghost, badgeList->get("bdg_exp_30_badges"));
+
 			break;
 		case 40:
-			awardBadge(ghost, badgeList->get("bdg_exp_40_badges"));
+
 			break;
 		case 45:
-			awardBadge(ghost, badgeList->get("bdg_exp_45_badges"));
+
 			break;
 		default:
 			break;

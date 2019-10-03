@@ -30,7 +30,7 @@ public:
 		ManagedReference<PlayerObject*> playerObject = creature->getPlayerObject();
 		// Bonus is in between 250-350.
 		int forceRandom = playerObject->getForcePowerMax();
-		int forceBonus = 100 + (forceRandom / 100);
+		int forceBonus = (forceRandom / 50);
 
 
 		if (playerObject == nullptr)
@@ -50,7 +50,7 @@ public:
 
 		// Setup buffs.
 
-		creature->playEffect("clienteffect/pl_force_channel.cef", "");
+		creature->playEffect("clienteffect/pl_force_channel_self.cef", "");
 
 
 		return SUCCESS;

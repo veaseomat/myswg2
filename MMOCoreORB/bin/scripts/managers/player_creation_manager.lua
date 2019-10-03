@@ -63,4 +63,4 @@ professionSpecificItems = {
 	social_entertainer = { }
 }
 
-commonStartingItems = { jeditool, resourcedeed }    
+commonStartingItems = { jeditool, resourcedeed, colorcrystal }    

@@ -149,7 +149,7 @@ class FindTargetTask : public Task, public Logger {
 			maximumSkillMod = 125;
 		}
 
-		long long successChance = player->getSkillMod(skillToUse) + player->getSkillModFromBuffs(skillToUse);
+		long long successChance = 100;
 
 		if (successChance < 100) {
 			successChance = 100;
@@ -178,7 +178,7 @@ class FindTargetTask : public Task, public Logger {
 			maximumSkillMod = 105;
 		}
 
-		long long skillMod = player->getSkillMod(skillToUse) + player->getSkillModFromBuffs(skillToUse);
+		long long skillMod = 100;
 
 		int checkedSkillMod = skillMod;
 		if (checkedSkillMod < 100) {

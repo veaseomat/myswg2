@@ -5,7 +5,7 @@ krayt_dragon_common2 = {
 	minimumLevel = 0,
 	maximumLevel = 0,
 	lootItems = {
-
+		{groupTemplate = "d_armor", weight = 10000000}
 	}
 }
 

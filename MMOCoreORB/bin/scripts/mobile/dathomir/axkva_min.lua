@@ -43,9 +43,9 @@ axkva_min = Creature:new {
 		},
 		{
 			groups = {
-				{group = "axkva_min", chance = 10000000},
+				{group = "holocron_dark2", chance = 500000},
 			},
-			lootChance = 5000000
+			lootChance = 10000000
 		}
 	},
 	weapons = {"mixed_force_weapons"},

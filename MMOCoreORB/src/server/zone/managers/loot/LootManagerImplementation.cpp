@@ -636,7 +636,7 @@ bool LootManagerImplementation::createLootFromCollection(SceneObject* container,
 		if (lootChance <= 0)
 			continue;
 
-		int roll = 1;
+		int roll = System::random(10000000);
 
 		if (roll > lootChance)
 			continue;
@@ -648,6 +648,11 @@ bool LootManagerImplementation::createLootFromCollection(SceneObject* container,
 		//Now we do the second roll to determine loot group.
 		roll = System::random(10000000);
 
+		if (roll < 5000){
+			createLoot(container, "holocron_light2", level);
+		}
+		// thats a 1/10k chance
+
 		//Select the loot group to use.
 		for (int i = 0; i < lootGroups->count(); ++i) {
 			const LootGroupEntry* entry = lootGroups->get(i);
@@ -663,23 +668,6 @@ bool LootManagerImplementation::createLootFromCollection(SceneObject* container,
 			break;
 		}
 
-		//Now we do the second roll to determine loot group.
-		roll = System::random(10000000);
-
-		//Select the loot group to use.
-		for (int i = 0; i < lootGroups->count(); ++i) {
-			const LootGroupEntry* entry = lootGroups->get(i);
-
-			tempChance += entry->getLootChance();
-
-			//Is this entry lower than the roll? If yes, then we want to try the next entry.
-			if (tempChance < roll)
-				continue;
-
-			createLoot(container, entry->getLootGroupName(), level);
-
-			break;
-		}
 	}
 
 	return true;

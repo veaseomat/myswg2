@@ -42,34 +42,93 @@ function VillageJediManagerHolocron.useTheHolocron(pSceneObject, pPlayer)
 	end
 
 	-- The holocrom hums softly as you feel your Force power replenish.
+	
+
 		
 	if CreatureObject(pPlayer):hasSkill("force_title_jedi_rank_03") then
-		local playerCouncil = JediTrials:getJediCouncil(pPlayer)
 	
-		if playerCouncil == JediTrials.COUNCIL_LIGHT and not CreatureObject(pPlayer):hasSkill("force_rank_light_novice") then
-			local sui = SuiMessageBox.new("KnightTrials", "noCallback")
-			sui.setTitle("FRS UNLOCK")
-			sui.setPrompt("Welcome to the Force ranking system. Completing BH missions and using more holocrons will earn FRS exp. You can learn FRS skills from trainers. There are also wild spawn dark jedi sentinels on every planet that drop higher tier loot when you are strong enough.")
-			sui.sendTo(pPlayer)
-		awardSkill(pPlayer, "force_rank_light_novice")
+		if CreatureObject(pPlayer):hasSkill("force_rank_dark_master") or CreatureObject(pPlayer):hasSkill("force_rank_light_master") then
+		local sui = SuiMessageBox.new("JediTrials", "emptyCallback") -- No callback
+		sui.setTitle("Prestige")
+		sui.setPrompt("The Holocron whispers ...Death is the only the beginning...")
+		sui.sendTo(pPlayer)
 		end
 
-		if playerCouncil == JediTrials.COUNCIL_DARK and not CreatureObject(pPlayer):hasSkill("force_rank_dark_novice") then
-			local sui = SuiMessageBox.new("KnightTrials", "noCallback")
-			sui.setTitle("FRS UNLOCK")
-			sui.setPrompt("Welcome to the Force ranking system. Completing BH missions and using more holocrons will earn FRS exp. You can learn FRS skills from trainers. There are also wild spawn dark jedi sentinels on every planet that drop higher tier loot when you are strong enough.")
-			sui.sendTo(pPlayer)
-		awardSkill(pPlayer, "force_rank_dark_novice")	
+		if CreatureObject(pPlayer):hasSkill("force_rank_light_rank_10") and not CreatureObject(pPlayer):hasSkill("force_rank_light_master") then
+		awardSkill(pPlayer, "force_rank_light_master")
+		end
+		if CreatureObject(pPlayer):hasSkill("force_rank_light_rank_09") and not CreatureObject(pPlayer):hasSkill("force_rank_light_rank_10") then
+		awardSkill(pPlayer, "force_rank_light_rank_10")
+		end
+		if CreatureObject(pPlayer):hasSkill("force_rank_light_rank_08") and not CreatureObject(pPlayer):hasSkill("force_rank_light_rank_09") then
+		awardSkill(pPlayer, "force_rank_light_rank_09")
+		end
+		if CreatureObject(pPlayer):hasSkill("force_rank_light_rank_07") and not CreatureObject(pPlayer):hasSkill("force_rank_light_rank_08") then
+		awardSkill(pPlayer, "force_rank_light_rank_08")
+		end
+		if CreatureObject(pPlayer):hasSkill("force_rank_light_rank_06") and not CreatureObject(pPlayer):hasSkill("force_rank_light_rank_07") then
+		awardSkill(pPlayer, "force_rank_light_rank_07")
+		end		
+		if CreatureObject(pPlayer):hasSkill("force_rank_light_rank_05") and not CreatureObject(pPlayer):hasSkill("force_rank_light_rank_06") then
+		awardSkill(pPlayer, "force_rank_light_rank_06")
+		end
+		if CreatureObject(pPlayer):hasSkill("force_rank_light_rank_04") and not CreatureObject(pPlayer):hasSkill("force_rank_light_rank_05") then
+		awardSkill(pPlayer, "force_rank_light_rank_05")
+		end
+		if CreatureObject(pPlayer):hasSkill("force_rank_light_rank_03") and not CreatureObject(pPlayer):hasSkill("force_rank_light_rank_04") then
+		awardSkill(pPlayer, "force_rank_light_rank_04")
+		end
+		if CreatureObject(pPlayer):hasSkill("force_rank_light_rank_02") and not CreatureObject(pPlayer):hasSkill("force_rank_light_rank_03") then
+		awardSkill(pPlayer, "force_rank_light_rank_03")
+		end
+		if CreatureObject(pPlayer):hasSkill("force_rank_light_rank_01") and not CreatureObject(pPlayer):hasSkill("force_rank_light_rank_02") then
+		awardSkill(pPlayer, "force_rank_light_rank_02")
+		end
+		if CreatureObject(pPlayer):hasSkill("force_rank_light_novice") and not CreatureObject(pPlayer):hasSkill("force_rank_light_rank_01") then
+		awardSkill(pPlayer, "force_rank_light_rank_01")
+		end
+		
+		if CreatureObject(pPlayer):hasSkill("force_rank_dark_rank_10") and not CreatureObject(pPlayer):hasSkill("force_rank_dark_master") then
+		awardSkill(pPlayer, "force_rank_dark_master")
+		end
+		if CreatureObject(pPlayer):hasSkill("force_rank_dark_rank_09") and not CreatureObject(pPlayer):hasSkill("force_rank_dark_rank_10") then
+		awardSkill(pPlayer, "force_rank_dark_rank_10")
+		end
+		if CreatureObject(pPlayer):hasSkill("force_rank_dark_rank_08") and not CreatureObject(pPlayer):hasSkill("force_rank_dark_rank_09") then
+		awardSkill(pPlayer, "force_rank_dark_rank_09")
+		end
+		if CreatureObject(pPlayer):hasSkill("force_rank_dark_rank_07") and not CreatureObject(pPlayer):hasSkill("force_rank_dark_rank_08") then
+		awardSkill(pPlayer, "force_rank_dark_rank_08")
+		end
+		if CreatureObject(pPlayer):hasSkill("force_rank_dark_rank_06") and not CreatureObject(pPlayer):hasSkill("force_rank_dark_rank_07") then
+		awardSkill(pPlayer, "force_rank_dark_rank_07")
+		end		
+		if CreatureObject(pPlayer):hasSkill("force_rank_dark_rank_05") and not CreatureObject(pPlayer):hasSkill("force_rank_dark_rank_06") then
+		awardSkill(pPlayer, "force_rank_dark_rank_06")
+		end
+		if CreatureObject(pPlayer):hasSkill("force_rank_dark_rank_04") and not CreatureObject(pPlayer):hasSkill("force_rank_dark_rank_05") then
+		awardSkill(pPlayer, "force_rank_dark_rank_05")
+		end
+		if CreatureObject(pPlayer):hasSkill("force_rank_dark_rank_03") and not CreatureObject(pPlayer):hasSkill("force_rank_dark_rank_04") then
+		awardSkill(pPlayer, "force_rank_dark_rank_04")
+		end
+		if CreatureObject(pPlayer):hasSkill("force_rank_dark_rank_02") and not CreatureObject(pPlayer):hasSkill("force_rank_dark_rank_03") then
+		awardSkill(pPlayer, "force_rank_dark_rank_03")
+		end
+		if CreatureObject(pPlayer):hasSkill("force_rank_dark_rank_01") and not CreatureObject(pPlayer):hasSkill("force_rank_dark_rank_02") then
+		awardSkill(pPlayer, "force_rank_dark_rank_02")
+		end
+		if CreatureObject(pPlayer):hasSkill("force_rank_dark_novice") and not CreatureObject(pPlayer):hasSkill("force_rank_dark_rank_01") then
+		awardSkill(pPlayer, "force_rank_dark_rank_01")
 		end		
 
-	CreatureObject(pPlayer):awardExperience("force_rank_xp", 5000, true)		
 
 	SceneObject(pSceneObject):destroyObjectFromWorld()
 	SceneObject(pSceneObject):destroyObjectFromDatabase()
-	CreatureObject(pPlayer):sendSystemMessage("The Holocron hums softly and begins to glow! You have absorbed the ancient knowledge of the holocron.")
+	CreatureObject(pPlayer):sendSystemMessage("The Holocron hums softly and begins to glow! You feel a rush of ancient knowledge flood your senses.")
 
 	else
-		CreatureObject(pPlayer):sendSystemMessage("The Holocron hums briefly but does nothing. Only a Jedi Knight can access the knowledge within.")
+		CreatureObject(pPlayer):sendSystemMessage("The Holocron hums briefly but otherwise does nothing. Only a Jedi Knight can access the knowledge within.")
 	end
 	
 end

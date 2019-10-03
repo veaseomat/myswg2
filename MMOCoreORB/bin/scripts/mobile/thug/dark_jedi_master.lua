@@ -31,8 +31,6 @@ dark_jedi_master = Creature:new {
 	lootGroups = {
 		{
 			groups = {
-				{group = "holocron_dark", chance = 600000},
-				{group = "holocron_light", chance = 600000},
 				{group = "power_crystals", chance = 600000},
 				{group = "color_crystals", chance = 600000},
 				{group = "rifles", chance = 1000000},
@@ -42,7 +40,7 @@ dark_jedi_master = Creature:new {
 				{group = "clothing_attachments", chance = 1100000},
 				{group = "carbines", chance = 1300000},
 				{group = "dark_jedi_common", chance = 800000},
-				{group = "melee_saber", chance = 100000},
+				{group = "melee_saber", chance = 300000},
 			}
 		}
 	},

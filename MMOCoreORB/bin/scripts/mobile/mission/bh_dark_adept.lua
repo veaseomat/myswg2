@@ -31,28 +31,11 @@ bh_dark_adept = Creature:new {
 	lootGroups = {
 		{
 			groups = {
-				{group = "holocron_dark", chance = 3500000},
-				{group = "holocron_light", chance = 3500000},
-				{group = "color_crystals", chance = 3000000},
+				{group = "holocron_dark2", chance = 500000},
+				{group = "color_crystals", chance = 8000000},
 			},
-			lootChance = 5000000
-		},
-		{
-			groups = {
-				{group = "holocron_dark", chance = 3500000},
-				{group = "holocron_light", chance = 3500000},
-				{group = "color_crystals", chance = 3000000},
-			},
-			lootChance = 2000000
-		},
-		{
-			groups = {
-				{group = "holocron_dark", chance = 3500000},
-				{group = "holocron_light", chance = 3500000},
-				{group = "color_crystals", chance = 3000000},
-			},
-			lootChance = 1000000
-		},
+			lootChance = 10000000
+		}
 	},
 	weapons = {"dark_jedi_weapons_gen2"},
 	conversationTemplate = "",
