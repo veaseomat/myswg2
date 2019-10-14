@@ -624,11 +624,13 @@ void LootManagerImplementation::setSockets(TangibleObject* object, CraftingValue
 bool LootManagerImplementation::createLoot(SceneObject* container, AiAgent* creature) {
 	auto lootCollection = creature->getLootGroups();
 
+	if (lootCollection == nullptr)
+		return false;
+
 	return createLootFromCollection(container, lootCollection, creature->getLevel());
 }
 
 bool LootManagerImplementation::createLootFromCollection(SceneObject* container, const LootGroupCollection* lootCollection, int level) {
-
 	for (int i = 0; i < lootCollection->count(); ++i) {
 		const LootGroupCollectionEntry* entry = lootCollection->get(i);
 		int lootChance = entry->getLootChance();
@@ -662,7 +664,6 @@ bool LootManagerImplementation::createLootFromCollection(SceneObject* container,
 
 			break;
 		}
-
 	}
 
 	return true;

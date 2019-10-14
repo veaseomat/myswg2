@@ -220,7 +220,7 @@ int CombatManager::doCombatAction(CreatureObject* attacker, WeaponObject* weapon
 					continue;
 				}
 
-				damage = doTargetCombatAction(attacker, weapon, areaDefenders->get(i), data, &shouldGcwTef,
+				damage += doTargetCombatAction(attacker, weapon, areaDefenders->get(i), data, &shouldGcwTef,
 											   &shouldBhTef);
 				areaDefenders->remove(i);
 
@@ -723,11 +723,17 @@ int CombatManager::getAttackerAccuracyModifier(TangibleObject* attacker, Creatur
 
 	const auto creatureAccMods = weapon->getCreatureAccuracyModifiers();
 
-	attackerAccuracy += creoAttacker->getSkillMod("onehandlightsaber_accuracy") / 3;
-	attackerAccuracy += creoAttacker->getSkillMod("polearmlightsaber_accuracy") / 3;
-	attackerAccuracy += creoAttacker->getSkillMod("twohandlightsaber_accuracy") / 3;
+	for (int i = 0; i < creatureAccMods->size(); ++i) {
+		const String& mod = creatureAccMods->get(i);
+		attackerAccuracy += creoAttacker->getSkillMod(mod);
+		attackerAccuracy += creoAttacker->getSkillMod("private_" + mod);
 
-	if (attackerAccuracy == 0) attackerAccuracy = -50; // unskilled penalty, TODO: this might be -50 or -125, do research
+		if (creoAttacker->isStanding()) {
+			attackerAccuracy += creoAttacker->getSkillMod(mod + "_while_standing");
+		}
+	}
+
+	if (attackerAccuracy == 0) attackerAccuracy = -15; // unskilled penalty, TODO: this might be -50 or -125, do research
 
 	attackerAccuracy += creoAttacker->getSkillMod("attack_accuracy") + creoAttacker->getSkillMod("dead_eye");
 
@@ -777,9 +783,11 @@ int CombatManager::getDefenderDefenseModifier(CreatureObject* defender, WeaponOb
 
 	const auto defenseAccMods = weapon->getDefenderDefenseModifiers();
 
-	targetDefense += defender->getSkillMod("jedi_force_power_max") / 360;
-	targetDefense += defender->getSkillMod("melee_defense") / 3.8;
-	targetDefense += 25;
+	for (int i = 0; i < defenseAccMods->size(); ++i) {
+		const String& mod = defenseAccMods->get(i);
+		targetDefense += defender->getSkillMod(mod);
+		targetDefense += defender->getSkillMod("private_" + mod);
+	}
 
 	//info("Base target defense is " + String::valueOf(targetDefense), true);
 
@@ -1144,11 +1152,6 @@ int CombatManager::getArmorReduction(TangibleObject* attacker, WeaponObject* wea
 		float rawDamage = damage;
 
 		int forceArmor = defender->getSkillMod("force_armor");
-
-		if (forceArmor > 80) {
-			forceArmor = 80;
-		}
-
 		if (forceArmor > 0) {
 			float dmgAbsorbed = rawDamage - (damage *= 1.f - (forceArmor / 100.f));
 			defender->notifyObservers(ObserverEventType::FORCEARMOR, attacker, dmgAbsorbed);
@@ -1160,11 +1163,6 @@ int CombatManager::getArmorReduction(TangibleObject* attacker, WeaponObject* wea
 
 		// Force Shield
 		int forceShield = defender->getSkillMod("force_shield");
-
-		if (forceShield > 80) {
-			forceShield = 80;
-		}
-
 		if (forceShield > 0) {
 			jediBuffDamage = rawDamage - (damage *= 1.f - (forceShield / 100.f));
 			defender->notifyObservers(ObserverEventType::FORCESHIELD, attacker, jediBuffDamage);

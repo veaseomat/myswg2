@@ -41,6 +41,10 @@ int SaberInventoryContainerComponent::canAddObject(SceneObject* sceneObject, Sce
 		return TransferErrorCode::INVALIDTYPE;
 	}
 
+	if (crystal->isDestroyed()) {
+		errorDescription = "You cannot add a broken crystal to your lightsaber.";
+		return TransferErrorCode::INVALIDTYPE;
+	}
 
 	if (sceneObject->getContainerObjectsSize() >= sceneObject->getContainerVolumeLimit()) {
 		errorDescription = "@container_error_message:container03"; //This container is full.

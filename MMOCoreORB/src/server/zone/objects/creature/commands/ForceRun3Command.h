@@ -21,8 +21,8 @@ public:
 		blockingCRCs.add(BuffCRC::JEDI_FORCE_RUN_1);
 		blockingCRCs.add(BuffCRC::JEDI_FORCE_RUN_2);
         
-		skillMods.put("force_run", 2);
-		skillMods.put("slope_move", 40);
+		skillMods.put("force_run", 3);
+		skillMods.put("slope_move", 99);
 	}
 
 	int doQueueCommand(CreatureObject* creature, const uint64& target, const UnicodeString& arguments) const {

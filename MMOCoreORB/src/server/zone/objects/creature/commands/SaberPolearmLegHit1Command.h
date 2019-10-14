@@ -26,6 +26,7 @@ public:
 		if (isWearingArmor(creature)) {
 			return NOJEDIARMOR;
 		}
+
 		return doCombatAction(creature, target);
 	}
 

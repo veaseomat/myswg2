@@ -96,6 +96,7 @@ void CraftingToolImplementation::fillAttributeList(AttributeListMessage* alm,
 		CreatureObject* object) {
 	TangibleObjectImplementation::fillAttributeList(alm, object);
 
+	alm->insertAttribute("craft_tool_effectiveness", Math::getPrecision(effectiveness, 2)); //remove?
 	alm->insertAttribute("craft_tool_status", status);
 
 	if (forceCriticalAssembly > 0)

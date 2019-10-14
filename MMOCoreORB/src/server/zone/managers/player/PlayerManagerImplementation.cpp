@@ -1037,7 +1037,7 @@ uint8 PlayerManagerImplementation::calculateIncapacitationTimer(CreatureObject* 
 	uint32 recoveryTime = (value / 5); //In seconds - 3 seconds is recoveryEvent timer
 
 	//Recovery time is gated between 10 and 60 seconds.
-	recoveryTime = Math::min(Math::max(recoveryTime, 10u), 20u);
+	recoveryTime = Math::min(Math::max(recoveryTime, 10u), 10u);
 
 	//Check for incap recovery food buff - overrides recovery time gate.
 	/*if (hasBuff(BuffCRC::FOOD_INCAP_RECOVERY)) {
@@ -1285,7 +1285,7 @@ void PlayerManagerImplementation::sendActivateCloneRequest(CreatureObject* playe
 
 	ManagedReference<SuiListBox*> cloneMenu = new SuiListBox(player, SuiWindowType::CLONE_REQUEST);
 	cloneMenu->setCallback(new CloningRequestSuiCallback(player->getZoneServer(), typeofdeath));
-	cloneMenu->setPromptTitle("Revive Locations");
+	cloneMenu->setPromptTitle("@base_player:revive_title");
 
 	uint64 preDesignatedFacilityOid = ghost->getCloningFacility();
 	ManagedReference<SceneObject*> preDesignatedFacility = server->getObject(preDesignatedFacilityOid);
@@ -1794,17 +1794,15 @@ void PlayerManagerImplementation::disseminateExperience(TangibleObject* destruct
 					//xpAmount *= 2.f;
 
 				//Award individual expType
-					if (xpType == "jedi_general"){
-						xpAmount *= .2;
-					}
-					//Award individual expType
-						if (xpType != "jedi_general"){
-							combatXp += xpAmount * .1f;
-						}
-
+				if (xpType != "jedi_general")
+					combatXp += xpAmount;
+				else
+					xpAmount *= 0.2f;
 				awardExperience(attacker, xpType, xpAmount);
 
 			}
+
+			combatXp = awardExperience(attacker, "combat_general", combatXp, true, 0.1f);
 
 
 

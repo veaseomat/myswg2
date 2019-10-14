@@ -79,8 +79,8 @@ void SkillModManager::init() {
 }
 
 void SkillModManager::setDefaults() {
-	skillModMin.put(WEARABLE, 0);
-	skillModMax.put(WEARABLE, 0);
+	skillModMin.put(WEARABLE, -25);
+	skillModMax.put(WEARABLE, 25);
 
 	skillModMin.put(ABILITYBONUS, -125);
 	skillModMax.put(ABILITYBONUS, 125);
