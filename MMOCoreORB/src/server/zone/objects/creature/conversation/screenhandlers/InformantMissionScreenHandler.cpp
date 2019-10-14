@@ -41,9 +41,9 @@ ConversationScreen* InformantMissionScreenHandler::handleScreen(CreatureObject* 
 	//Get informant level.
 	int informantLevel;
 	if (conversationScreen->getOptionLink(0) == "1") {
-		informantLevel = 3;
+		informantLevel = 1;
 	} else if (conversationScreen->getOptionLink(0) == "2") {
-		informantLevel = 3;
+		informantLevel = 2;
 	} else if (conversationScreen->getOptionLink(0) == "3") {
 		informantLevel = 3;
 	} else {
@@ -52,7 +52,7 @@ ConversationScreen* InformantMissionScreenHandler::handleScreen(CreatureObject* 
 	}
 
 	//Check if player is bounty hunter.
-	if (!conversingPlayer->hasSkill("force_title_jedi_rank_03")) {
+	if (!conversingPlayer->hasSkill("force_title_jedi_rank_03") or !conversingPlayer->hasSkill("combat_bountyhunter_novice")) {
 		conversationScreen->setDialogText(String("@mission/mission_generic:informant_not_bounty_hunter"));
 	} else {
 		//Get bounty mission object if it exists.

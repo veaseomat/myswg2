@@ -84,7 +84,7 @@ void CreatureImplementation::fillAttributeList(AttributeListMessage* alm, Creatu
 			return;
 	}
 
-	if (creaKnowledge >= 5) {
+
 		if (isAggressiveTo(player))
 			alm->insertAttribute("aggro", "yes");
 		else
@@ -93,7 +93,7 @@ void CreatureImplementation::fillAttributeList(AttributeListMessage* alm, Creatu
 			alm->insertAttribute("stalking", "yes");
 		else
 			alm->insertAttribute("stalking", "no");
-	}
+
 
 	if (creaKnowledge >= 10) {
 		if (getTame() > 0.0f)
@@ -123,18 +123,18 @@ void CreatureImplementation::fillAttributeList(AttributeListMessage* alm, Creatu
 			alm->insertAttribute("res_meat", "---");
 	}
 
-	if (creaKnowledge >= 30) {
+
 		if (isKiller())
 			alm->insertAttribute("killer", "yes");
 		else
 			alm->insertAttribute("killer", "no");
-	}
+
 
 	if (creaKnowledge >= 40) {
 		alm->insertAttribute("ferocity", (int) getFerocity());
 	}
 
-	if (creaKnowledge >= 45)
+
 		alm->insertAttribute("challenge_level", getAdultLevel());
 
 	//int skillNum = skillCommands.size();

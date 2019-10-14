@@ -166,8 +166,8 @@ void MissionManagerImplementation::handleMissionListRequest(MissionTerminal* mis
 	}
 
 	if (missionTerminal->isBountyTerminal()) {
-		if (!player->hasSkill("force_title_jedi_rank_03")) {
-			player->sendSystemMessage("You must be a Jedi Knight to use this");
+		if (!player->hasSkill("combat_bountyhunter_novice") or !player->hasSkill("force_title_jedi_rank_03")) {
+			player->sendSystemMessage("You must be a bounty hunter or jedi knight to use this terminal.");
 			return;
 		}
 	}
@@ -829,9 +829,9 @@ void MissionManagerImplementation::randomizeGenericDestroyMission(CreatureObject
 	mission->setFaction(faction);
 
 	int factionPointsReward = randomLairSpawn->getMinDifficulty();
-	if (factionPointsReward > 1)
+	if (factionPointsReward > 32)
 	{
-		factionPointsReward = 100;
+		factionPointsReward = 32;
 	}
 
 	String messageDifficulty;
@@ -948,8 +948,8 @@ void MissionManagerImplementation::randomizeGenericSurveyMission(CreatureObject*
 }
 
 void MissionManagerImplementation::randomizeGenericBountyMission(CreatureObject* player, MissionObject* mission, const uint32 faction, Vector<ManagedReference<PlayerBounty*>>* potentialTargets) {
-	if (!player->hasSkill("force_title_jedi_rank_03")) {
-		player->sendSystemMessage("You must be a Jedi Knight to use this.");
+	if (!player->hasSkill("combat_bountyhunter_novice") or !player->hasSkill("force_title_jedi_rank_03")) {
+		player->sendSystemMessage("@mission/mission_generic:not_bounty_hunter_terminal");
 		return;
 	}
 
@@ -961,7 +961,7 @@ void MissionManagerImplementation::randomizeGenericBountyMission(CreatureObject*
 
 	int level = 1;
 	int randomTexts = 25;
-	if (player->hasSkill("force_title_jedi_rank_03")) {
+	if (player->hasSkill("combat_bountyhunter_investigation_03") || player->hasSkill("force_title_jedi_rank_03")) {
 		level = 3;
 	} else if (player->hasSkill("combat_bountyhunter_investigation_01")) {
 		level = 2;
@@ -1001,19 +1001,16 @@ void MissionManagerImplementation::randomizeGenericBountyMission(CreatureObject*
 			mission->setTargetOptionalTemplate("");
 
 			ManagedReference<CreatureObject*> creature = server->getObject(target->getTargetPlayerID()).castTo<CreatureObject*>();
-			String name = "player jedi";
+			String name = "unknown";
 
 			if (creature != nullptr) {
 
-				name = "player jedi";
+				name = "unknown";
 			}
 
 			mission->setMissionTargetName(name);
-			mission->setMissionDifficulty(100);
-
-
-			int reward = (50000 + System::random(50000));
-			mission->setRewardCredits(reward);
+			mission->setMissionDifficulty(75);
+			mission->setRewardCredits(getRealBountyReward(creature, target));
 
 			// Set the Title, Creator, and Description of the mission.
 
@@ -1042,7 +1039,7 @@ void MissionManagerImplementation::randomizeGenericBountyMission(CreatureObject*
 			}
 
 			mission->setCreatorName(creatorName);
-			mission->setMissionTitle(stfFile, "***PLAYER BOUNTY***");
+			mission->setMissionTitle(stfFile, "m" + String::valueOf(randTexts) + "t");
 			mission->setMissionDescription(stfFile, "m" + String::valueOf(randTexts) + "d");
 		}
 	} else {
@@ -1061,9 +1058,20 @@ void MissionManagerImplementation::randomizeGenericBountyMission(CreatureObject*
 
 		CreatureTemplate* creoTemplate = CreatureTemplateManager::instance()->getTemplate(mission->getTargetOptionalTemplate());
 
+		int reward = 1000;
+		int creoLevel = 1;
 
-		int reward = (50000 + System::random(50000));
+		if (creoTemplate != nullptr) {
+			creoLevel = creoTemplate->getLevel();
+		}
 
+		if (level == 1) {
+			reward = creoLevel * (200 + System::random(200));
+		} else if (level == 2) {
+			reward = creoLevel * (250 + System::random(250));
+		} else if (level == 3) {
+			reward = creoLevel * (300 + System::random(300));
+		}
 
 		mission->setRewardCredits(reward);
 
@@ -1092,7 +1100,7 @@ void MissionManagerImplementation::randomizeGenericBountyMission(CreatureObject*
 		}
 
 		mission->setMissionNumber(randTexts);
-		mission->setMissionDifficulty(100);
+		mission->setMissionDifficulty(3 * creoLevel + 7);
 
 		UnicodeString possibleCreatorName = StringIdManager::instance()->getStringId(String::hashCode("@" + stfFile + diffString + ":" + "m" + String::valueOf(randTexts) + "o"));
 		String creatorName = "";

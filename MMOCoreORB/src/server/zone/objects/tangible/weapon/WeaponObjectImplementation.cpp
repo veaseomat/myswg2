@@ -336,6 +336,11 @@ void WeaponObjectImplementation::fillAttributeList(AttributeListMessage* alm, Cr
 	alm->insertAttribute("cat_wpn_rangemods.wpn_range_max", maxrange);
 
 	//Special Attack Costs
+	alm->insertAttribute("cat_wpn_attack_cost.health", getHealthAttackCost());
+
+	alm->insertAttribute("cat_wpn_attack_cost.action", getActionAttackCost());
+
+	alm->insertAttribute("cat_wpn_attack_cost.mind", getMindAttackCost());
 
 	//Anti Decay Kit
 	if(hasAntiDecayKit()){
@@ -703,8 +708,42 @@ String WeaponObjectImplementation::repairAttempt(int repairChance) {
 }
 
 void WeaponObjectImplementation::decay(CreatureObject* user) {
+	if (_this.getReferenceUnsafeStaticCast() == user->getSlottedObject("default_weapon") || user->isAiAgent() || hasAntiDecayKit()) {
 		return;
+	}
 
+	int roll = System::random(100);
+	int chance = 5;
+
+	if (hasPowerup())
+		chance += 10;
+
+	if (roll < chance) {
+		Locker locker(_this.getReferenceUnsafeStaticCast());
+
+		if (isJediWeapon()) {
+			ManagedReference<SceneObject*> saberInv = getSlottedObject("saber_inv");
+
+			if (saberInv == nullptr)
+				return;
+
+			// TODO: is this supposed to be every crystal, or random crystal(s)?
+			for (int i = 0; i < saberInv->getContainerObjectsSize(); i++) {
+				ManagedReference<LightsaberCrystalComponent*> crystal = saberInv->getContainerObject(i).castTo<LightsaberCrystalComponent*>();
+
+				if (crystal != nullptr) {
+
+				}
+			}
+		} else {
+			inflictDamage(_this.getReferenceUnsafeStaticCast(), 0, 1, true, true);
+
+			if (((float)conditionDamage - 1 / (float)maxCondition < 0.75) && ((float)conditionDamage / (float)maxCondition > 0.75))
+				user->sendSystemMessage("@combat_effects:weapon_quarter");
+			if (((float)conditionDamage - 1 / (float)maxCondition < 0.50) && ((float)conditionDamage / (float)maxCondition > 0.50))
+				user->sendSystemMessage("@combat_effects:weapon_half");
+		}
+	}
 }
 
 bool WeaponObjectImplementation::isEquipped() {

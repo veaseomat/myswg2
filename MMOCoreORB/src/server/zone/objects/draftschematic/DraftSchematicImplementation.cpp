@@ -142,7 +142,7 @@ String DraftSchematicImplementation::getXpType() {
 }
 
 int DraftSchematicImplementation::getXpAmount() {
-	return schematicTemplate->getXp();
+	return schematicTemplate->getXp() * 10;
 }
 
 bool DraftSchematicImplementation::getIsMagic() {

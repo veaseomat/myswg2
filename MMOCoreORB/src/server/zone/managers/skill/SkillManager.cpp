@@ -263,6 +263,10 @@ bool SkillManager::awardSkill(const String& skillName, CreatureObject* creature,
 		return false;
 	}
 
+	if (creature->hasSkill("force_title_jedi_novice")) {
+		SkillManager::surrenderAllSkills(creature, true, false);
+	}
+
 	//If they already have the skill, then return true.
 	if (creature->hasSkill(skill->getSkillName()))
 		return true;
@@ -697,6 +701,10 @@ bool SkillManager::canLearnSkill(const String& skillName, CreatureObject* creatu
 		return false;
 	}
 
+	if (creature->hasSkill("force_title_jedi_novice") && !skillName.beginsWith("force_")) {
+		return false;
+	}
+
 	ManagedReference<PlayerObject* > ghost = creature->getPlayerObject();
 	if (ghost != nullptr) {
 		//Check if player has enough xp to learn the skill.
@@ -838,5 +846,5 @@ bool SkillManager::villageKnightPrereqsMet(CreatureObject* creature, const Strin
 		totalJediPoints -= skillBeingDropped->getSkillPointsRequired();
 	}
 
-	return totalJediPoints > 444;
+	return fullTrees >= 2 && totalJediPoints >= 206;
 }

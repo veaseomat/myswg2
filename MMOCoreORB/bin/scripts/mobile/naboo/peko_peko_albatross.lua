@@ -2,13 +2,13 @@ peko_peko_albatross = Creature:new {
 	objectName = "@mob/creature_names:peko_peko_albatross",
 	socialGroup = "peko",
 	faction = "",
-	level = 155,
-	chanceHit = 7.75,
-	damageMin = 945,
-	damageMax = 1600,
-	baseXp = 14694,
-	baseHAM = 74000,
-	baseHAMmax = 91000,
+	level = 173,
+	chanceHit = 10.75,
+	damageMin = 1095,
+	damageMax = 1900,
+	baseXp = 16411,
+	baseHAM = 120000,
+	baseHAMmax = 125000,
 	armor = 2,
 	resists = {200,180,130,180,180,190,25,25,-1},
 	meatType = "meat_avian",
@@ -31,9 +31,9 @@ peko_peko_albatross = Creature:new {
 	lootGroups = {
 		{
 			groups = {
-				{group = "peko_albatross", chance = 10000000}
+				{group = "holocron_light2", chance = 10000000},
 			},
-			lootChance = 4100000
+			lootChance = 5000000
 		}
 	},
 	weapons = {},

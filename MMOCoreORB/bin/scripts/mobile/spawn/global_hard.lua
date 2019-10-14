@@ -7,7 +7,7 @@ global_hard = {
 			minDifficulty = 1,
 			maxDifficulty = 1,
 			numberToSpawn = 0,
-			weighting = 30,
+			weighting = 3,
 			size = 25
 		},
 	}

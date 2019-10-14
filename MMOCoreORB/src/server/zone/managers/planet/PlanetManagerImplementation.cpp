@@ -991,7 +991,7 @@ bool PlanetManagerImplementation::isSpawningPermittedAt(float x, float y, float 
 	targetPos.setZ(zone->getHeight(x, y));
 
 	zone->getInRangeActiveAreas(x, y, &activeAreas, true);
-	zone->getInRangeActiveAreas(x, y, margin + 64.f, &activeAreas, true);
+	zone->getInRangeActiveAreas(x, y, margin + 64.f, &activeAreas, true);   //distance between spawns???
 
 	for (int i = 0; i < activeAreas.size(); ++i) {
 		ActiveArea* area = activeAreas.get(i);

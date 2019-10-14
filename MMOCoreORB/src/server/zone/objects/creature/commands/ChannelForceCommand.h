@@ -26,7 +26,9 @@ public:
 
 		if (creature->hasAttackDelay())
 			return GENERALERROR;
-
+		if (isWearingArmor(creature)) {
+			return NOJEDIARMOR;
+		}
 		ManagedReference<PlayerObject*> playerObject = creature->getPlayerObject();
 		// Bonus is in between 250-350.
 		int forceRandom = playerObject->getForcePowerMax();

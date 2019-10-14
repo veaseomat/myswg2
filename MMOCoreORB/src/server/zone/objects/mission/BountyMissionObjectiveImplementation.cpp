@@ -115,6 +115,7 @@ void BountyMissionObjectiveImplementation::complete() {
 
 	ManagedReference<CreatureObject*> owner = getPlayerOwner();
 	//Award bountyhunter xp.
+	owner->getZoneServer()->getPlayerManager()->awardExperience(owner, "bountyhunter", mission->getRewardCredits() / 50, true, 1);
 
 	owner->getZoneServer()->getMissionManager()->completePlayerBounty(mission->getTargetObjectId(), owner->getObjectID());
 

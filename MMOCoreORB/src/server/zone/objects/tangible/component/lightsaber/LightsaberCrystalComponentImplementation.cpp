@@ -263,10 +263,9 @@ void LightsaberCrystalComponentImplementation::fillAttributeList(AttributeListMe
 			str << "\\#pcontrast2 UNTUNED";
 			alm->insertAttribute("crystal_owner", str);
 		} else {
-			alm->insertAttribute("crystal_owner", "TUNED");
+			alm->insertAttribute("crystal_owner", ownerName);
 		}
-
-		if (getColor() != 31) {
+		if (getColor() != 31 && ownerID != 0) {
 			StringBuffer str3;
 			str3 << "@jedi_spam:saber_color_" << getColor();
 			alm->insertAttribute("color", str3);
@@ -277,6 +276,10 @@ void LightsaberCrystalComponentImplementation::fillAttributeList(AttributeListMe
 
 				alm->insertAttribute("maxdamage", sacHealth);
 
+				StringBuffer str;
+				str << "@jedi_spam:crystal_quality_" << getQuality();
+				alm->insertAttribute("crystal_quality", str);
+
 				// For debugging
 				if (player->isPrivileged()) {
 					StringBuffer str;
@@ -284,10 +287,6 @@ void LightsaberCrystalComponentImplementation::fillAttributeList(AttributeListMe
 					alm->insertAttribute("challenge_level", itemLevel);
 					alm->insertAttribute("crystal_quality", str);
 				}
-			} else {
-				StringBuffer str;
-				str << "@jedi_spam:crystal_quality_" << getQuality();
-				alm->insertAttribute("crystal_quality", str);
 			}
 		}
 	}
@@ -425,8 +424,10 @@ void LightsaberCrystalComponentImplementation::updateCraftingValues(CraftingValu
 
 	if (colorMax != 31) {
 		int finalColor = System::random(11);
-		if (itemLevel > 299)
+		if (itemLevel > 50)
 			finalColor = System::random(30);
+		if (itemLevel > 250)
+			finalColor = System::random(19) + 11;
 		setColor(finalColor);
 		updateCrystal(finalColor);
 	} else {

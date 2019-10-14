@@ -44,7 +44,7 @@
 SaberPolearmHit3Command = {
         name = "saberpolearmhit3",
   
-	damageMultiplier = 1.4,
+	damageMultiplier = 1.25,
 	speedMultiplier = 1.0,
 	healthCostMultiplier = 0,
 	actionCostMultiplier = 0,

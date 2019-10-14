@@ -275,7 +275,7 @@ int CombatManager::doCombatAction(TangibleObject* attacker, WeaponObject* weapon
 			Reference<SortedVector<ManagedReference<TangibleObject*> >* > areaDefenders = getAreaTargets(attacker, weapon, defender, data);
 
 			for (int i=0; i<areaDefenders->size(); i++) {
-				damage = doTargetCombatAction(attacker, weapon, areaDefenders->get(i), data);
+				damage += doTargetCombatAction(attacker, weapon, areaDefenders->get(i), data);
 			}
 		}
 	}
@@ -813,11 +813,11 @@ int CombatManager::getDefenderSecondaryDefenseModifier(CreatureObject* defender)
 
 	const auto defenseAccMods = weapon->getDefenderSecondaryDefenseModifiers();
 
-	targetDefense += defender->getSkillMod("jedi_force_power_max") / 400;
-	targetDefense += defender->getSkillMod("saber_block") / 4.25;
-	targetDefense += 25;
-
-	//90saber block
+	for (int i = 0; i < defenseAccMods->size(); ++i) {
+		const String& mod = defenseAccMods->get(i);
+		targetDefense += defender->getSkillMod(mod);
+		targetDefense += defender->getSkillMod("private_" + mod);
+	}
 
 	if (targetDefense > 125)
 		targetDefense = 125;
@@ -830,36 +830,19 @@ float CombatManager::getDefenderToughnessModifier(CreatureObject* defender, int 
 
 	const auto defenseToughMods = weapon->getDefenderToughnessModifiers();
 
-
-	int toughMod = 25;
-
-	toughMod += defender->getSkillMod("lightsaber_toughness") / 5.5;
-	toughMod += defender->getSkillMod("jedi_force_power_max") / 720;
-	toughMod += defender->getSkillMod("force_manipulation_dark") / 16;
-	toughMod += defender->getSkillMod("force_manipulation_light") / 16;
-
-	// toughmod
-
-	if (toughMod > 70){
-		toughMod = 70;
+	if (attackType == weapon->getAttackType()) {
+		for (int i = 0; i < defenseToughMods->size(); ++i) {
+			int toughMod = defender->getSkillMod(defenseToughMods->get(i));
+			if (toughMod > 0) damage *= 1.f - (toughMod / 100.f);
+		}
 	}
 
-	if (toughMod > 0) damage *= 1.f - (toughMod / 100.f);
-
-
-	int jediToughness = 25;
-
-	jediToughness += defender->getSkillMod("jedi_toughness") / 2.25;
-	jediToughness += defender->getSkillMod("jedi_force_power_max") / 450;
-	jediToughness += defender->getSkillMod("force_manipulation_dark") / 16;
-	jediToughness += defender->getSkillMod("force_manipulation_light") / 16;
-
-	//75 jedi toughness
-	if (jediToughness > 90){
-		jediToughness = 90;
+	int jediToughness = defender->getSkillMod("jedi_toughness");
+	jediToughness += defender->getSkillMod("force_manipulation_dark");
+	jediToughness += defender->getSkillMod("force_manipulation_light");
+	if (jediToughness > 80) {
+		jediToughness = 80;
 	}
-
-
 	if (damType != SharedWeaponObjectTemplate::LIGHTSABER && jediToughness > 0)
 		damage *= 1.f - (jediToughness / 100.f);
 
@@ -944,9 +927,12 @@ float CombatManager::applyDamageModifiers(CreatureObject* attacker, WeaponObject
 	if (!data.isForceAttack()) {
 		const auto weaponDamageMods = weapon->getDamageModifiers();
 
-		damage += attacker->getSkillMod("force_manipulation_dark") / 3.2;
-		damage += attacker->getSkillMod("force_manipulation_light") / 3.2;
-
+		for (int i = 0; i < weaponDamageMods->size(); ++i) {
+			damage += attacker->getSkillMod(weaponDamageMods->get(i));
+		}
+		
+		damage += attacker->getSkillMod("force_manipulation_dark");
+		damage += attacker->getSkillMod("force_manipulation_light");
 
 		if (weapon->getAttackType() == SharedWeaponObjectTemplate::MELEEATTACK)
 			damage += attacker->getSkillMod("private_melee_damage_bonus");
@@ -972,6 +958,22 @@ float CombatManager::applyDamageModifiers(CreatureObject* attacker, WeaponObject
 int CombatManager::getSpeedModifier(CreatureObject* attacker, WeaponObject* weapon) {
 	int speedMods = 0;
 
+	const auto weaponSpeedMods = weapon->getSpeedModifiers();
+
+	for (int i = 0; i < weaponSpeedMods->size(); ++i) {
+		speedMods += attacker->getSkillMod(weaponSpeedMods->get(i));
+	}
+
+	speedMods += attacker->getSkillMod("private_speed_bonus");
+
+	if (weapon->getAttackType() == SharedWeaponObjectTemplate::MELEEATTACK) {
+		speedMods += attacker->getSkillMod("private_melee_speed_bonus");
+		speedMods += attacker->getSkillMod("melee_speed");
+	} else if (weapon->getAttackType() == SharedWeaponObjectTemplate::RANGEDATTACK) {
+		speedMods += attacker->getSkillMod("private_ranged_speed_bonus");
+		speedMods += attacker->getSkillMod("ranged_speed");
+	}
+
 	return speedMods;
 }
 
@@ -982,31 +984,31 @@ int CombatManager::getArmorObjectReduction(ArmorObject* armor, int damageType) {
 
 	switch (damageType) {
 	case SharedWeaponObjectTemplate::KINETIC:
-		resist = 0;
+		resist = armor->getKinetic();
 		break;
 	case SharedWeaponObjectTemplate::ENERGY:
-		resist = 0;
+		resist = armor->getEnergy();
 		break;
 	case SharedWeaponObjectTemplate::ELECTRICITY:
-		resist = 0;
+		resist = armor->getElectricity();
 		break;
 	case SharedWeaponObjectTemplate::STUN:
-		resist = 0;
+		resist = armor->getStun();
 		break;
 	case SharedWeaponObjectTemplate::BLAST:
-		resist = 0;
+		resist = armor->getBlast();
 		break;
 	case SharedWeaponObjectTemplate::HEAT:
-		resist = 0;
+		resist = armor->getHeat();
 		break;
 	case SharedWeaponObjectTemplate::COLD:
-		resist = 0;
+		resist = armor->getCold();
 		break;
 	case SharedWeaponObjectTemplate::ACID:
-		resist = 0;
+		resist = armor->getAcid();
 		break;
 	case SharedWeaponObjectTemplate::LIGHTSABER:
-		resist = 0;
+		resist = armor->getLightSaber();
 		break;
 	}
 
@@ -1142,6 +1144,11 @@ int CombatManager::getArmorReduction(TangibleObject* attacker, WeaponObject* wea
 		float rawDamage = damage;
 
 		int forceArmor = defender->getSkillMod("force_armor");
+
+		if (forceArmor > 80) {
+			forceArmor = 80;
+		}
+
 		if (forceArmor > 0) {
 			float dmgAbsorbed = rawDamage - (damage *= 1.f - (forceArmor / 100.f));
 			defender->notifyObservers(ObserverEventType::FORCEARMOR, attacker, dmgAbsorbed);
@@ -1153,6 +1160,11 @@ int CombatManager::getArmorReduction(TangibleObject* attacker, WeaponObject* wea
 
 		// Force Shield
 		int forceShield = defender->getSkillMod("force_shield");
+
+		if (forceShield > 80) {
+			forceShield = 80;
+		}
+
 		if (forceShield > 0) {
 			jediBuffDamage = rawDamage - (damage *= 1.f - (forceShield / 100.f));
 			defender->notifyObservers(ObserverEventType::FORCESHIELD, attacker, jediBuffDamage);
@@ -1417,8 +1429,34 @@ float CombatManager::doDroidDetonation(CreatureObject* droid, CreatureObject* de
 }
 
 void CombatManager::getFrsModifiedForceAttackDamage(CreatureObject* attacker, float& minDmg, float& maxDmg, const CreatureAttackData& data) {
+	ManagedReference<PlayerObject*> ghost = attacker->getPlayerObject();
 
+	if (ghost == nullptr)
 		return;
+
+	FrsData* playerData = ghost->getFrsData();
+	int councilType = playerData->getCouncilType();
+
+	float minMod = 0, maxMod = 0;
+	int powerModifier = 0;
+
+	if (councilType == FrsManager::COUNCIL_LIGHT) {
+		powerModifier = attacker->getSkillMod("force_manipulation_light");
+		minMod = data.getFrsLightMinDamageModifier();
+		maxMod = data.getFrsLightMaxDamageModifier();
+	} else if (councilType == FrsManager::COUNCIL_DARK) {
+		powerModifier = attacker->getSkillMod("force_manipulation_dark");
+		minMod = data.getFrsDarkMinDamageModifier();
+		maxMod = data.getFrsDarkMaxDamageModifier();
+	}
+
+	if (powerModifier > 0) {
+		if (minMod > 0)
+			minDmg += (int)((powerModifier * minMod) + 0.5);
+
+		if (maxMod > 0)
+			maxDmg += (int)((powerModifier * maxMod) + 0.5);
+	}
 }
 
 float CombatManager::calculateDamage(CreatureObject* attacker, WeaponObject* weapon, CreatureObject* defender, const CreatureAttackData& data) {
@@ -1463,12 +1501,12 @@ float CombatManager::calculateDamage(CreatureObject* attacker, WeaponObject* wea
 		damage *= 1.25;
 
 	if (defender->isKnockedDown()) {
-		damage *= 1.3f;
+		damage *= 1.5f;
 	} else if (data.isForceAttack() && data.getCommandName().hashCode() == STRING_HASHCODE("forcechoke")) {
 		if  (defender->isProne())
-			damage *= 1.2f;
+			damage *= 1.5f;
 		else if (defender->isKneeling())
-			damage *= 1.1f;
+			damage *= 1.25f;
 	}
 
 	// Toughness reduction
@@ -1487,7 +1525,7 @@ float CombatManager::calculateDamage(CreatureObject* attacker, WeaponObject* wea
 
 	// PvP Damage Reduction.
 	if (attacker->isPlayerCreature() && defender->isPlayerCreature() && !data.isForceAttack())
-		damage *= 0.5;
+		damage *= 0.25;
 
 	if (damage < 1) damage = 1;
 
@@ -1659,7 +1697,7 @@ float CombatManager::calculateWeaponAttackSpeed(CreatureObject* attacker, Weapon
 	int speedMod = getSpeedModifier(attacker, weapon);
 	float jediSpeed = attacker->getSkillMod("combat_haste") / 100.0f;
 
-	float attackSpeed = weapon->getAttackSpeed();
+	float attackSpeed = (1.0f - ((float) speedMod / 100.0f)) * skillSpeedRatio * weapon->getAttackSpeed();
 
 	if (jediSpeed > 0)
 		attackSpeed = attackSpeed - (attackSpeed * jediSpeed);
@@ -1687,7 +1725,7 @@ void CombatManager::doBlock(TangibleObject* attacker, WeaponObject* weapon, Crea
 
 void CombatManager::doLightsaberBlock(TangibleObject* attacker, WeaponObject* weapon, CreatureObject* defender, int damage) {
 	// No Fly Text.
-	defender->showFlyText("combat_effects", "saberblock", 0, 0xFF, 0);
+
 	//creature->doCombatAnimation(defender, STRING_HASHCODE("test_sword_ricochet"), 0);
 
 }

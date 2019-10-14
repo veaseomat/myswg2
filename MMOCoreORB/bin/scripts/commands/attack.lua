@@ -43,7 +43,7 @@
 
 AttackCommand = {
         name = "attack",
-	damageMultiplier = 1.0,
+	damageMultiplier = 0.5,
 	speedMultiplier = 1.0,
 
 	combatSpam = "attack",
@@ -52,7 +52,7 @@ AttackCommand = {
 	healthCostMultiplier = 0,
 	actionCostMultiplier = 0,
 	mindCostMultiplier = 0,
-	forceCostMultiplier = 1.0,
+	forceCostMultiplier = 0.5,
 	visMod = 25,
 
 	range = -1,

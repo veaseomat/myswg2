@@ -295,7 +295,7 @@ public:
 	}
 
 	inline int getXpCap() const {
-		return xpCap * 5;
+		return xpCap;
 	}
 
 	/**
@@ -311,7 +311,7 @@ public:
 	 * @return the credits required for training the skill at a trainer.
 	 */
 	inline int getMoneyRequired() const {
-		return moneyRequired / 5;
+		return moneyRequired / 10;
 	}
 
 	/**

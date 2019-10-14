@@ -34,8 +34,10 @@ int DynamicSpawnObserverImplementation::notifyObserverEvent(unsigned int eventTy
 
 			return 1;
 		}
+		Reference<Task*> task = new DespawnDynamicSpawnTask(spawn);
+		task->schedule(60000);
 
-		return 0;
+		return 1;
 	}
 
 	Zone* zone = spawn->getZone();
@@ -50,10 +52,10 @@ int DynamicSpawnObserverImplementation::notifyObserverEvent(unsigned int eventTy
 		level = creature->getAdultLevel();
 	}
 
-	Reference<Task*> task = new RespawnCreatureTask(ai.get(), zone, level);
-	task->schedule((60 + (level * 2)) * 1000);
+	Reference<Task*> task = new DespawnDynamicSpawnTask(spawn);
+	task->schedule(60000);
 
-	return 0;
+	return 1;
 }
 
 void DynamicSpawnObserverImplementation::spawnInitialMobiles(SceneObject* building) {
@@ -123,7 +125,7 @@ void DynamicSpawnObserverImplementation::spawnInitialMobiles(SceneObject* buildi
 
 				Locker clocker(ai, building);
 
-				ai->setDespawnOnNoPlayerInRange(false);
+				ai->setDespawnOnNoPlayerInRange(false); //true crashes with decreased spawn radius
 				ai->setHomeLocation(x, z, y);
 				ai->setRespawnTimer(0);
 				ai->resetRespawnCounter();

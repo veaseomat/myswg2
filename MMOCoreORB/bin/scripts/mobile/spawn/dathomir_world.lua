@@ -943,17 +943,8 @@ dathomir_world = {
 			minDifficulty = 98,
 			maxDifficulty = 102,
 			numberToSpawn = 0,
-			weighting = 6,
-			size = 30
-		},
-		{
-			lairTemplateName = "dathomir_rancor_ancient_bull_lair_neutral_large",
-			spawnLimit = -1,
-			minDifficulty = 98,
-			maxDifficulty = 102,
-			numberToSpawn = 0,
-			weighting = 6,
-			size = 30
+			weighting = 3,
+			size = 35
 		},
 		{
 			lairTemplateName = "global_black_sun_neutral_none",

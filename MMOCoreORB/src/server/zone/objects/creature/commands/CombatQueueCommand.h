@@ -649,10 +649,10 @@ public:
 
 		switch (effectType) {
 		case CommandEffect::BLIND:
-			defender->setStunnedState(duration);
+			defender->setBlindedState(duration);
 			break;
 		case CommandEffect::DIZZY:
-			defender->setStunnedState(duration);
+			defender->setDizziedState(duration);
 			break;
 		case CommandEffect::INTIMIDATE:
 			defender->setIntimidatedState(duration);

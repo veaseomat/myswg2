@@ -1349,14 +1349,15 @@ void PlayerManagerImplementation::sendActivateCloneRequest(CreatureObject* playe
 	}
 
 	StringBuffer promptText;
-	promptText
+	promptText << "Closest:\t\t " << closestName << "\n"
 			<< "Pre-Designated: " << predesignatedName << "\n"
-
-			<< "Rest easy son, you've had a busy day. Select the location you would like to revive at. You may only clone at Force Shrines unless you store your clone data at a city cloning facility.";
+			<< "Cash Balance:\t " << player->getCashCredits() << "\n\n"
+			<< "Select the desired option and click OK.";
 
 	cloneMenu->setPromptText(promptText.toString());
 
-
+	if (closestCloning != nullptr)
+		cloneMenu->addMenuItem("@base_player:revive_closest", closestCloning->getObjectID());
 
 	if (preDesignatedFacility != nullptr && preDesignatedFacility->getZone() == zone)
 		cloneMenu->addMenuItem("@base_player:revive_bind", preDesignatedFacility->getObjectID());
@@ -1753,33 +1754,59 @@ void PlayerManagerImplementation::disseminateExperience(TangibleObject* destruct
 			ManagedReference<GroupObject*> group = attacker->getGroup();
 
 			uint32 combatXp = 0;
+			uint32 playerTotal = 0;
 
 			Locker crossLocker(attacker, destructedObject);
+
+			for (int v = 0; v < entry->size(); ++v){
+				uint32 weapDamage = entry->elementAt(v).getValue();
+				playerTotal += weapDamage;
+			}
+
 
 			for (int j = 0; j < entry->size(); ++j) {
 				uint32 damage = entry->elementAt(j).getValue();
 				String xpType = entry->elementAt(j).getKey();
-				float xpAmount = 0;
+				float xpAmount = baseXp;
 
-				xpAmount += (totalDamage / 2);
-				xpAmount += 500;
+				//remove damage-based xp split
+				//xpAmount *= (float) damage / totalDamage;
+				//add in weapon damage split
+				xpAmount *= (float) damage / playerTotal;
 
-				//Cap xp 
+				//Cap xp based on level
+				//xpAmount = Math::min(xpAmount, calculatePlayerLevel(attacker, xpType) * 300.f);
 
 				//Apply group bonus if in group
+			//	if (group != NULL)
+				//	xpAmount *= groupExpMultiplier;
 
+		//		if (winningFaction == attacker->getFaction())
+			//		xpAmount *= gcwBonus;
 
 				//Jedi experience doesn't count towards combat experience, and is earned at 20% the rate of normal experience
-				if (xpType != "jedi_general")
-					combatXp += xpAmount;
-				else
-					xpAmount *= .6f;
+
+					//combatXp += xpAmount;
+				//else
+					//xpAmount += (totalDamage / 10);
+					//xpAmount *= 1.5f;
+					xpAmount += 1000;
+					//xpAmount *= 2.f;
 
 				//Award individual expType
+					if (xpType == "jedi_general"){
+						xpAmount *= .2;
+					}
+					//Award individual expType
+						if (xpType != "jedi_general"){
+							combatXp += xpAmount * .1f;
+						}
+
 				awardExperience(attacker, xpType, xpAmount);
+
 			}
 
-			combatXp = awardExperience(attacker, "combat_general", combatXp, true, 0.1f);
+
 
 			//Check if the group leader is a squad leader
 			if (group == nullptr)
@@ -1899,27 +1926,6 @@ void PlayerManagerImplementation::applyEncumbrancies(CreatureObject* player, Arm
 	int actionEncumb = Math::max(0, armor->getActionEncumbrance());
 	int mindEncumb = Math::max(0, armor->getMindEncumbrance());
 
-	player->addEncumbrance(CreatureEncumbrance::HEALTH, healthEncumb, true);
-	player->addEncumbrance(CreatureEncumbrance::ACTION, actionEncumb, true);
-	player->addEncumbrance(CreatureEncumbrance::MIND, mindEncumb, true);
-
-	player->inflictDamage(player, CreatureAttribute::STRENGTH, healthEncumb, true);
-	player->addMaxHAM(CreatureAttribute::STRENGTH, -healthEncumb, true);
-
-	player->inflictDamage(player, CreatureAttribute::CONSTITUTION, healthEncumb, true);
-	player->addMaxHAM(CreatureAttribute::CONSTITUTION, -healthEncumb, true);
-
-	player->inflictDamage(player, CreatureAttribute::QUICKNESS, actionEncumb, true);
-	player->addMaxHAM(CreatureAttribute::QUICKNESS, -actionEncumb, true);
-
-	player->inflictDamage(player, CreatureAttribute::STAMINA, actionEncumb, true);
-	player->addMaxHAM(CreatureAttribute::STAMINA, -actionEncumb, true);
-
-	player->inflictDamage(player, CreatureAttribute::FOCUS, mindEncumb, true);
-	player->addMaxHAM(CreatureAttribute::FOCUS, -mindEncumb, true);
-
-	player->inflictDamage(player, CreatureAttribute::WILLPOWER, mindEncumb, true);
-	player->addMaxHAM(CreatureAttribute::WILLPOWER, -mindEncumb, true);
 }
 
 void PlayerManagerImplementation::removeEncumbrancies(CreatureObject* player, ArmorObject* armor) {
@@ -1927,27 +1933,7 @@ void PlayerManagerImplementation::removeEncumbrancies(CreatureObject* player, Ar
 	int actionEncumb = Math::max(0, armor->getActionEncumbrance());
 	int mindEncumb = Math::max(0, armor->getMindEncumbrance());
 
-	player->addEncumbrance(CreatureEncumbrance::HEALTH, -healthEncumb, true);
-	player->addEncumbrance(CreatureEncumbrance::ACTION, -actionEncumb, true);
-	player->addEncumbrance(CreatureEncumbrance::MIND, -mindEncumb, true);
 
-	player->addMaxHAM(CreatureAttribute::STRENGTH, healthEncumb, true);
-	player->healDamage(player, CreatureAttribute::STRENGTH, healthEncumb, true);
-
-	player->addMaxHAM(CreatureAttribute::CONSTITUTION, healthEncumb, true);
-	player->healDamage(player, CreatureAttribute::CONSTITUTION, healthEncumb, true);
-
-	player->addMaxHAM(CreatureAttribute::QUICKNESS, actionEncumb, true);
-	player->healDamage(player, CreatureAttribute::QUICKNESS, actionEncumb, true);
-
-	player->addMaxHAM(CreatureAttribute::STAMINA, actionEncumb, true);
-	player->healDamage(player, CreatureAttribute::STAMINA, actionEncumb, true);
-
-	player->addMaxHAM(CreatureAttribute::FOCUS, mindEncumb, true);
-	player->healDamage(player, CreatureAttribute::FOCUS, mindEncumb, true);
-
-	player->addMaxHAM(CreatureAttribute::WILLPOWER, mindEncumb, true);
-	player->healDamage(player, CreatureAttribute::WILLPOWER, mindEncumb, true);
 }
 
 void PlayerManagerImplementation::awardBadge(PlayerObject* ghost, uint32 badgeId) {
@@ -1987,25 +1973,25 @@ void PlayerManagerImplementation::awardBadge(PlayerObject* ghost, const Badge* b
 	BadgeList* badgeList = BadgeList::instance();
 	switch (ghost->getNumBadges()) {
 	case 5:
-
+		awardBadge(ghost, badgeList->get("count_5"));
 		break;
 	case 10:
-
+		awardBadge(ghost, badgeList->get("count_10"));
 		break;
 	case 25:
-
+		awardBadge(ghost, badgeList->get("count_25"));
 		break;
 	case 50:
-
+		awardBadge(ghost, badgeList->get("count_50"));
 		break;
 	case 75:
-
+		awardBadge(ghost, badgeList->get("count_75"));
 		break;
 	case 100:
-
+		awardBadge(ghost, badgeList->get("count_100"));
 		break;
 	case 125:
-
+		awardBadge(ghost, badgeList->get("count_125"));
 		break;
 	default:
 		break;
@@ -2014,25 +2000,26 @@ void PlayerManagerImplementation::awardBadge(PlayerObject* ghost, const Badge* b
 	if (badge->getType() == Badge::EXPLORATION) {
 		switch (ghost->getBadgeTypeCount(static_cast<uint8>(Badge::EXPLORATION))) {
 		case 10:
-
+			awardBadge(ghost, badgeList->get("bdg_exp_10_badges"));
 			break;
 		case 20:
-
+			awardBadge(ghost, badgeList->get("bdg_exp_20_badges"));
 			break;
 		case 30:
-
+			awardBadge(ghost, badgeList->get("bdg_exp_30_badges"));
 			break;
 		case 40:
-
+			awardBadge(ghost, badgeList->get("bdg_exp_40_badges"));
 			break;
 		case 45:
-
+			awardBadge(ghost, badgeList->get("bdg_exp_45_badges"));
 			break;
 		default:
 			break;
 		}
 	}
 }
+
 
 void PlayerManagerImplementation::setExperienceMultiplier(float globalMultiplier) {
 	globalExpMultiplier = globalMultiplier;

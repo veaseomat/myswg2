@@ -70,37 +70,36 @@ object_weapon_melee_unarmed_unarmed_default_player = object_weapon_melee_unarmed
 	weaponType = UNARMEDWEAPON,
 	
 	-- ENERGY, KINETIC, ELECTRICITY, STUN, BLAST, HEAT, COLD, ACID, LIGHTSABER
-	damageType = LIGHTSABER,
+	damageType = KINETIC,
 	
 	-- NONE, LIGHT, MEDIUM, HEAVY
-	armorPiercing = MEDIUM, 
+	armorPiercing = NONE, 
 	
 	-- combat_rangedspecialize_bactarifle, combat_rangedspecialize_rifle, combat_rangedspecialize_pistol, combat_rangedspecialize_heavy, combat_rangedspecialize_carbine
 	-- combat_meleespecialize_unarmed, combat_meleespecialize_twohand, combat_meleespecialize_polearm, combat_meleespecialize_onehand, combat_general,
 	-- combat_meleespecialize_twohandlightsaber, combat_meleespecialize_polearmlightsaber, combat_meleespecialize_onehandlightsaber
-	xpType = "jedi_general",
+	xpType = "combat_meleespecialize_unarmed",
 	       
 	-- See http://www.ocdsoft.com/files/certifications.xls
 	certificationsRequired = {  },
 
 	-- See http://www.ocdsoft.com/files/accuracy.xls
-	creatureAccuracyModifiers = { "polearmlightsaber_accuracy" },
+	creatureAccuracyModifiers = { "unarmed_accuracy" },
 	
 	-- See http://www.ocdsoft.com/files/defense.xls
 	defenderDefenseModifiers = { "melee_defense" },
 	
 	-- can be dodge, counterattack, or block or a combination
 	-- Secondary defense when equipped
-	defenderSecondaryDefenseModifiers = { "saber_block" },
+	defenderSecondaryDefenseModifiers = { "unarmed_passive_defense" },
 
-	defenderToughnessModifiers = { "lightsaber_toughness" },
+	defenderToughnessModifiers = { "unarmed_toughness" },
 	
 	-- See http://www.ocdsoft.com/files/speed.xls
-	speedModifiers = { "polearmlightsaber_speed" },
+	speedModifiers = { "unarmed_speed" },
 	
 	-- carbine_damage, onehandmelee_damage, pistol_damage, rifle_damage, twohandmelee_damage, unarmed_damage
-
-	       
+	damageModifiers = { "unarmed_damage" },
 	
 	-- The values below are the default values.  To be used for blue frog objects primarily
 	healthAttackCost = 0,

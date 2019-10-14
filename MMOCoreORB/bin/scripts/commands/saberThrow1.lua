@@ -44,12 +44,12 @@
 SaberThrow1Command = {
         name = "saberthrow1",                
 
-	damageMultiplier = 1.2,
+	damageMultiplier = 0.75,
 	speedMultiplier = 1.0,
 	healthCostMultiplier = 0,
 	actionCostMultiplier = 0,
 	mindCostMultiplier = 0,
-	forceCostMultiplier = 1.0,
+	forceCostMultiplier = 0.75,
 	visMod = 25,
 
 	animation = "saberthrow", 

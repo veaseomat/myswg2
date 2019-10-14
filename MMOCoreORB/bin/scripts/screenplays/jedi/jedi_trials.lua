@@ -193,7 +193,7 @@ function JediTrials:unlockJediKnight(pPlayer)
 
 	local sui = SuiMessageBox.new("JediTrials", "emptyCallback") -- No callback
 	sui.setTitle("Jedi Knight")
-	sui.setPrompt("Welcome to the Force Ranking System. Knights gain FRS skill boxes from Holocrons. Holocrons can be looted from NPC BH missions, dark jedi sentinels, nightsister elders, spiderclan elders, SMC councilwomen, and extremely rarely from anything in the game. Bounty hunter NPCs located in cities drop BH droids to use on missions. When a rank11 (leader) dies he can *prestige* by cloning (or has to if he has no way to revive himself), which is to reroll with a small permanent increase to skills. Doing so will also add an * to your first name each time so others can see how many times you have prestiged. Welcome to mySWG Force Ranking System.")
+	sui.setPrompt("Welcome to the Force Ranking System. Knights gain FRS skill boxes from Holocrons. Holocrons can be looted from anything in the game including creatures but higher level creatures have a higher chance. Bounty hunter NPCs located in cities drop BH droids to use on missions. When a rank11 (leader) dies he can *prestige* by cloning (or has to if he has no way to revive himself), which is to reroll with a small permanent increase to skills. Doing so will also add an * to your first name each time so others can see how many times you have prestiged. Welcome to mySWG Force Ranking System.")
 	sui.sendTo(pPlayer)
 
 	local pInventory = SceneObject(pPlayer):getSlottedObject("inventory")

@@ -40,7 +40,6 @@ dark_jedi_master = Creature:new {
 				{group = "clothing_attachments", chance = 1100000},
 				{group = "carbines", chance = 1300000},
 				{group = "dark_jedi_common", chance = 800000},
-				{group = "melee_saber", chance = 300000},
 			}
 		}
 	},

@@ -22,14 +22,13 @@ public:
     
 		// Skill mods.
 		skillMods.put("force_run", 1.5);
-		skillMods.put("slope_move", 25);
+		skillMods.put("slope_move", 20);
 	}
 
 	int doQueueCommand(CreatureObject* creature, const uint64& target, const UnicodeString& arguments) const {
 		int res = creature->hasBuff(buffCRC) ? NOSTACKJEDIBUFF : doJediSelfBuffCommand(creature);
 
 		if (res == NOSTACKJEDIBUFF) {
-			creature->sendSystemMessage("You slow down."); // You are already force running.
 			creature->removeBuff(BuffCRC::JEDI_FORCE_RUN_1);
 			return GENERALERROR;
 		}
@@ -37,11 +36,6 @@ public:
 		if (res != SUCCESS) {
 			return res;
 		}
-
-		// need to apply the damage reduction in a separate buff so that the multiplication and division applies right
-		Buff* buff = creature->getBuff(BuffCRC::JEDI_FORCE_RUN_2);
-		if (buff == NULL)
-			return GENERALERROR;
 
 
 		// SPECIAL - For Force Run.

@@ -23,7 +23,9 @@ public:
 		if (!checkInvalidLocomotions(creature))
 			return INVALIDLOCOMOTION;
 
-
+		if (isWearingArmor(creature)) {
+			return NOJEDIARMOR;
+		}
 
 		return doCombatAction(creature, target, "");
 	}

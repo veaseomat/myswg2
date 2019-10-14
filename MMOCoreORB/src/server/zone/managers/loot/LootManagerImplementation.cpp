@@ -15,6 +15,8 @@
 #include "server/zone/ZoneServer.h"
 #include "LootGroupMap.h"
 #include "server/zone/objects/tangible/component/lightsaber/LightsaberCrystalComponent.h"
+#include "server/zone/managers/creature/CreatureManager.h"
+#include "server/zone/objects/creature/ai/CreatureTemplate.h"
 
 void LootManagerImplementation::initialize() {
 	info("Loading configuration.");
@@ -622,13 +624,11 @@ void LootManagerImplementation::setSockets(TangibleObject* object, CraftingValue
 bool LootManagerImplementation::createLoot(SceneObject* container, AiAgent* creature) {
 	auto lootCollection = creature->getLootGroups();
 
-	if (lootCollection == nullptr)
-		return false;
-
 	return createLootFromCollection(container, lootCollection, creature->getLevel());
 }
 
 bool LootManagerImplementation::createLootFromCollection(SceneObject* container, const LootGroupCollection* lootCollection, int level) {
+
 	for (int i = 0; i < lootCollection->count(); ++i) {
 		const LootGroupCollectionEntry* entry = lootCollection->get(i);
 		int lootChance = entry->getLootChance();
@@ -647,11 +647,6 @@ bool LootManagerImplementation::createLootFromCollection(SceneObject* container,
 
 		//Now we do the second roll to determine loot group.
 		roll = System::random(10000000);
-
-		if (roll < 5000){
-			createLoot(container, "holocron_light2", level);
-		}
-		// thats a 1/10k chance
 
 		//Select the loot group to use.
 		for (int i = 0; i < lootGroups->count(); ++i) {

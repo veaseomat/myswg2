@@ -90,7 +90,21 @@ public:
 
 		locker.release();
 
-		return forceCost;
+		int manipulationMod = 0;
+		float frsModifier = 0;
+
+		if (councilType == FrsManager::COUNCIL_LIGHT) {
+			manipulationMod = creature->getSkillMod("force_manipulation_light");
+			frsModifier = frsLightForceCostModifier;
+		} else if (councilType == FrsManager::COUNCIL_DARK) {
+			manipulationMod = creature->getSkillMod("force_manipulation_dark");
+			frsModifier = frsDarkForceCostModifier;
+		}
+
+		if (manipulationMod == 0 || frsModifier == 0)
+			return forceCost;
+
+		return forceCost + (int)((manipulationMod * frsModifier) + .5);
 	}
 
 	float getCommandDuration(CreatureObject *object, const UnicodeString& arguments) const {

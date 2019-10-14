@@ -2,13 +2,13 @@ stintaril_prowler = Creature:new {
 	objectName = "@mob/creature_names:stintaril_prowler",
 	socialGroup = "stinaril",
 	faction = "",
-	level = 83,
-	chanceHit = 0.85,
-	damageMin = 595,
-	damageMax = 900,
-	baseXp = 7945,
-	baseHAM = 12000,
-	baseHAMmax = 15000,
+	level = 173,
+	chanceHit = 10.75,
+	damageMin = 1095,
+	damageMax = 1900,
+	baseXp = 16411,
+	baseHAM = 120000,
+	baseHAMmax = 125000,
 	armor = 1,
 	resists = {40,40,40,40,40,40,40,-1,-1},
 	meatType = "meat_carnivore",
@@ -27,8 +27,15 @@ stintaril_prowler = Creature:new {
 
 	templates = {"object/mobile/stintaril_hue.iff"},
 	hues = { 24, 25, 26, 27, 28, 29, 30, 31 },
-	scale = 1.5,
-	lootGroups = {},
+	scale = 2.0,
+	lootGroups = {
+		{
+			groups = {
+				{group = "holocron_light2", chance = 10000000},
+			},
+			lootChance = 5000000
+		}
+	},
 	weapons = {"creature_spit_small_red"},
 	conversationTemplate = "",
 	attacks = {

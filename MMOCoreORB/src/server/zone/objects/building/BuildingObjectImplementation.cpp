@@ -380,22 +380,8 @@ bool BuildingObjectImplementation::isAllowedEntry(CreatureObject* player) {
 		return encComp->checkContainerPermission(asBuildingObject(), player, ContainerPermissions::WALKIN);
 	}
 
-	if (!isClientObject()) {
-		PlayerObject* ghost = player->getPlayerObject().get();
-
-		if (ghost != nullptr && ghost->hasPvpTef()) {
-			return false;
-		}
-	}
-
 	if (getOwnerObjectID() == player->getObjectID())
 		return true;
-
-	if (isOnBanList(player))
-		return false;
-
-	if (isPrivateStructure() && !isOnEntryList(player))
-		return false;
 
 	return true;
 }

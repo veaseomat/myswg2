@@ -33,7 +33,7 @@ public:
 			return;
 
 		// Client Effect upon hit (needed)
-		player->playEffect("", "");
+		player->playEffect("clienteffect/pl_force_absorb_hit.cef", "");
 
 		int fCost = param * getFrsModifiedExtraForceCost(player, 0.15);
 		ghost->setForcePower(ghost->getForcePower() + fCost);

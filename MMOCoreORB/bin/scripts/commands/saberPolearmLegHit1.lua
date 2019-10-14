@@ -44,12 +44,12 @@
 SaberPolearmLegHit1Command = {
         name = "saberpolearmleghit1",
       
-	damageMultiplier = 1.1,
+	damageMultiplier = 0.63,
 	speedMultiplier = 1.0,
 	healthCostMultiplier = 0,
 	actionCostMultiplier = 0,
 	mindCostMultiplier = 0,
-	forceCostMultiplier = 1.0,
+	forceCostMultiplier = 0.5,
 	visMod = 25,
 
 	animation = "combo_3a", 

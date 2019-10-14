@@ -36,6 +36,10 @@ int SaberInventoryContainerComponent::canAddObject(SceneObject* sceneObject, Sce
 
 	ManagedReference<CreatureObject*> creature = crystal->getParentRecursively(SceneObjectType::PLAYERCREATURE).castTo<CreatureObject*>();
 
+	if (creature == NULL || crystal->getOwnerID() != creature->getObjectID()){
+		errorDescription = "@jedi_spam:saber_crystal_not_owner";
+		return TransferErrorCode::INVALIDTYPE;
+	}
 
 
 	if (sceneObject->getContainerObjectsSize() >= sceneObject->getContainerVolumeLimit()) {

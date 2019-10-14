@@ -19,17 +19,17 @@ function RecordKeeper:wipeQuests(pObject)
 	for k,v in pairs(self.quests) do
 		-- we wipe out all screen play data for this theme park/quest
 		local park = _G[v]
-		park:resetThemePark(pObject)
+
 	end
-	writeScreenPlayData(pObject, self.keeperName, "completed", 1)
+
 end
 
 function RecordKeeper:resetQuests(pObject)
 	for k,v in pairs(self.quests) do
 		local park = _G[v]
-		park:resetCurrentMission(pObject)
+
 	end
-	writeScreenPlayData(pObject, self.keeperName, "completed", 1)
+
 end
 
 function RecordKeeper:available(pObject)

@@ -44,12 +44,12 @@
 Saber2hSweep3Command = {
         name = "saber2hsweep3",
 
-	damageMultiplier = 1.4,
+	damageMultiplier = 1.5,
 	speedMultiplier = 1.0,
 	healthCostMultiplier = 0,
 	actionCostMultiplier = 0,
 	mindCostMultiplier = 0,
-	forceCostMultiplier = 1.0,
+	forceCostMultiplier = 1.25,
 	coneAngle = 90,
 	coneAction = true,
 	coneRange = 8,

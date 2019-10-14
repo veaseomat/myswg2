@@ -310,6 +310,11 @@ public:
 	}
 	
 	bool isWearingArmor(CreatureObject* creo) const {
+		for (int i = 0; i < creo->getSlottedObjectsSize(); ++i) {
+			SceneObject* item = creo->getSlottedObject(i);
+			if (item != nullptr && item->isArmorObject())
+				return true;
+		}
 
 		return false;
 	}

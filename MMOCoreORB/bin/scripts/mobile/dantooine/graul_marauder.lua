@@ -27,8 +27,15 @@ graul_marauder = Creature:new {
 
 	templates = {"object/mobile/graul_hue.iff"},
 	hues = { 8, 9, 10, 11, 12, 13, 14, 15 },
-	scale = 1.35,
-	lootGroups = {},
+	scale = 2.0,
+	lootGroups = {
+		{
+			groups = {
+				{group = "holocron_light2", chance = 10000000},
+			},
+			lootChance = 5000000
+		}
+	},
 	weapons = {},
 	conversationTemplate = "",
 	attacks = {

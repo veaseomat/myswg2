@@ -44,25 +44,67 @@
 SaberSlash1Command = {
         name = "saberslash1",
 
-	damageMultiplier = 1.1,
+	damageMultiplier = 0.5,
 	speedMultiplier = 1.0,
 	healthCostMultiplier = 0,
 	actionCostMultiplier = 0,
 	mindCostMultiplier = 0,
-	forceCostMultiplier = 1.0,
+	forceCostMultiplier = 0.5,
 	visMod = 25,
 
+	dotEffects = {
+	  DotEffect(
+		BLEEDING,
+		{ "resistance_bleeding", "bleed_resist" },
+		HEALTH,
+		true,
+		0,
+		25,
+		50,
+		30,
+      		8.33,
+      		8.33
+	  ),
+
+	  	DotEffect(
+		BLEEDING,
+		{ "resistance_bleeding", "bleed_resist" },
+		ACTION,
+		true,
+		0,
+		25,
+		50,
+		30,
+		8.33,
+		8.33
+	  ),
+
+	  	DotEffect(
+		BLEEDING,
+		{ "resistance_bleeding", "bleed_resist" },
+		MIND,
+		true,
+		0,
+		25,
+		50,
+		30,
+		8.33,
+		8.33
+	  ),
+	},
+
 	stateEffects = {
-	  StateEffect( 
-		STUN_EFFECT, 
-		{}, 
-		{ "stun_defense" }, 
-		{ "jedi_state_defense", "resistance_states" },
-		100, 
-		0, 
-		45 
+	  StateEffect(
+		POSTUREDOWN_EFFECT,
+		{ "postureDownRecovery" },
+		{ "posture_change_down_defense" },
+		{},
+		100,
+		0,
+		0
 	  )
 	},
+
 
 	combatSpam = "saberslash1",
 

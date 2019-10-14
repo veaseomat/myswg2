@@ -22,7 +22,6 @@ function LokStaticSpawnsScreenPlay:spawnMobiles()
 	spawnMobile("lok", "young_spined_snake",720,-26.3,-118.8,-370.0,66,7475374)
 	spawnMobile("lok", "kimogila_hatchling",3600,-28.2,-78.7,-353.3,13,7475370)
 	spawnMobile("lok", "kimogila_hatchling",3600,-100.0,-82.8,-345.1,-54,7475371)
-	spawnMobile("lok", "enraged_dune_kimogila",7200,-29.9,-53.5,-190.9,59,7475359)
 	spawnMobile("lok", "ig_assassin_droid",360,-27.1,-38.2,-64.2,0,7475357)
 
 	--Rebel House (-4743 3531) Leia Story part 3 needs to be populated

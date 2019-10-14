@@ -2,13 +2,13 @@ enraged_dune_kimogila = Creature:new {
 	objectName = "@mob/creature_names:enraged_dune_kimogila",
 	socialGroup = "kimogila",
 	faction = "",
-	level = 148,
-	chanceHit = 6.25,
-	damageMin = 940,
-	damageMax = 1590,
-	baseXp = 14030,
-	baseHAM = 62000,
-	baseHAMmax = 75000,
+	level = 173,
+	chanceHit = 10.75,
+	damageMin = 1095,
+	damageMax = 1900,
+	baseXp = 16411,
+	baseHAM = 120000,
+	baseHAMmax = 125000,
 	armor = 2,
 	resists = {180,190,180,200,180,180,200,180,-1},
 	meatType = "meat_carnivore",
@@ -27,13 +27,13 @@ enraged_dune_kimogila = Creature:new {
 
 	templates = {"object/mobile/kimogila_hue.iff"},
 	hues = { 24, 25, 26, 27, 28, 29, 30, 31 },
-	scale = 1.05,
+	scale = 1.5,
 	lootGroups = {
-	 {
-	        groups = {
-				{group = "kimogila_common", chance = 10000000}
+		{
+			groups = {
+				{group = "holocron_dark2", chance = 10000000},
 			},
-			lootChance = 3960000
+			lootChance = 5000000
 		}
 	},
 	weapons = {},

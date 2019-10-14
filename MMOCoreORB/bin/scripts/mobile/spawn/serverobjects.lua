@@ -1,4 +1,7 @@
 -- spawn groups
+includeFile("spawn/ns_strong.lua")
+includeFile("spawn/krayt.lua")
+
 includeFile("spawn/corellia_world.lua")
 includeFile("spawn/dantooine_world.lua")
 includeFile("spawn/dathomir_world.lua")
