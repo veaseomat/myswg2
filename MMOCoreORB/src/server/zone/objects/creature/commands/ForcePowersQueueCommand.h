@@ -94,10 +94,10 @@ public:
 		float frsModifier = 0;
 
 		if (councilType == FrsManager::COUNCIL_LIGHT) {
-			manipulationMod = creature->getSkillMod("force_manipulation_light");
+			manipulationMod = creature->getSkillMod("force_power_light");
 			frsModifier = frsLightForceCostModifier;
 		} else if (councilType == FrsManager::COUNCIL_DARK) {
-			manipulationMod = creature->getSkillMod("force_manipulation_dark");
+			manipulationMod = creature->getSkillMod("force_control_dark");
 			frsModifier = frsDarkForceCostModifier;
 		}
 

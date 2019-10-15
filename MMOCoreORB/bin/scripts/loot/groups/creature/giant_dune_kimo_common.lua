@@ -5,8 +5,7 @@ giant_dune_kimo_common = {
 	minimumLevel = 0,
 	maximumLevel = 0,
 	lootItems = {
-		{itemTemplate = "krayt_dragon_pearl", weight = 5000000},
-		{groupTemplate = "d_armor", weight = 5000000}
+		{itemTemplate = "giant_dune_kimogila_scale", weight = 10000000}
 	}
 }
 

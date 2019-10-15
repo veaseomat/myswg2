@@ -50,8 +50,6 @@ object_building_player_player_house_generic_small_style_01 = object_building_pla
 		{"private_medical_rating", 100},
 		{"private_buff_mind", 100},
 		{"private_med_battle_fatigue", 5},
-		{"private_med_wound_health", 100},
-		{"private_med_wound_action", 100},
 		{"private_safe_logout", 1}
 	},
 	childObjects = {

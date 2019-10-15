@@ -724,14 +724,15 @@ void PlayerCreationManager::addProfessionStartingItems(CreatureObject* creature,
 	//Reference<Skill*> startingSkill = SkillManager::instance()->getSkill("crafting_artisan_novice");
 
 	//Starting skill.
-
+	SkillManager::instance()->awardSkill(startingSkill->getSkillName(),
+			creature, false, true, true);
 
 	//Set the hams.
 	for (int i = 0; i < 9; ++i) {
 		int mod = professionData->getAttributeMod(i);
-		creature->setBaseHAM(i, 2500, false);
-		creature->setHAM(i, 2500, false);
-		creature->setMaxHAM(i, 2500, false);
+		creature->setBaseHAM(i, mod, false);
+		creature->setHAM(i, mod, false);
+		creature->setMaxHAM(i, mod, false);
 	}
 
 	auto itemTemplates = professionData->getProfessionItems(
@@ -1046,5 +1047,42 @@ void PlayerCreationManager::addRacialMods(CreatureObject* creature,
 		Vector<String>* startingItems, bool equipmentOnly) const {
 	Reference<RacialCreationData*> racialData = racialCreationData.get(race);
 
-	return;
+	if (racialData == nullptr)
+		racialData = racialCreationData.get(0);
+
+	for (int i = 0; i < 9; ++i) {
+		int mod = racialData->getAttributeMod(i) + creature->getBaseHAM(i);
+		creature->setBaseHAM(i, mod, false);
+		creature->setHAM(i, mod, false);
+		creature->setMaxHAM(i, mod, false);
+	}
+
+	if (startingSkills != nullptr) {
+		for (int i = 0; i < startingSkills->size(); ++i) {
+			SkillManager::instance()->awardSkill(startingSkills->get(i),
+					creature, false, true, true);
+		}
+	}
+
+	// Get inventory.
+	if (!equipmentOnly) {
+		SceneObject* inventory = creature->getSlottedObject("inventory");
+		if (inventory == nullptr) {
+			return;
+		}
+
+		if (startingItems != nullptr) {
+			for (int i = 0; i < startingItems->size(); ++i) {
+				ManagedReference<SceneObject*> item = zoneServer->createObject(
+						startingItems->get(i).hashCode(), 1);
+
+				if (item != nullptr) {
+					if (!inventory->transferObject(item, -1, false)) {
+						item->destroyObjectFromDatabase(true);
+					}
+				}
+
+			}
+		}
+	}
 }

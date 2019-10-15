@@ -1,4 +1,3 @@
-
 weapons_all = {
 	description = "",
 	minimumLevel = 0,

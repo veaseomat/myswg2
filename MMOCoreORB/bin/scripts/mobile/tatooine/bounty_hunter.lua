@@ -4,15 +4,15 @@ bounty_hunter = Creature:new {
 	randomNameTag = true,
 	socialGroup = "townsperson",
 	faction = "townsperson",
-	level = 291,
-	chanceHit = 23.5,
-	damageMin = 1000,
-	damageMax = 2000,
-	baseXp = 2443,
-	baseHAM = 26300,
-	baseHAMmax = 32700,
+	level = 99,
+	chanceHit = 1,
+	damageMin = 645,
+	damageMax = 1000,
+	baseXp = 9243,
+	baseHAM = 24000,
+	baseHAMmax = 30000,
 	armor = 0,
-	resists = {20,20,0,0,0,0,-1,-1,-1},
+	resists = {20,20,10,10,10,10,10,-1,-1},
 	meatType = "",
 	meatAmount = 0,
 	hideType = "",
@@ -23,22 +23,16 @@ bounty_hunter = Creature:new {
 	tamingChance = 0,
 	ferocity = 0,
 	pvpBitmask = NONE,
-	creatureBitmask = PACK,
+	creatureBitmask = HERD,
 	optionsBitmask = AIENABLED,
 	diet = HERBIVORE,
 
 	templates = {"object/mobile/dressed_bounty_hunter_zabrak_female_01.iff"},
-	lootGroups = {
-		{
-			groups = {
-				{group = "bh_droid", chance = 5000000},
-				{group = "bh_droid", chance = 5000000},
-			}
-		}
-	},
+	lootGroups = {},
 	weapons = {"pirate_weapons_heavy"},
 	conversationTemplate = "",
-	attacks = merge(brawlermaster,marksmanmaster)
+	attacks = {
+	}
 }
 
 CreatureTemplates:addCreatureTemplate(bounty_hunter, "bounty_hunter")

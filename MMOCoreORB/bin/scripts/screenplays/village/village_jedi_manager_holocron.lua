@@ -59,12 +59,34 @@ function VillageJediManagerHolocron.useTheHolocron(pSceneObject, pPlayer)
 		end
 		if CreatureObject(pPlayer):hasSkill("force_rank_light_rank_09") and not CreatureObject(pPlayer):hasSkill("force_rank_light_rank_10") then
 		awardSkill(pPlayer, "force_rank_light_rank_10")
+			local pInventory = SceneObject(pPlayer):getSlottedObject("inventory")
+
+			if (pInventory == nil or SceneObject(pInventory):isContainerFullRecursive()) then
+				CreatureObject(pPlayer):sendSystemMessage("@jedi_spam:inventory_full_jedi_robe")
+			else
+				giveItem(pInventory, "object/tangible/wearables/robe/robe_jedi_light_s05.iff", -1)
+					local sui = SuiMessageBox.new("JediTrials", "emptyCallback") -- No callback
+					sui.setTitle("Jedi Knight")
+					sui.setPrompt("You have been given a new robe befitting your rank.")
+					sui.sendTo(pPlayer)
+			end	
 		end
 		if CreatureObject(pPlayer):hasSkill("force_rank_light_rank_08") and not CreatureObject(pPlayer):hasSkill("force_rank_light_rank_09") then
 		awardSkill(pPlayer, "force_rank_light_rank_09")
 		end
 		if CreatureObject(pPlayer):hasSkill("force_rank_light_rank_07") and not CreatureObject(pPlayer):hasSkill("force_rank_light_rank_08") then
 		awardSkill(pPlayer, "force_rank_light_rank_08")
+			local pInventory = SceneObject(pPlayer):getSlottedObject("inventory")
+
+			if (pInventory == nil or SceneObject(pInventory):isContainerFullRecursive()) then
+				CreatureObject(pPlayer):sendSystemMessage("@jedi_spam:inventory_full_jedi_robe")
+			else
+				giveItem(pInventory, "object/tangible/wearables/robe/robe_jedi_light_s04.iff", -1)
+					local sui = SuiMessageBox.new("JediTrials", "emptyCallback") -- No callback
+					sui.setTitle("Jedi Knight")
+					sui.setPrompt("You have been given a new robe befitting your rank.")
+					sui.sendTo(pPlayer)
+			end	
 		end
 		if CreatureObject(pPlayer):hasSkill("force_rank_light_rank_06") and not CreatureObject(pPlayer):hasSkill("force_rank_light_rank_07") then
 		awardSkill(pPlayer, "force_rank_light_rank_07")
@@ -74,6 +96,17 @@ function VillageJediManagerHolocron.useTheHolocron(pSceneObject, pPlayer)
 		end
 		if CreatureObject(pPlayer):hasSkill("force_rank_light_rank_04") and not CreatureObject(pPlayer):hasSkill("force_rank_light_rank_05") then
 		awardSkill(pPlayer, "force_rank_light_rank_05")
+			local pInventory = SceneObject(pPlayer):getSlottedObject("inventory")
+
+			if (pInventory == nil or SceneObject(pInventory):isContainerFullRecursive()) then
+				CreatureObject(pPlayer):sendSystemMessage("@jedi_spam:inventory_full_jedi_robe")
+			else
+				giveItem(pInventory, "object/tangible/wearables/robe/robe_jedi_light_s03.iff", -1)
+					local sui = SuiMessageBox.new("JediTrials", "emptyCallback") -- No callback
+					sui.setTitle("Jedi Knight")
+					sui.setPrompt("You have been given a new robe befitting your rank.")
+					sui.sendTo(pPlayer)
+			end	
 		end
 		if CreatureObject(pPlayer):hasSkill("force_rank_light_rank_03") and not CreatureObject(pPlayer):hasSkill("force_rank_light_rank_04") then
 		awardSkill(pPlayer, "force_rank_light_rank_04")
@@ -86,6 +119,17 @@ function VillageJediManagerHolocron.useTheHolocron(pSceneObject, pPlayer)
 		end
 		if CreatureObject(pPlayer):hasSkill("force_rank_light_novice") and not CreatureObject(pPlayer):hasSkill("force_rank_light_rank_01") then
 		awardSkill(pPlayer, "force_rank_light_rank_01")
+			local pInventory = SceneObject(pPlayer):getSlottedObject("inventory")
+
+			if (pInventory == nil or SceneObject(pInventory):isContainerFullRecursive()) then
+				CreatureObject(pPlayer):sendSystemMessage("@jedi_spam:inventory_full_jedi_robe")
+			else
+				giveItem(pInventory, "object/tangible/wearables/robe/robe_jedi_light_s02.iff", -1)
+					local sui = SuiMessageBox.new("JediTrials", "emptyCallback") -- No callback
+					sui.setTitle("Jedi Knight")
+					sui.setPrompt("You have been given a new robe befitting your rank.")
+					sui.sendTo(pPlayer)
+			end	
 		end
 		
 		if CreatureObject(pPlayer):hasSkill("force_rank_dark_rank_10") and not CreatureObject(pPlayer):hasSkill("force_rank_dark_master") then
@@ -93,12 +137,34 @@ function VillageJediManagerHolocron.useTheHolocron(pSceneObject, pPlayer)
 		end
 		if CreatureObject(pPlayer):hasSkill("force_rank_dark_rank_09") and not CreatureObject(pPlayer):hasSkill("force_rank_dark_rank_10") then
 		awardSkill(pPlayer, "force_rank_dark_rank_10")
+			local pInventory = SceneObject(pPlayer):getSlottedObject("inventory")
+
+			if (pInventory == nil or SceneObject(pInventory):isContainerFullRecursive()) then
+				CreatureObject(pPlayer):sendSystemMessage("@jedi_spam:inventory_full_jedi_robe")
+			else
+				giveItem(pInventory, "object/tangible/wearables/robe/robe_jedi_dark_s05.iff", -1)
+					local sui = SuiMessageBox.new("JediTrials", "emptyCallback") -- No callback
+					sui.setTitle("Jedi Knight")
+					sui.setPrompt("You have been given a new robe befitting your rank.")
+					sui.sendTo(pPlayer)
+			end	
 		end
 		if CreatureObject(pPlayer):hasSkill("force_rank_dark_rank_08") and not CreatureObject(pPlayer):hasSkill("force_rank_dark_rank_09") then
 		awardSkill(pPlayer, "force_rank_dark_rank_09")
 		end
 		if CreatureObject(pPlayer):hasSkill("force_rank_dark_rank_07") and not CreatureObject(pPlayer):hasSkill("force_rank_dark_rank_08") then
 		awardSkill(pPlayer, "force_rank_dark_rank_08")
+			local pInventory = SceneObject(pPlayer):getSlottedObject("inventory")
+
+			if (pInventory == nil or SceneObject(pInventory):isContainerFullRecursive()) then
+				CreatureObject(pPlayer):sendSystemMessage("@jedi_spam:inventory_full_jedi_robe")
+			else
+				giveItem(pInventory, "object/tangible/wearables/robe/robe_jedi_dark_s04.iff", -1)
+					local sui = SuiMessageBox.new("JediTrials", "emptyCallback") -- No callback
+					sui.setTitle("Jedi Knight")
+					sui.setPrompt("You have been given a new robe befitting your rank.")
+					sui.sendTo(pPlayer)
+			end	
 		end
 		if CreatureObject(pPlayer):hasSkill("force_rank_dark_rank_06") and not CreatureObject(pPlayer):hasSkill("force_rank_dark_rank_07") then
 		awardSkill(pPlayer, "force_rank_dark_rank_07")
@@ -108,6 +174,17 @@ function VillageJediManagerHolocron.useTheHolocron(pSceneObject, pPlayer)
 		end
 		if CreatureObject(pPlayer):hasSkill("force_rank_dark_rank_04") and not CreatureObject(pPlayer):hasSkill("force_rank_dark_rank_05") then
 		awardSkill(pPlayer, "force_rank_dark_rank_05")
+			local pInventory = SceneObject(pPlayer):getSlottedObject("inventory")
+
+			if (pInventory == nil or SceneObject(pInventory):isContainerFullRecursive()) then
+				CreatureObject(pPlayer):sendSystemMessage("@jedi_spam:inventory_full_jedi_robe")
+			else
+				giveItem(pInventory, "object/tangible/wearables/robe/robe_jedi_dark_s03.iff", -1)
+					local sui = SuiMessageBox.new("JediTrials", "emptyCallback") -- No callback
+					sui.setTitle("Jedi Knight")
+					sui.setPrompt("You have been given a new robe befitting your rank.")
+					sui.sendTo(pPlayer)
+			end	
 		end
 		if CreatureObject(pPlayer):hasSkill("force_rank_dark_rank_03") and not CreatureObject(pPlayer):hasSkill("force_rank_dark_rank_04") then
 		awardSkill(pPlayer, "force_rank_dark_rank_04")
@@ -120,13 +197,23 @@ function VillageJediManagerHolocron.useTheHolocron(pSceneObject, pPlayer)
 		end
 		if CreatureObject(pPlayer):hasSkill("force_rank_dark_novice") and not CreatureObject(pPlayer):hasSkill("force_rank_dark_rank_01") then
 		awardSkill(pPlayer, "force_rank_dark_rank_01")
+			local pInventory = SceneObject(pPlayer):getSlottedObject("inventory")
+
+			if (pInventory == nil or SceneObject(pInventory):isContainerFullRecursive()) then
+				CreatureObject(pPlayer):sendSystemMessage("@jedi_spam:inventory_full_jedi_robe")
+			else
+				giveItem(pInventory, "object/tangible/wearables/robe/robe_jedi_dark_s02.iff", -1)
+					local sui = SuiMessageBox.new("JediTrials", "emptyCallback") -- No callback
+					sui.setTitle("Jedi Knight")
+					sui.setPrompt("You have been given a new robe befitting your rank.")
+					sui.sendTo(pPlayer)
+			end	
 		end		
 
 
 	SceneObject(pSceneObject):destroyObjectFromWorld()
 	SceneObject(pSceneObject):destroyObjectFromDatabase()
 	CreatureObject(pPlayer):sendSystemMessage("The Holocron hums softly and begins to glow! You feel a rush of ancient knowledge flood your senses.")
-
 	else
 		CreatureObject(pPlayer):sendSystemMessage("The Holocron hums briefly but otherwise does nothing. Only a Jedi Knight can access the knowledge within.")
 	end

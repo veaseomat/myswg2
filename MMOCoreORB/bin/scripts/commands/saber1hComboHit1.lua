@@ -44,15 +44,12 @@
 Saber1hComboHit1Command = {
         name = "saber1hcombohit1",
 
-	damageMultiplier = 0.38,
-	speedMultiplier = 1.0,
+	damageMultiplier = 1.5,
+	speedMultiplier = 1.25,
 	healthCostMultiplier = 0,
 	actionCostMultiplier = 0,
 	mindCostMultiplier = 0,
-	forceCostMultiplier = 0.62,
-	coneAngle = 90,
-	coneAction = true,
-	coneRange = 8,
+	forceCostMultiplier = 1.25,
 	visMod = 25,
 
 	animation = "combo_4c", 
@@ -60,7 +57,7 @@ Saber1hComboHit1Command = {
 
 	combatSpam = "saber1hcombohit1",
 
-	poolsToDamage = RANDOM_ATTRIBUTE,
+	poolsToDamage = HEALTH_ATTRIBUTE + ACTION_ATTRIBUTE + MIND_ATTRIBUTE,
 
 	weaponType = JEDIWEAPON,
 

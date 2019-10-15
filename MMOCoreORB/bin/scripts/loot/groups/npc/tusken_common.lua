@@ -5,8 +5,8 @@ tusken_common = {
 	minimumLevel = 0,
 	maximumLevel = 0,
 	lootItems = {
-		{itemTemplate = "krayt_dragon_pearl", weight = 600000},
-		{itemTemplate = "force_color_crystal", weight = 600000},
+		{itemTemplate = "baton_gaderiffi", weight = 600000},
+		{itemTemplate = "rifle_tusken", weight = 600000},
 		{itemTemplate = "tusken_raider_bandolier_1", weight = 700000},
 		{itemTemplate = "tusken_raider_bandolier_2", weight = 400000},
 		{itemTemplate = "tusken_raider_bandolier_3", weight = 200000},

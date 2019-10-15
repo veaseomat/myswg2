@@ -5,16 +5,7 @@ death_watch_bunker_ingredient_binary = {
 	minimumLevel = 0,
 	maximumLevel = 0,
 	lootItems = {
-		{itemTemplate = "m_armor_belt", weight = 1000000},
-		{itemTemplate = "m_armor_bicep_l", weight = 1000000},
-		{itemTemplate = "m_armor_bicep_r", weight = 1000000},
-		{itemTemplate = "m_armor_boots", weight = 1000000},
-		{itemTemplate = "m_armor_bracer_l", weight = 1000000},
-		{itemTemplate = "m_armor_bracer_r", weight = 1000000},
-		{itemTemplate = "m_armor_chest_plate", weight = 1000000},
-		{itemTemplate = "m_armor_gloves", weight = 1000000},
-		{itemTemplate = "m_armor_helmet", weight = 1000000},
-		{itemTemplate = "m_armor_leggings", weight = 1000000}
+		{itemTemplate = "binary_liquid", weight = 10000000}
 	}
 }
 

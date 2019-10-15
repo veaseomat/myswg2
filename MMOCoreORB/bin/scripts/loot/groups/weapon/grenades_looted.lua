@@ -1,4 +1,3 @@
-
 grenades_looted = {
 	description = "",
 	minimumLevel = 0,

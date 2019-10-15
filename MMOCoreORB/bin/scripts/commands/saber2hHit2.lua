@@ -44,14 +44,13 @@
 Saber2hHit2Command = {
         name = "saber2hhit2",
 
-	damageMultiplier = 1.0,
-	speedMultiplier = 1.0,
+	damageMultiplier = 2.0,
+	speedMultiplier = 1.5,
 	healthCostMultiplier = 0,
 	actionCostMultiplier = 0,
 	mindCostMultiplier = 0,
-	forceCostMultiplier = 1.0,
+	forceCostMultiplier = 1.5,
 	visMod = 25,
-
 
 	animation = "combo_jedi_1", 
 	animType = GENERATE_INTENSITY,

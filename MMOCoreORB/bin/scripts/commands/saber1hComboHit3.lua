@@ -44,23 +44,32 @@
 Saber1hComboHit3Command = {
         name = "saber1hcombohit3",
 
-	damageMultiplier = 1.5,
-	speedMultiplier = 1.0,
+	damageMultiplier = 3.5,
+	speedMultiplier = 3,
 	healthCostMultiplier = 0,
 	actionCostMultiplier = 0,
 	mindCostMultiplier = 0,
-	forceCostMultiplier = 1.25,
-	coneAngle = 90,
-	coneAction = true,
-	coneRange = 8,
+	forceCostMultiplier = 2.25,
 	visMod = 25,
 
 	animation = "combo_4c", 
 	animType = GENERATE_INTENSITY,
 
+	stateEffects = {
+	  StateEffect( 
+		POSTUREDOWN_EFFECT, 
+		{ "postureDownRecovery" }, 
+		{ "posture_change_down_defense" }, 
+		{},
+		40, 
+		0, 
+		0 
+	  )
+	},
+
 	combatSpam = "saber1hcombohit3",
 
-	poolsToDamage = RANDOM_ATTRIBUTE,
+	poolsToDamage = HEALTH_ATTRIBUTE + ACTION_ATTRIBUTE + MIND_ATTRIBUTE,
 
 	weaponType = JEDIWEAPON,
 

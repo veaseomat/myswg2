@@ -1,5 +1,4 @@
 
-
 mines = {
 	description = "",
 	minimumLevel = 0,

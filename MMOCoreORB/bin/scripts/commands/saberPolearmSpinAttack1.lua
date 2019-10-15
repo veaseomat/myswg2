@@ -44,15 +44,14 @@
 SaberPolearmSpinAttack1Command = {
         name = "saberpolearmspinattack1",
 
-	damageMultiplier = 0.38,
-	speedMultiplier = 1.0,
+	damageMultiplier = 0.75,
+	speedMultiplier = 1.25,
 	healthCostMultiplier = 0,
 	actionCostMultiplier = 0,
 	mindCostMultiplier = 0,
-	forceCostMultiplier = 0.62,
-	coneAngle = 90,
-	coneAction = true,
-	coneRange = 8,
+	forceCostMultiplier = 1.25,
+	areaAction = true,
+	areaRange = 16,
 	visMod = 25,
 
 	animation = "combo_3b", 

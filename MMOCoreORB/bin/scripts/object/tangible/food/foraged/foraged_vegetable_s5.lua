@@ -44,20 +44,30 @@
 object_tangible_food_foraged_foraged_vegetable_s5 = object_tangible_food_foraged_shared_foraged_vegetable_s5:new {
 	templateType = CONSUMABLE,
 	
-	duration = 1800,
+	duration = 400,
 	filling = 0,
-	nutrition = 10,
+	nutrition = 0,
 
-	effectType = 2,
+	effectType = 1,
 
+	fillingMin = 0,
+	fillingMax = 0,
 
-	modifiers = { "attack_accuracy", 0 },
-
+	flavorMin = 0,
+	flavorMax = 0,
+	nutritionMin = 0,
+	nutritionMax = 0,
+	quantityMin = 0,
+	quantityMax = 0,
+	
+	modifiers = { "health", 120, "mind", 50 },
 
 	buffName = "sosi_hodor",
 	buffCRC = 0,
 	speciesRestriction = "",
-
+	
+	consumableType = 1,
+	foragedFood = 1
 
 }
 

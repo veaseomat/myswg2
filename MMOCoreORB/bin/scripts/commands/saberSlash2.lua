@@ -45,14 +45,14 @@ SaberSlash2Command = {
         name = "saberslash2",
 
 
-	damageMultiplier = 1.25,
-	speedMultiplier = 1.0,
+	damageMultiplier = 2.5,
+	speedMultiplier = 2.0,
 	healthCostMultiplier = 0,
 	actionCostMultiplier = 0,
 	mindCostMultiplier = 0,
-	forceCostMultiplier = 1.0,
+	forceCostMultiplier = 2.0,
 	visMod = 25,
-	
+
 	dotEffects = {
 	  DotEffect(
 		BLEEDING,
@@ -105,7 +105,7 @@ SaberSlash2Command = {
 		0
 	  )
 	},
-	
+
 	combatSpam = "saberslash2",
 
 	poolsToDamage = RANDOM_ATTRIBUTE,

@@ -1108,15 +1108,6 @@ global = {
 			weighting = 1,
 			size = 25
 		},
-		{
-			lairTemplateName = "old_man2",
-			spawnLimit = -1,
-			minDifficulty = 1,
-			maxDifficulty = 1,
-			numberToSpawn = 0,
-			weighting = 3,
-			size = 25
-		},
 	}
 }
 

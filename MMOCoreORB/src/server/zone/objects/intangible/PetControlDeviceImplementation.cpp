@@ -135,7 +135,7 @@ void PetControlDeviceImplementation::callObject(CreatureObject* player) {
 
 	int currentlySpawned = 0;
 	int spawnedLevel = 0;
-	int maxPets = 10;
+	int maxPets = 5;
 	int maxLevelofPets = 10;
 	int level = pet->getLevel();
 
@@ -167,7 +167,7 @@ void PetControlDeviceImplementation::callObject(CreatureObject* player) {
 		}
 
 	} else if (petType == PetManager::FACTIONPET){
-		maxPets = 10;
+		maxPets = 5;
 	}
 
 	for (int i = 0; i < ghost->getActivePetsSize(); ++i) {

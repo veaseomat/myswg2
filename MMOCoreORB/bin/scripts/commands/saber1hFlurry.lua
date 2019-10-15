@@ -44,17 +44,17 @@
 Saber1hFlurryCommand = {
         name = "saber1hflurry",
 
-	damageMultiplier = 1.75,
-	speedMultiplier = 1.0,
+	damageMultiplier = 3.5,
+	speedMultiplier = 3.0,
 	healthCostMultiplier = 0,
 	actionCostMultiplier = 0,
 	mindCostMultiplier = 0,
-	areaRange = 8,
+	areaRange = 16,
 	areaAction = true,
-	forceCostMultiplier = 1.25,
+	forceCostMultiplier = 2.5,
 	visMod = 25,
-	
-		stateEffects = {
+
+	stateEffects = {
 	   StateEffect( 
 		BLIND_EFFECT, 
 		{}, 
@@ -80,7 +80,7 @@ Saber1hFlurryCommand = {
 		{ "jedi_state_defense", "resistance_states" },
 		75, 
 		0, 
-		60 
+		60
 	  )
 	},
 
@@ -93,7 +93,7 @@ Saber1hFlurryCommand = {
 
 	weaponType = JEDIWEAPON,
 
-	range = -1,
+	range = -1
 }
 
 AddCommand(Saber1hFlurryCommand)

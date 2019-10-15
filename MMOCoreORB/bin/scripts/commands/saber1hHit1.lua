@@ -44,12 +44,12 @@
 Saber1hHit1Command = {
         name = "saber1hhit1",
 
-	damageMultiplier = 0.63,
-	speedMultiplier = 1.0,
+	damageMultiplier = 1.25,
+	speedMultiplier = 1.25,
 	healthCostMultiplier = 0,
 	actionCostMultiplier = 0,
 	mindCostMultiplier = 0,
-	forceCostMultiplier = 0.5,
+	forceCostMultiplier = 1.0,
 	visMod = 25,
 	
 	animation = "combo_jedi_1", 

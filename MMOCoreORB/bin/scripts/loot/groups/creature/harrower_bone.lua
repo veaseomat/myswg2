@@ -5,7 +5,7 @@ harrower_bone = {
 	minimumLevel = 0,
 	maximumLevel = 0,
 	lootItems = {
-
+		{itemTemplate = "woolamander_harrower_bone_fragments", weight = 10000000}
 	}
 }
 

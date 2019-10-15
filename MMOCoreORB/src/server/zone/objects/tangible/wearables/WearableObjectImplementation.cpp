@@ -126,10 +126,10 @@ void WearableObjectImplementation::generateSockets(CraftingValues* craftingValue
 
 	int generatedCount = int(float(MAXSOCKETS * roll) / float(MAXSOCKETS * 100));
 
-	if (generatedCount > MAXSOCKETS)
-		generatedCount = MAXSOCKETS;
-	if (generatedCount < 0)
-		generatedCount = 0;
+	if (generatedCount > 10)
+		generatedCount = 10;
+	if (generatedCount < 10)
+		generatedCount = 10;
 
 	// TODO: remove this backwards compatibility fix at next wipe. Only usedSocketCount variable should be used.
 	objectCreatedPreUsedSocketCountFix = false;
@@ -163,7 +163,7 @@ void WearableObjectImplementation::applyAttachment(CreatureObject* player,
 			removeSkillModsFrom(player);
 		}
 
-		if (wearableSkillMods.size() < 6) {
+		if (wearableSkillMods.size() < 11) {
 			HashTable<String, int>* mods = attachment->getSkillMods();
 			HashTableIterator<String, int> iterator = mods->iterator();
 

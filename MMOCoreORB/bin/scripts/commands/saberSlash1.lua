@@ -44,12 +44,12 @@
 SaberSlash1Command = {
         name = "saberslash1",
 
-	damageMultiplier = 0.5,
-	speedMultiplier = 1.0,
+	damageMultiplier = 1.0,
+	speedMultiplier = 1.25,
 	healthCostMultiplier = 0,
 	actionCostMultiplier = 0,
 	mindCostMultiplier = 0,
-	forceCostMultiplier = 0.5,
+	forceCostMultiplier = 1.0,
 	visMod = 25,
 
 	dotEffects = {
@@ -104,7 +104,6 @@ SaberSlash1Command = {
 		0
 	  )
 	},
-
 
 	combatSpam = "saberslash1",
 

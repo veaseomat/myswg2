@@ -56,6 +56,8 @@ AttackCommand = {
 	visMod = 25,
 
 	range = -1,
+	
+	trails = NOTRAIL,
 
 	poolsToDamage = RANDOM_ATTRIBUTE
 }

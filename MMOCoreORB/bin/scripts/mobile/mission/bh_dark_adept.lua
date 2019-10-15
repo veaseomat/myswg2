@@ -1,4 +1,3 @@
-
 bh_dark_adept = Creature:new {
 	objectName = "@mob/creature_names:dark_adept",
 	randomNameType = NAME_GENERIC,

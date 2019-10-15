@@ -43,8 +43,8 @@
 
 HealAllSelf1Command = {
 	name = "healallself1",
-	healAmount = 1000,
-	forceCost = 100,
+	healAmount = 500,
+	forceCost = 250,
 	forceCostMultiplier = 0.05,
 	defaultTime = 6,
 	attributesToHeal = HEALTH_ATTRIBUTE + MIND_ATTRIBUTE + ACTION_ATTRIBUTE,

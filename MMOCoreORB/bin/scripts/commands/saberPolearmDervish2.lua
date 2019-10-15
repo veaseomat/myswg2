@@ -44,16 +44,17 @@
 SaberPolearmDervish2Command = {
         name = "saberpolearmdervish2",
 
-	damageMultiplier = 2.25,
-	speedMultiplier = 1.0,
+	damageMultiplier = 4.5,
+	speedMultiplier = 4.0,
 	healthCostMultiplier = 0,
 	actionCostMultiplier = 0,
 	mindCostMultiplier = 0,
-	areaAction = true,
-	areaRange = 8,
-	forceCostMultiplier = 1.5,
+	coneAngle = 45,
+	coneAction = true,
+	coneRange = 24,
+	forceCostMultiplier = 3.0,
 	visMod = 25,
-	
+
 		stateEffects = {
 	   StateEffect( 
 		BLIND_EFFECT, 
@@ -93,7 +94,7 @@ SaberPolearmDervish2Command = {
 
 	weaponType = JEDIWEAPON,
 
-	range = -1,
+	range = -1
 }
 
 AddCommand(SaberPolearmDervish2Command)

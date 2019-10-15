@@ -24,13 +24,21 @@ death_watch_s_battle_droid_alt = Creature:new {
 	creatureBitmask = KILLER,
 	optionsBitmask = AIENABLED,
 	diet = NONE,
-	scale = 1.40,
+	scale = 1.70,
 
 	templates = {
 		"object/mobile/death_watch_s_battle_droid.iff",
 		"object/mobile/death_watch_s_battle_droid_02.iff",
 		"object/mobile/death_watch_s_battle_droid_03.iff"},
-	lootGroups = {},
+	lootGroups = {
+		{
+			groups = {
+				{group = "armor_attachments", chance = 5000000},
+				{group = "clothing_attachments", chance = 5000000}
+			},
+			lootChance = 5000000
+		}
+	},
 	conversationTemplate = "",
 	defaultWeapon = "object/weapon/ranged/droid/droid_droideka_ranged.iff",
 	defaultAttack = "attack"

@@ -46,20 +46,19 @@ ForceKnockdown3Command = {
 
     damageMultiplier = 0,
 	speed = 4.0,
-	forceCost = 100,
+	forceCost = 200,
 	visMod = 25,
 	accuracySkillMod = "forceknockdown_accuracy",
-	splashDamage = true,
 	areaAction = true,
-	areaRange = 16,
-	
+	areaRange = 15,
+
 	stateEffects = {
 	  StateEffect(
 		KNOCKDOWN_EFFECT,
 		{ "knockdownRecovery", "lastKnockdown" },
 		{},
 		{},
-		100,
+		65,
 		0,
 		0
 	  )

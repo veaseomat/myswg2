@@ -5,7 +5,7 @@
  *      Author: crush
  */
 
-
+///bldg stuff
 #include "SharedStructureObjectTemplate.h"
 
 
@@ -14,9 +14,9 @@ void SharedStructureObjectTemplate::readObject(LuaObject* templateData) {
 
 	lotSize = templateData->getByteField("lotSize");
 
-	baseMaintenanceRate = templateData->getIntField("baseMaintenanceRate");
+	baseMaintenanceRate = templateData->getIntField("baseMaintenanceRate") / 10;
 
-	basePowerRate = templateData->getIntField("basePowerRate");
+	basePowerRate = templateData->getIntField("basePowerRate") / 10;
 
 	LuaObject allowzones = templateData->getObjectField("allowedZones");
 	allowedZones.removeAll(); //Make sure it's empty...
@@ -35,7 +35,7 @@ void SharedStructureObjectTemplate::readObject(LuaObject* templateData) {
 
 	uniqueStructure = templateData->getBooleanField("uniqueStructure");
 
-	cityMaintenanceBase = templateData->getIntField("cityMaintenanceBase");
+	cityMaintenanceBase = templateData->getIntField("cityMaintenanceBase") / 10;
 
-	cityMaintenanceRate = templateData->getIntField("cityMaintenanceRate");
+	cityMaintenanceRate = templateData->getIntField("cityMaintenanceRate") / 10;
 }

@@ -63,4 +63,4 @@ professionSpecificItems = {
 	social_entertainer = { }
 }
 
-commonStartingItems = { jeditool, resourcedeed, colorcrystal, marksmanPistol, marksmanRifle, marksmanCarbine, brawlerOneHander, brawlerTwoHander, brawlerPolearm, survivalKnife, genericTool, foodTool, mineralTool, slitherhorn, marojMelon}    
+commonStartingItems = { resourcedeed, marksmanPistol, marksmanRifle, marksmanCarbine, brawlerOneHander, brawlerTwoHander, brawlerPolearm, survivalKnife, genericTool, foodTool, mineralTool, slitherhorn, marojMelon}    

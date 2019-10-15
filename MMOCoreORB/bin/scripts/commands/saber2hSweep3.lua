@@ -44,19 +44,27 @@
 Saber2hSweep3Command = {
         name = "saber2hsweep3",
 
-	damageMultiplier = 1.5,
-	speedMultiplier = 1.0,
+	damageMultiplier = 3.0,
+	speedMultiplier = 3.5,
 	healthCostMultiplier = 0,
 	actionCostMultiplier = 0,
 	mindCostMultiplier = 0,
-	forceCostMultiplier = 1.25,
-	coneAngle = 90,
-	coneAction = true,
-	coneRange = 8,
+	forceCostMultiplier = 2.25,
 	visMod = 25,
 
+	stateEffects = {
+	  StateEffect( 
+		POSTUREDOWN_EFFECT, 
+		{ "postureDownRecovery" }, 
+		{ "posture_change_down_defense" }, 
+		{},
+		100, 
+		0, 
+		0 
+	  )
+	},
+
 	animation = "combo_3b", 
-	animType = GENERATE_INTENSITY,
 
 	combatSpam = "saber2hsweep3",
 

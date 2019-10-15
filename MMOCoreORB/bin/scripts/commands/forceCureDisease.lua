@@ -43,7 +43,7 @@
 
 ForceCureDiseaseCommand = {
 	name = "forcecuredisease",
-	forceCost = 100,
+	healDiseaseCost = 75,
 	forceCost = 0,
 	allowedTarget = FORCE_HEAL_TARGET_SELF + FORCE_HEAL_TARGET_OTHER,
 	defaultTime = 2,

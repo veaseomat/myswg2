@@ -1,4 +1,3 @@
-
 heavy_weapons_rifle = {
 	description = "",
 	minimumLevel = 0,

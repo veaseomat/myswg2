@@ -37,7 +37,6 @@ public:
 			return res;
 		}
 
-
 		// SPECIAL - For Force Run.
 		if (creature->hasBuff(STRING_HASHCODE("burstrun")) || creature->hasBuff(STRING_HASHCODE("retreat"))) {
 			creature->removeBuff(STRING_HASHCODE("burstrun"));

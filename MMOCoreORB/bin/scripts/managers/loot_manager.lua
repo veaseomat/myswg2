@@ -41,9 +41,9 @@
 --which carries forward this exception.
 
 --Determines how often exceptional and legendary items can drop.
-yellowChance = 1000000 -- 1 in 1,000
-exceptionalChance = 1000000000 --1 in 100,000
-legendaryChance = 1000000000000 --1 in 1,000,000
+yellowChance = 1000 -- 1 in 1,000
+exceptionalChance = 100000 --1 in 100,000
+legendaryChance = 1000000 --1 in 1,000,000
 --yellowChance = 50 --1 in 50 for testing
 --exceptionalChance = 100 --1 in 100 for testing
 --legendaryChance = 1000 --1 in 1000 for testing
@@ -54,7 +54,7 @@ exceptionalModifier = 1.0
 legendaryModifier = 1.0
 
 --The chance for random skill mods to be on looted weapons/wearables
-skillModChance = 1000000000000 -- 1 in 500
+skillModChance = 500 -- 1 in 500
 
 -- Value ranges for random dots on looted weapons (chance is set individually on the loot items)
 randomDotAttribute = {0, 8} -- See CreatureAttributes.h in src for numbers.
@@ -64,7 +64,7 @@ randomDotPotency = {1, 100}
 randomDotUses = {250, 9999}
 
 -- Modifier applied to min/max junk values found in loot item lua
-junkValueModifier = 100;
+junkValueModifier = 5;
 
 lootableArmorAttachmentStatMods = {
 	"combat_medicine_assembly",
@@ -145,6 +145,12 @@ lootableArmorAttachmentStatMods = {
 }
 
 lootableClothingAttachmentStatMods = {
+	"twohandlightsaber_accuracy",
+	"twohandlightsaber_speed",
+	"polearmlightsaber_accuracy",
+	"polearmlightsaber_speed",
+	"onehandlightsaber_accuracy",
+	"onehandlightsaber_speed",
 	"dna_harvesting",
 	"bio_engineer_assembly",
 	"bio_engineer_experimentation",
@@ -378,6 +384,12 @@ lootableArmorStatMods = {
 }
 
 lootableClothingStatMods = {
+	"twohandlightsaber_accuracy",
+	"twohandlightsaber_speed",
+	"polearmlightsaber_accuracy",
+	"polearmlightsaber_speed",
+	"onehandlightsaber_accuracy",
+	"onehandlightsaber_speed",
 	"dna_harvesting",
 	"bio_engineer_assembly",
 	"bio_engineer_experimentation",

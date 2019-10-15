@@ -78,34 +78,34 @@ void LightsaberCrystalComponentImplementation::generateCrystalStats() {
 	if (color == 31) {
 
 		if (quality == POOR)
-			damage = 1 + System::random(11); // 1-12
+			damage = 1 + System::random(9); // 1-10
 		else if (quality == FAIR)
-			damage = 12 + System::random(13); // 12-25
+			damage = 5 + System::random(15); // 5-20
 		else if (quality == GOOD)
-			damage = 25 + System::random(25); // 25-50
+			damage = 15 + System::random(15); // 15-30
 		else if (quality == QUALITY)
-			damage = 50 + System::random(25); // 50-75
+			damage = 25 + System::random(10); // 25-35
 		else if (quality == SELECT)
-			damage = 75 + System::random(25); // 75-100
+			damage = 30 + System::random(10); // 30-40
 		else if (quality == PREMIUM)
-			damage = 100 + System::random(13); // 100-113
+			damage = 35 + System::random(10); // 35-45
 		else if (quality == FLAWLESS)
-			damage = 113 + System::random(12); // 113-125
+			damage = 40 + System::random(10); // 40-50
 
 		if (quality == POOR)
-			sacHealth = 1 + System::random(11); // 1-12
+			sacHealth = 1 + System::random(9); // 1-10
 		else if (quality == FAIR)
-			sacHealth = 12 + System::random(13); // 12-25
+			sacHealth = 5 + System::random(15); // 5-20
 		else if (quality == GOOD)
-			sacHealth = 25 + System::random(25); // 25-50
+			sacHealth = 15 + System::random(15); // 15-30
 		else if (quality == QUALITY)
-			sacHealth = 50 + System::random(25); // 50-75
+			sacHealth = 25 + System::random(10); // 25-35
 		else if (quality == SELECT)
-			sacHealth = 75 + System::random(25); // 75-100
+			sacHealth = 30 + System::random(10); // 30-40
 		else if (quality == PREMIUM)
-			sacHealth = 100 + System::random(13); // 100-113
+			sacHealth = 35 + System::random(10); // 35-45
 		else if (quality == FLAWLESS)
-			sacHealth = 113 + System::random(12); // 113-125
+			sacHealth = 40 + System::random(10); // 40-50
 	}
 
 
@@ -128,46 +128,45 @@ void LightsaberCrystalComponentImplementation::validateCrystalStats() {
 	if (color == 31) {
 
 		if (quality == POOR)
-			damage = 1 + System::random(11); // 1-12
+			damage = 1 + System::random(9); // 1-10
 		else if (quality == FAIR)
-			damage = 12 + System::random(13); // 12-25
+			damage = 5 + System::random(15); // 5-20
 		else if (quality == GOOD)
-			damage = 25 + System::random(25); // 25-50
+			damage = 15 + System::random(15); // 15-30
 		else if (quality == QUALITY)
-			damage = 50 + System::random(25); // 50-75
+			damage = 25 + System::random(10); // 25-35
 		else if (quality == SELECT)
-			damage = 75 + System::random(25); // 75-100
+			damage = 30 + System::random(10); // 30-40
 		else if (quality == PREMIUM)
-			damage = 100 + System::random(13); // 100-113
+			damage = 35 + System::random(10); // 35-45
 		else if (quality == FLAWLESS)
-			damage = 113 + System::random(12); // 113-125
+			damage = 40 + System::random(10); // 40-50
 
 		if (quality == POOR)
-			sacHealth = 1 + System::random(11); // 1-12
+			sacHealth = 1 + System::random(9); // 1-10
 		else if (quality == FAIR)
-			sacHealth = 12 + System::random(13); // 12-25
+			sacHealth = 5 + System::random(15); // 5-20
 		else if (quality == GOOD)
-			sacHealth = 25 + System::random(25); // 25-50
+			sacHealth = 15 + System::random(15); // 15-30
 		else if (quality == QUALITY)
-			sacHealth = 50 + System::random(25); // 50-75
+			sacHealth = 25 + System::random(10); // 25-35
 		else if (quality == SELECT)
-			sacHealth = 75 + System::random(25); // 75-100
+			sacHealth = 30 + System::random(10); // 30-40
 		else if (quality == PREMIUM)
-			sacHealth = 100 + System::random(13); // 100-113
+			sacHealth = 35 + System::random(10); // 35-45
 		else if (quality == FLAWLESS)
-			sacHealth = 113 + System::random(12); // 113-125
-
+			sacHealth = 40 + System::random(10); // 40-50
 	}
 }
 
 int LightsaberCrystalComponentImplementation::getCrystalQuality() {
-	if (itemLevel < 20)
+	if (itemLevel < 10)
 		return POOR;
-	else if (itemLevel < 50)
+	else if (itemLevel < 25)
 		return FAIR;
-	else if (itemLevel < 90)
+	else if (itemLevel < 75)
 		return GOOD;
-	else if (itemLevel < 120)
+	else if (itemLevel < 100)
 		return QUALITY;
 	else if (itemLevel < 200)
 		return SELECT;

@@ -2007,7 +2007,7 @@ void PlayerObjectImplementation::activateForcePowerRegen() {
 
 	float regen = (float)(creature->getSkillMod("jedi_force_power_regen") / 2);
 
-	regen += 15;
+	regen += 10;
 
 	if(regen == 0.0f)
 		return;

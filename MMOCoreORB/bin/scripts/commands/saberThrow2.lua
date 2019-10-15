@@ -44,14 +44,14 @@
 SaberThrow2Command = {
         name = "saberthrow2",
     
-	damageMultiplier = 1.0,
-	speedMultiplier = 1.0,
+	damageMultiplier = 2.0,
+	speedMultiplier = 3.0,
 	healthCostMultiplier = 0,
 	actionCostMultiplier = 0,
 	mindCostMultiplier = 0,
-	forceCostMultiplier = 1.0,
+	forceCostMultiplier = 2.0,
 	visMod = 25,
-	
+
 	stateEffects = {
 	   StateEffect( 
 		KNOCKDOWN_EFFECT, 

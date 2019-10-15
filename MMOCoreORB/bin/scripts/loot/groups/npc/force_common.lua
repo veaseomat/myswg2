@@ -6,7 +6,7 @@ force_common = {
 	maximumLevel = 0,
 	lootItems = {
 		{itemTemplate = "force_power_crystal", weight = 5000000},
-		{itemTemplate = "force_color_crystal", weight = 5000000},
+		{itemTemplate = "petrified_avian_egg", weight = 5000000}
 	}
 }
 

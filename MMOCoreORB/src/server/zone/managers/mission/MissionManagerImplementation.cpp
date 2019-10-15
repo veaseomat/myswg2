@@ -165,13 +165,6 @@ void MissionManagerImplementation::handleMissionListRequest(MissionTerminal* mis
 		return;
 	}
 
-	if (missionTerminal->isBountyTerminal()) {
-		if (!player->hasSkill("combat_bountyhunter_novice") or !player->hasSkill("force_title_jedi_rank_03")) {
-			player->sendSystemMessage("You must be a bounty hunter or jedi knight to use this terminal.");
-			return;
-		}
-	}
-
 	ManagedReference<CityRegion*> terminalCity = missionTerminal->getCityRegion().get();
 
 	if (terminalCity != nullptr) {

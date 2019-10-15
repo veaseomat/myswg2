@@ -1498,6 +1498,12 @@ void PlayerManagerImplementation::sendPlayerToCloner(CreatureObject* player, uin
 	uint64 preDesignatedFacilityOid = ghost->getCloningFacility();
 	ManagedReference<SceneObject*> preDesignatedFacility = server->getObject(preDesignatedFacilityOid);
 
+	if (preDesignatedFacility == nullptr || preDesignatedFacility != cloner) {
+		player->addWounds(CreatureAttribute::HEALTH, 100, true, false);
+		player->addWounds(CreatureAttribute::ACTION, 100, true, false);
+		player->addWounds(CreatureAttribute::MIND, 100, true, false);
+		player->addShockWounds(100, true);
+	}
 
 	if (player->getFactionStatus() != FactionStatus::ONLEAVE && cbot->getFacilityType() != CloningBuildingObjectTemplate::FACTION_IMPERIAL && cbot->getFacilityType() != CloningBuildingObjectTemplate::FACTION_REBEL && !player->hasSkill("force_title_jedi_rank_03"))
 		player->setFactionStatus(FactionStatus::ONLEAVE);
@@ -1790,7 +1796,7 @@ void PlayerManagerImplementation::disseminateExperience(TangibleObject* destruct
 				//else
 					//xpAmount += (totalDamage / 10);
 					//xpAmount *= 1.5f;
-					xpAmount += 1000;
+					//xpAmount += 1000;
 					//xpAmount *= 2.f;
 
 				//Award individual expType
@@ -1924,6 +1930,27 @@ void PlayerManagerImplementation::applyEncumbrancies(CreatureObject* player, Arm
 	int actionEncumb = Math::max(0, armor->getActionEncumbrance());
 	int mindEncumb = Math::max(0, armor->getMindEncumbrance());
 
+	player->addEncumbrance(CreatureEncumbrance::HEALTH, healthEncumb, true);
+	player->addEncumbrance(CreatureEncumbrance::ACTION, actionEncumb, true);
+	player->addEncumbrance(CreatureEncumbrance::MIND, mindEncumb, true);
+
+	player->inflictDamage(player, CreatureAttribute::STRENGTH, healthEncumb, true);
+	player->addMaxHAM(CreatureAttribute::STRENGTH, -healthEncumb, true);
+
+	player->inflictDamage(player, CreatureAttribute::CONSTITUTION, healthEncumb, true);
+	player->addMaxHAM(CreatureAttribute::CONSTITUTION, -healthEncumb, true);
+
+	player->inflictDamage(player, CreatureAttribute::QUICKNESS, actionEncumb, true);
+	player->addMaxHAM(CreatureAttribute::QUICKNESS, -actionEncumb, true);
+
+	player->inflictDamage(player, CreatureAttribute::STAMINA, actionEncumb, true);
+	player->addMaxHAM(CreatureAttribute::STAMINA, -actionEncumb, true);
+
+	player->inflictDamage(player, CreatureAttribute::FOCUS, mindEncumb, true);
+	player->addMaxHAM(CreatureAttribute::FOCUS, -mindEncumb, true);
+
+	player->inflictDamage(player, CreatureAttribute::WILLPOWER, mindEncumb, true);
+	player->addMaxHAM(CreatureAttribute::WILLPOWER, -mindEncumb, true);
 }
 
 void PlayerManagerImplementation::removeEncumbrancies(CreatureObject* player, ArmorObject* armor) {
@@ -1931,7 +1958,27 @@ void PlayerManagerImplementation::removeEncumbrancies(CreatureObject* player, Ar
 	int actionEncumb = Math::max(0, armor->getActionEncumbrance());
 	int mindEncumb = Math::max(0, armor->getMindEncumbrance());
 
+	player->addEncumbrance(CreatureEncumbrance::HEALTH, -healthEncumb, true);
+	player->addEncumbrance(CreatureEncumbrance::ACTION, -actionEncumb, true);
+	player->addEncumbrance(CreatureEncumbrance::MIND, -mindEncumb, true);
 
+	player->addMaxHAM(CreatureAttribute::STRENGTH, healthEncumb, true);
+	player->healDamage(player, CreatureAttribute::STRENGTH, healthEncumb, true);
+
+	player->addMaxHAM(CreatureAttribute::CONSTITUTION, healthEncumb, true);
+	player->healDamage(player, CreatureAttribute::CONSTITUTION, healthEncumb, true);
+
+	player->addMaxHAM(CreatureAttribute::QUICKNESS, actionEncumb, true);
+	player->healDamage(player, CreatureAttribute::QUICKNESS, actionEncumb, true);
+
+	player->addMaxHAM(CreatureAttribute::STAMINA, actionEncumb, true);
+	player->healDamage(player, CreatureAttribute::STAMINA, actionEncumb, true);
+
+	player->addMaxHAM(CreatureAttribute::FOCUS, mindEncumb, true);
+	player->healDamage(player, CreatureAttribute::FOCUS, mindEncumb, true);
+
+	player->addMaxHAM(CreatureAttribute::WILLPOWER, mindEncumb, true);
+	player->healDamage(player, CreatureAttribute::WILLPOWER, mindEncumb, true);
 }
 
 void PlayerManagerImplementation::awardBadge(PlayerObject* ghost, uint32 badgeId) {
@@ -2017,7 +2064,6 @@ void PlayerManagerImplementation::awardBadge(PlayerObject* ghost, const Badge* b
 		}
 	}
 }
-
 
 void PlayerManagerImplementation::setExperienceMultiplier(float globalMultiplier) {
 	globalExpMultiplier = globalMultiplier;
@@ -5444,8 +5490,8 @@ bool PlayerManagerImplementation::doBurstRun(CreatureObject* player, float hamMo
 
 	uint32 crc = STRING_HASHCODE("burstrun");
 	float hamCost = 100.0f;
-	float duration = 120;
-	float cooldown = 60;
+	float duration = 30;
+	float cooldown = 300;
 
 	float burstRunMod = (float) player->getSkillMod("burst_run");
 	hamModifier += (burstRunMod / 100.f);
@@ -5485,8 +5531,8 @@ bool PlayerManagerImplementation::doBurstRun(CreatureObject* player, float hamMo
 
 	Locker locker(buff);
 
-	buff->setSpeedMultiplierMod(1.5f);
-	buff->setAccelerationMultiplierMod(1.5f);
+	buff->setSpeedMultiplierMod(1.822f);
+	buff->setAccelerationMultiplierMod(1.822f);
 
 	if (cooldownModifier == 0.f)
 		buff->setStartMessage(startStringId);

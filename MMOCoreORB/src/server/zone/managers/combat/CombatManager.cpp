@@ -719,7 +719,7 @@ int CombatManager::getAttackerAccuracyModifier(TangibleObject* attacker, Creatur
 
 	CreatureObject* creoAttacker = cast<CreatureObject*>(attacker);
 
-	int attackerAccuracy = 25;
+	int attackerAccuracy = 0;
 
 	const auto creatureAccMods = weapon->getCreatureAccuracyModifiers();
 
@@ -1439,11 +1439,11 @@ void CombatManager::getFrsModifiedForceAttackDamage(CreatureObject* attacker, fl
 	int powerModifier = 0;
 
 	if (councilType == FrsManager::COUNCIL_LIGHT) {
-		powerModifier = attacker->getSkillMod("force_manipulation_light");
+		powerModifier = attacker->getSkillMod("force_control_light");
 		minMod = data.getFrsLightMinDamageModifier();
 		maxMod = data.getFrsLightMaxDamageModifier();
 	} else if (councilType == FrsManager::COUNCIL_DARK) {
-		powerModifier = attacker->getSkillMod("force_manipulation_dark");
+		powerModifier = attacker->getSkillMod("force_power_dark");
 		minMod = data.getFrsDarkMinDamageModifier();
 		maxMod = data.getFrsDarkMaxDamageModifier();
 	}

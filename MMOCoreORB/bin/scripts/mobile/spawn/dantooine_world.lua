@@ -651,7 +651,7 @@ dantooine_world = {
 		},
 		{
 			lairTemplateName = "dantooine_graul_frenzied_pack_neutral_none",
-			spawnLimit = -1,
+			spawnLimit = 10,
 			minDifficulty = 56,
 			maxDifficulty = 175,
 			numberToSpawn = 0,

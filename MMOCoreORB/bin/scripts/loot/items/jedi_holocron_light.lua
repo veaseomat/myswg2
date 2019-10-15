@@ -2,13 +2,13 @@
 
 jedi_holocron_light = {
 	minimumLevel = 0,
-	maximumLevel = 0,
+	maximumLevel = -1,
 	customObjectName = "",
-	directObjectTemplate = "object/tangible/loot/misc/artifact_rare_s01.iff",
-	craftingValues = {},
+	directObjectTemplate = "object/tangible/jedi/jedi_holocron_light.iff",
+	craftingValues = {
+	},
 	customizationStringNames = {},
 	customizationValues = {}
 }
-
 
 addLootItemTemplate("jedi_holocron_light", jedi_holocron_light)

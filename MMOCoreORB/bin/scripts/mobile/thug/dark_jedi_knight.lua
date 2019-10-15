@@ -4,13 +4,13 @@ dark_jedi_knight = Creature:new {
 	randomNameTag = true,
 	socialGroup = "dark_jedi",
 	faction = "",
-	level = 291,
-	chanceHit = 13.5,
-	damageMin = 1000,
-	damageMax = 2000,
+	level = 265,
+	chanceHit = 23.5,
+	damageMin = 1645,
+	damageMax = 3000,
 	baseXp = 25266,
-	baseHAM = 161000,
-	baseHAMmax = 220000,
+	baseHAM = 261000,
+	baseHAMmax = 320000,
 	armor = 3,
 	resists = {90,90,90,90,90,90,90,90,-1},
 	meatType = "",
@@ -31,6 +31,8 @@ dark_jedi_knight = Creature:new {
 	lootGroups = {
 		{
 			groups = {
+				{group = "holocron_dark", chance = 600000},
+				{group = "holocron_light", chance = 600000},
 				{group = "power_crystals", chance = 600000},
 				{group = "rifles", chance = 1300000},
 				{group = "pistols", chance = 1300000},

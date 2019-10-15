@@ -1,4 +1,3 @@
-
 heavy_weapons = {
 	description = "",
 	minimumLevel = 0,

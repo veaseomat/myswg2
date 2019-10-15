@@ -68,8 +68,8 @@ object_tangible_terminal_terminal_character_builder = object_tangible_terminal_s
 	},
 
 	itemList = {
---		"Character Options",
---		{
+		"Character Options",
+		{
 --			"Learn Skill",
 --			{
 --				"Architect",
@@ -1516,7 +1516,7 @@ object_tangible_terminal_terminal_character_builder = object_tangible_terminal_s
 --			},
 --			"Unlearn All Skills", "unlearn_all_skills",
 --			"Cleanse Character", "cleanse_character",
---		"Apply Buffs", "enhance_character",
+			"Apply Buffs", "enhance_character",
 --			"Jedi",
 --			{
 --				--"Unlock Jedi Initiate", "unlock_jedi_initiate",
@@ -1524,7 +1524,7 @@ object_tangible_terminal_terminal_character_builder = object_tangible_terminal_s
 --				"Unlock FRS Dark Side", "frs_dark_side"
 --			},
 --			"Fill Force Bar", "fill_force_bar",
-			--"Remove Buffs", "reset_buffs",
+			"Remove Buffs", "reset_buffs",
 --			"Learn Languages", "language",
 --			"Credits", "credits",
 --			"Apply ALL DoTs", "apply_all_dots",
@@ -1540,7 +1540,7 @@ object_tangible_terminal_terminal_character_builder = object_tangible_terminal_s
 --				"Imperial", "faction_imperial",
 --				"Rebel", "faction_rebel"
 --			}
---		},
+		},
 		"Items",
 		{
 --			"Jedi Items",
@@ -2707,8 +2707,8 @@ object_tangible_terminal_terminal_character_builder = object_tangible_terminal_s
 				{
 --					"Clothing and Armor Crafting Tool", "object/tangible/crafting/station/clothing_tool.iff",
 --					"Food and Chemical Crafting Tool", "object/tangible/crafting/station/food_tool.iff",
---					"Generic Crafting Tool", "object/tangible/crafting/station/generic_tool.iff",
-					"Lightsaber Crafting Toolkit", "object/tangible/crafting/station/jedi_tool.iff",
+					"Generic Crafting Tool", "object/tangible/crafting/station/generic_tool.iff",
+					--"Lightsaber Crafting Toolkit", "object/tangible/crafting/station/jedi_tool.iff",
 --					"Starship Crafting Tool", "object/tangible/crafting/station/space_tool.iff",
 --					"Structure and Furniture Crafting Tool", "object/tangible/crafting/station/structure_tool.iff",
 --					"Weapon, Droid, and General Item Crafting Tool", "object/tangible/crafting/station/weapon_tool.iff"
