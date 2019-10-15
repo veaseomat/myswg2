@@ -145,6 +145,8 @@ lootableArmorAttachmentStatMods = {
 }
 
 lootableClothingAttachmentStatMods = {
+	"jedi_saber_assembly",
+	"jedi_saber_experimentation",
 	"twohandlightsaber_accuracy",
 	"twohandlightsaber_speed",
 	"polearmlightsaber_accuracy",
@@ -384,6 +386,8 @@ lootableArmorStatMods = {
 }
 
 lootableClothingStatMods = {
+	"jedi_saber_assembly",
+	"jedi_saber_experimentation",
 	"twohandlightsaber_accuracy",
 	"twohandlightsaber_speed",
 	"polearmlightsaber_accuracy",
@@ -830,9 +834,9 @@ lootableHeavyWeaponStatMods = {
 -- Values used to generate lightsaber crystal stats
 jediCrystalStats = {
 	lightsaber_module_force_crystal = {
-		minDamage = 1,
-		maxDamage = 125,
-		minHitpoints = 900,
+		minDamage = 0,
+		maxDamage = 50,
+		minHitpoints = 700,
 		maxHitpoints = 1400,
 		minHealthSac = 0,
 		maxHealthSac = 0,
@@ -848,8 +852,8 @@ jediCrystalStats = {
 		maxWoundChance = 0,
 	},
 	lightsaber_module_krayt_dragon_pearl = {
-		minDamage = 1,
-		maxDamage = 125,
+		minDamage = 20,
+		maxDamage = 50,
 		minHitpoints = 900,
 		maxHitpoints = 1400,
 		minHealthSac = 0,

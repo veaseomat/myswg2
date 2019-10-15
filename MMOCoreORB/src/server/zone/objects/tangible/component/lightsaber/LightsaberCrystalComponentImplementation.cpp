@@ -72,43 +72,49 @@ void LightsaberCrystalComponentImplementation::generateCrystalStats() {
 		return;
 	}
 
+	int minStat = crystalData->getMinHitpoints();
+	int maxStat = crystalData->getMaxHitpoints();
 
-	quality = getCrystalQuality();
+	setMaxCondition(getRandomizedStat(minStat, maxStat, itemLevel));
 
 	if (color == 31) {
+		int minStat = crystalData->getMinDamage();
+		int maxStat = crystalData->getMaxDamage();
 
-		if (quality == POOR)
-			damage = 1 + System::random(9); // 1-10
-		else if (quality == FAIR)
-			damage = 5 + System::random(15); // 5-20
-		else if (quality == GOOD)
-			damage = 15 + System::random(15); // 15-30
-		else if (quality == QUALITY)
-			damage = 25 + System::random(10); // 25-35
-		else if (quality == SELECT)
-			damage = 30 + System::random(10); // 30-40
-		else if (quality == PREMIUM)
-			damage = 35 + System::random(10); // 35-45
-		else if (quality == FLAWLESS)
-			damage = 40 + System::random(10); // 40-50
+		damage = getRandomizedStat(minStat, maxStat, itemLevel);
 
-		if (quality == POOR)
-			sacHealth = 1 + System::random(9); // 1-10
-		else if (quality == FAIR)
-			sacHealth = 5 + System::random(15); // 5-20
-		else if (quality == GOOD)
-			sacHealth = 15 + System::random(15); // 15-30
-		else if (quality == QUALITY)
-			sacHealth = 25 + System::random(10); // 25-35
-		else if (quality == SELECT)
-			sacHealth = 30 + System::random(10); // 30-40
-		else if (quality == PREMIUM)
-			sacHealth = 35 + System::random(10); // 35-45
-		else if (quality == FLAWLESS)
-			sacHealth = 40 + System::random(10); // 40-50
+		minStat = crystalData->getMinHealthSac();
+		maxStat = crystalData->getMaxHealthSac();
+
+		sacHealth = getRandomizedStat(minStat, maxStat, itemLevel);
+
+		minStat = crystalData->getMinActionSac();
+		maxStat = crystalData->getMaxActionSac();
+
+		sacAction = getRandomizedStat(minStat, maxStat, itemLevel);
+
+		minStat = crystalData->getMinMindSac();
+		maxStat = crystalData->getMaxMindSac();
+
+		sacMind = getRandomizedStat(minStat, maxStat, itemLevel);
+
+		minStat = crystalData->getMinWoundChance();
+		maxStat = crystalData->getMaxWoundChance();
+
+		woundChance = getRandomizedStat(minStat, maxStat, itemLevel);
+
+		float minFloatStat = crystalData->getMinForceCost();
+		float maxFloatStat = crystalData->getMaxForceCost();
+
+		floatForceCost = getRandomizedStat(minFloatStat, maxFloatStat, itemLevel);
+
+		minFloatStat = crystalData->getMinAttackSpeed();
+		maxFloatStat = crystalData->getMaxAttackSpeed();
+
+		attackSpeed = Math::getPrecision(getRandomizedStat(minFloatStat, maxFloatStat, itemLevel), 2);
 	}
 
-
+	quality = getCrystalQuality();
 }
 
 void LightsaberCrystalComponentImplementation::validateCrystalStats() {
@@ -124,53 +130,69 @@ void LightsaberCrystalComponentImplementation::validateCrystalStats() {
 		return;
 	}
 
+	int minStat = crystalData->getMinHitpoints();
+	int maxStat = crystalData->getMaxHitpoints();
+
+	if (getMaxCondition() > maxStat || getMaxCondition() < minStat)
+		setMaxCondition(getRandomizedStat(minStat, maxStat, itemLevel));
 
 	if (color == 31) {
+		minStat = crystalData->getMinDamage();
+		maxStat = crystalData->getMaxDamage();
 
-		if (quality == POOR)
-			damage = 1 + System::random(9); // 1-10
-		else if (quality == FAIR)
-			damage = 5 + System::random(15); // 5-20
-		else if (quality == GOOD)
-			damage = 15 + System::random(15); // 15-30
-		else if (quality == QUALITY)
-			damage = 25 + System::random(10); // 25-35
-		else if (quality == SELECT)
-			damage = 30 + System::random(10); // 30-40
-		else if (quality == PREMIUM)
-			damage = 35 + System::random(10); // 35-45
-		else if (quality == FLAWLESS)
-			damage = 40 + System::random(10); // 40-50
+		if (damage > maxStat || damage < minStat)
+			damage = getRandomizedStat(minStat, maxStat, itemLevel);
 
-		if (quality == POOR)
-			sacHealth = 1 + System::random(9); // 1-10
-		else if (quality == FAIR)
-			sacHealth = 5 + System::random(15); // 5-20
-		else if (quality == GOOD)
-			sacHealth = 15 + System::random(15); // 15-30
-		else if (quality == QUALITY)
-			sacHealth = 25 + System::random(10); // 25-35
-		else if (quality == SELECT)
-			sacHealth = 30 + System::random(10); // 30-40
-		else if (quality == PREMIUM)
-			sacHealth = 35 + System::random(10); // 35-45
-		else if (quality == FLAWLESS)
-			sacHealth = 40 + System::random(10); // 40-50
+		minStat = crystalData->getMinHealthSac();
+		maxStat = crystalData->getMaxHealthSac();
+
+		if (sacHealth > maxStat || sacHealth < minStat)
+			sacHealth = getRandomizedStat(minStat, maxStat, itemLevel);
+
+		minStat = crystalData->getMinActionSac();
+		maxStat = crystalData->getMaxActionSac();
+
+		if (sacAction > maxStat || sacAction < minStat)
+			sacAction = getRandomizedStat(minStat, maxStat, itemLevel);
+
+		minStat = crystalData->getMinMindSac();
+		maxStat = crystalData->getMaxMindSac();
+
+		if (sacMind > maxStat || sacMind < minStat)
+			sacMind = getRandomizedStat(minStat, maxStat, itemLevel);
+
+		minStat = crystalData->getMinWoundChance();
+		maxStat = crystalData->getMaxWoundChance();
+
+		if (woundChance > maxStat || woundChance < minStat)
+			woundChance = getRandomizedStat(minStat, maxStat, itemLevel);
+
+		float minFloatStat = crystalData->getMinForceCost();
+		float maxFloatStat = crystalData->getMaxForceCost();
+
+		if (floatForceCost > maxFloatStat || floatForceCost < minFloatStat)
+			floatForceCost = getRandomizedStat(minFloatStat, maxFloatStat, itemLevel);
+
+		minFloatStat = crystalData->getMinAttackSpeed();
+		maxFloatStat = crystalData->getMaxAttackSpeed();
+
+		if (attackSpeed > maxFloatStat || attackSpeed < minFloatStat)
+			attackSpeed = Math::getPrecision(getRandomizedStat(minFloatStat, maxFloatStat, itemLevel), 2);
 	}
 }
 
 int LightsaberCrystalComponentImplementation::getCrystalQuality() {
-	if (itemLevel < 10)
+	if (itemLevel < 40)
 		return POOR;
-	else if (itemLevel < 25)
+	else if (itemLevel < 70)
 		return FAIR;
-	else if (itemLevel < 75)
-		return GOOD;
 	else if (itemLevel < 100)
+		return GOOD;
+	else if (itemLevel < 140)
 		return QUALITY;
-	else if (itemLevel < 200)
+	else if (itemLevel < 220)
 		return SELECT;
-	else if (itemLevel < 300)
+	else if (itemLevel < 330)
 		return PREMIUM;
 	else
 		return FLAWLESS;
@@ -264,20 +286,21 @@ void LightsaberCrystalComponentImplementation::fillAttributeList(AttributeListMe
 		} else {
 			alm->insertAttribute("crystal_owner", ownerName);
 		}
-		if (getColor() != 31 && ownerID != 0) {
+
+		if (getColor() != 31) {
 			StringBuffer str3;
 			str3 << "@jedi_spam:saber_color_" << getColor();
 			alm->insertAttribute("color", str3);
 		} else {
 			if (ownerID != 0 || player->isPrivileged()) {
-
 				alm->insertAttribute("mindamage", damage);
-
-				alm->insertAttribute("maxdamage", sacHealth);
-
-				StringBuffer str;
-				str << "@jedi_spam:crystal_quality_" << getQuality();
-				alm->insertAttribute("crystal_quality", str);
+				alm->insertAttribute("maxdamage", damage);
+				alm->insertAttribute("wpn_attack_speed", attackSpeed);
+				alm->insertAttribute("wpn_wound_chance", woundChance);
+				alm->insertAttribute("wpn_attack_cost_health", sacHealth);
+				alm->insertAttribute("wpn_attack_cost_action", sacAction);
+				alm->insertAttribute("wpn_attack_cost_mind", sacMind);
+				alm->insertAttribute("forcecost", (int)getForceCost());
 
 				// For debugging
 				if (player->isPrivileged()) {
@@ -286,6 +309,10 @@ void LightsaberCrystalComponentImplementation::fillAttributeList(AttributeListMe
 					alm->insertAttribute("challenge_level", itemLevel);
 					alm->insertAttribute("crystal_quality", str);
 				}
+			} else {
+				StringBuffer str;
+				str << "@jedi_spam:crystal_quality_" << getQuality();
+				alm->insertAttribute("crystal_quality", str);
 			}
 		}
 	}
@@ -423,10 +450,8 @@ void LightsaberCrystalComponentImplementation::updateCraftingValues(CraftingValu
 
 	if (colorMax != 31) {
 		int finalColor = System::random(11);
-		if (itemLevel > 50)
-			finalColor = System::random(30);
 		if (itemLevel > 250)
-			finalColor = System::random(19) + 11;
+			finalColor = System::random(30);
 		setColor(finalColor);
 		updateCrystal(finalColor);
 	} else {
@@ -451,8 +476,14 @@ int LightsaberCrystalComponentImplementation::inflictDamage(TangibleObject* atta
 
 		if (weapon != nullptr) {
 			if (getColor() == 31) {
+				weapon->setAttackSpeed(weapon->getAttackSpeed() - getAttackSpeed());
 				weapon->setMinDamage(weapon->getMinDamage() - getDamage());
-				weapon->setMaxDamage(weapon->getMaxDamage() - getSacHealth());
+				weapon->setMaxDamage(weapon->getMaxDamage() - getDamage());
+				weapon->setHealthAttackCost(weapon->getHealthAttackCost() - getSacHealth());
+				weapon->setActionAttackCost(weapon->getActionAttackCost() - getSacAction());
+				weapon->setMindAttackCost(weapon->getMindAttackCost() - getSacMind());
+				weapon->setWoundsRatio(weapon->getWoundsRatio() - getWoundChance());
+				weapon->setForceCost(weapon->getForceCost() - getForceCost());
 			}
 
 			if (getColor() != 31) {
