@@ -45,10 +45,10 @@ object_building_player_city_bank_corellia = object_building_player_city_shared_b
 	lotSize = 0,
 	baseMaintenanceRate = 0,
 	planetMapCategory = "bank",
-	allowedZones = {"corellia", "talus"},
-	cityRankRequired = 2,
+	allowedZones = {"corellia", "dantooine", "lok", "naboo", "rori", "talus", "tatooine", "endor", "yavin4", "dathomir"},
+	cityRankRequired = 0,
 	cityMaintenanceBase = 1500,
-	abilityRequired = "place_bank",
+	abilityRequired = "place_cityhall",
 	zoneComponent = "StructureZoneComponent",
 	childObjects = {
 		{templateFile = "object/tangible/terminal/terminal_player_structure.iff", x = 0, z = 0, y = -1, ox = 0, oy = 1, oz = 0, ow = 0, cellid = -1, containmentType = -1},

@@ -28,7 +28,7 @@ public:
 		int res = creature->hasBuff(buffCRC) ? NOSTACKJEDIBUFF : doJediSelfBuffCommand(creature);
 
 		if (res == NOSTACKJEDIBUFF) {
-			creature->sendSystemMessage("@jedi_spam:already_force_running"); // You are already force running.
+			creature->removeBuff(BuffCRC::JEDI_FORCE_RUN_2);
 			return GENERALERROR;
 		}
 

@@ -2756,7 +2756,7 @@ void CreatureObjectImplementation::activateHAMRegeneration(int latency) {
 	if (isKneeling())
 		modifier *= 1.25f;
 	else if (isSitting())
-		modifier *= 1.75f;
+		modifier *= 3.f;
 
 	// this formula gives the amount of regen per second
 	uint32 healthTick = (uint32) ceil((float) Math::max(0, getHAM(
@@ -2787,7 +2787,7 @@ void CreatureObjectImplementation::activatePassiveWoundRegeneration() {
 	int healthRegen = getSkillMod("private_med_wound_health");
 
 	if(healthRegen > 0) {
-		healthWoundHeal += (int)(healthRegen * 0.2);
+		healthWoundHeal += (int)(healthRegen * 5);
 		if(healthWoundHeal >= 100) {
 			healWound(asCreatureObject(), CreatureAttribute::HEALTH, 1, true, false);
 			healWound(asCreatureObject(), CreatureAttribute::STRENGTH, 1, true, false);
@@ -2800,7 +2800,7 @@ void CreatureObjectImplementation::activatePassiveWoundRegeneration() {
 	int actionRegen = getSkillMod("private_med_wound_action");
 
 	if(actionRegen > 0) {
-		actionWoundHeal += (int)(actionRegen * 0.2);
+		actionWoundHeal += (int)(actionRegen * 5);
 		if(actionWoundHeal >= 100) {
 			healWound(asCreatureObject(), CreatureAttribute::ACTION, 1, true, false);
 			healWound(asCreatureObject(), CreatureAttribute::QUICKNESS, 1, true, false);
@@ -2813,7 +2813,7 @@ void CreatureObjectImplementation::activatePassiveWoundRegeneration() {
 	int mindRegen = getSkillMod("private_med_wound_mind");
 
 	if(mindRegen > 0) {
-		mindWoundHeal += (int)(mindRegen * 0.2);
+		mindWoundHeal += (int)(mindRegen * 5);
 		if(mindWoundHeal >= 100) {
 			healWound(asCreatureObject(), CreatureAttribute::MIND, 1, true, false);
 			healWound(asCreatureObject(), CreatureAttribute::FOCUS, 1, true, false);

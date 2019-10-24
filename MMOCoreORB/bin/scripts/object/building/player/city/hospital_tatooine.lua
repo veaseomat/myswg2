@@ -44,12 +44,12 @@
 object_building_player_city_hospital_tatooine = object_building_player_city_shared_hospital_tatooine:new {
 	lotSize = 3,
 	baseMaintenanceRate = 50,
-	allowedZones = {"dantooine", "lok", "tatooine"},
+	allowedZones = {"corellia", "dantooine", "lok", "naboo", "rori", "talus", "tatooine", "endor", "yavin4", "dathomir"},
 	length = 5,
 	width = 5,
 	planetMapCategory = "medicalcenter",
-	cityRankRequired = 3,
-	abilityRequired = "place_hospital",
+	cityRankRequired = 0,
+	abilityRequired = "place_cityhall",
 	zoneComponent = "StructureZoneComponent",
 	skillMods = {
 		{"private_medical_rating", 100},

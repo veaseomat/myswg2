@@ -45,14 +45,14 @@ object_building_player_city_bank_naboo = object_building_player_city_shared_bank
 
 	lotSize = 0,
 	baseMaintenanceRate = 0,
-	allowedZones = {"dantooine", "naboo", "rori"},
+	allowedZones = {"corellia", "dantooine", "lok", "naboo", "rori", "talus", "tatooine", "endor", "yavin4", "dathomir"},
 	length = 4,
 	width = 4,
 	planetMapCategory = "bank",
 	gameObjectType = 4096,
-	cityRankRequired = 2,
+	cityRankRequired = 0,
 	cityMaintenanceBase = 1500,
-	abilityRequired = "place_bank",
+	abilityRequired = "place_cityhall",
 	zoneComponent = "StructureZoneComponent",
 	childObjects = {
 		{templateFile = "object/tangible/terminal/terminal_player_structure.iff", x = 0, z = 0, y = -1, ox = 0, oy = 1, oz = 0, ow = 0, cellid = -1, containmentType = -1},

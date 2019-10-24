@@ -576,8 +576,10 @@ int PlayerObjectImplementation::addExperience(const String& xpType, int xp, bool
 			removeExperience(xpType, notifyClient);
 			return 0;
 		// -10 million experience cap for Jedi experience loss
-		} else if(xp < -10000000 && xpType == "jedi_general") {
-			xp = -10000000;
+		} else if(xp < 0 && xpType == "jedi_general") {
+			xp = 0;
+		} else if(xp < 0 && xpType == "force_rank_xp") {
+			xp = 0;
 		}
 	}
 
@@ -2269,11 +2271,15 @@ void PlayerObjectImplementation::doForceRegen() {
 
 	uint32 modifier = 1;
 
+	if (creature->isSitting()) {
+	modifier = 2;
+	}
+
 	if (creature->isMeditating()) {
 		Reference<ForceMeditateTask*> medTask = creature->getPendingTask("forcemeditate").castTo<ForceMeditateTask*>();
 
 		if (medTask != nullptr)
-			modifier = 3;
+			modifier = 5;
 	}
 
 	uint32 forceTick = tick * modifier;

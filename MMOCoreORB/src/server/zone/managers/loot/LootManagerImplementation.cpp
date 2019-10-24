@@ -306,7 +306,7 @@ TangibleObject* LootManagerImplementation::createLootObject(const LootItemTempla
 
 	if (System::random(legendaryChance) >= legendaryChance - adjustment) {
 		UnicodeString newName = prototype->getDisplayedName() + " (Legendary)";
-		prototype->setCustomObjectName(newName, false);
+
 
 		excMod = legendaryModifier;
 
@@ -315,7 +315,7 @@ TangibleObject* LootManagerImplementation::createLootObject(const LootItemTempla
 		legendaryLooted.increment();
 	} else if (System::random(exceptionalChance) >= exceptionalChance - adjustment) {
 		UnicodeString newName = prototype->getDisplayedName() + " (Exceptional)";
-		prototype->setCustomObjectName(newName, false);
+
 
 		excMod = exceptionalModifier;
 
@@ -420,7 +420,7 @@ TangibleObject* LootManagerImplementation::createLootObject(const LootItemTempla
 				max *= yellowModifier;
 			}
 
-			yellow = true;
+			yellow = false;
 
 			yellowLooted.increment();
 		}
@@ -508,7 +508,7 @@ void LootManagerImplementation::setSkillMods(TangibleObject* object, const LootI
 
 	if (System::random(skillModChance / modSqr) == 0) {
 		// if it has a skillmod the name will be yellow
-		yellow = true;
+		yellow = false;
 		int modCount = 1;
 		int roll = System::random(100);
 
@@ -538,7 +538,7 @@ void LootManagerImplementation::setSkillMods(TangibleObject* object, const LootI
 		ManagedReference<TangibleObject*> item = cast<TangibleObject*>(object);
 
 		if(additionalMods.size() > 0 || skillMods->size() > 0)
-			yellow = true;
+			yellow = false;
 
 		for (int i = 0; i < additionalMods.size(); i++) {
 			item->addSkillMod(SkillModManager::WEARABLE, additionalMods.elementAt(i).getKey(), additionalMods.elementAt(i).getValue());
@@ -629,6 +629,321 @@ bool LootManagerImplementation::createLoot(SceneObject* container, AiAgent* crea
 }
 
 bool LootManagerImplementation::createLootFromCollection(SceneObject* container, const LootGroupCollection* lootCollection, int level) {
+	for (int i = 0; i < lootCollection->count(); ++i) {
+		const LootGroupCollectionEntry* entry = lootCollection->get(i);
+		int lootChance = entry->getLootChance();
+
+		if (lootChance <= 0)
+			continue;
+
+		int roll = System::random(10000000);
+
+		if (roll > lootChance)
+			continue;
+
+		int tempChance = 0; //Start at 0.
+
+		const LootGroups* lootGroups = entry->getLootGroups();
+
+		//Now we do the second roll to determine loot group.
+		roll = System::random(10000000);
+
+		//Select the loot group to use.
+		for (int i = 0; i < lootGroups->count(); ++i) {
+			const LootGroupEntry* entry = lootGroups->get(i);
+
+			tempChance += entry->getLootChance();
+
+			//Is this entry lower than the roll? If yes, then we want to try the next entry.
+			if (tempChance < roll)
+				continue;
+
+			createLoot(container, entry->getLootGroupName(), level);
+
+			break;
+		}
+	}
+
+	for (int i = 0; i < lootCollection->count(); ++i) {
+		const LootGroupCollectionEntry* entry = lootCollection->get(i);
+		int lootChance = entry->getLootChance();
+
+		if (lootChance <= 0)
+			continue;
+
+		int roll = System::random(10000000);
+
+		if (roll > lootChance)
+			continue;
+
+		int tempChance = 0; //Start at 0.
+
+		const LootGroups* lootGroups = entry->getLootGroups();
+
+		//Now we do the second roll to determine loot group.
+		roll = System::random(10000000);
+
+		//Select the loot group to use.
+		for (int i = 0; i < lootGroups->count(); ++i) {
+			const LootGroupEntry* entry = lootGroups->get(i);
+
+			tempChance += entry->getLootChance();
+
+			//Is this entry lower than the roll? If yes, then we want to try the next entry.
+			if (tempChance < roll)
+				continue;
+
+			createLoot(container, entry->getLootGroupName(), level);
+
+			break;
+		}
+	}
+
+	for (int i = 0; i < lootCollection->count(); ++i) {
+		const LootGroupCollectionEntry* entry = lootCollection->get(i);
+		int lootChance = entry->getLootChance();
+
+		if (lootChance <= 0)
+			continue;
+
+		int roll = System::random(10000000);
+
+		if (roll > lootChance)
+			continue;
+
+		int tempChance = 0; //Start at 0.
+
+		const LootGroups* lootGroups = entry->getLootGroups();
+
+		//Now we do the second roll to determine loot group.
+		roll = System::random(10000000);
+
+		//Select the loot group to use.
+		for (int i = 0; i < lootGroups->count(); ++i) {
+			const LootGroupEntry* entry = lootGroups->get(i);
+
+			tempChance += entry->getLootChance();
+
+			//Is this entry lower than the roll? If yes, then we want to try the next entry.
+			if (tempChance < roll)
+				continue;
+
+			createLoot(container, entry->getLootGroupName(), level);
+
+			break;
+		}
+	}
+
+	for (int i = 0; i < lootCollection->count(); ++i) {
+		const LootGroupCollectionEntry* entry = lootCollection->get(i);
+		int lootChance = entry->getLootChance();
+
+		if (lootChance <= 0)
+			continue;
+
+		int roll = System::random(10000000);
+
+		if (roll > lootChance)
+			continue;
+
+		int tempChance = 0; //Start at 0.
+
+		const LootGroups* lootGroups = entry->getLootGroups();
+
+		//Now we do the second roll to determine loot group.
+		roll = System::random(10000000);
+
+		//Select the loot group to use.
+		for (int i = 0; i < lootGroups->count(); ++i) {
+			const LootGroupEntry* entry = lootGroups->get(i);
+
+			tempChance += entry->getLootChance();
+
+			//Is this entry lower than the roll? If yes, then we want to try the next entry.
+			if (tempChance < roll)
+				continue;
+
+			createLoot(container, entry->getLootGroupName(), level);
+
+			break;
+		}
+	}
+
+	for (int i = 0; i < lootCollection->count(); ++i) {
+		const LootGroupCollectionEntry* entry = lootCollection->get(i);
+		int lootChance = entry->getLootChance();
+
+		if (lootChance <= 0)
+			continue;
+
+		int roll = System::random(10000000);
+
+		if (roll > lootChance)
+			continue;
+
+		int tempChance = 0; //Start at 0.
+
+		const LootGroups* lootGroups = entry->getLootGroups();
+
+		//Now we do the second roll to determine loot group.
+		roll = System::random(10000000);
+
+		//Select the loot group to use.
+		for (int i = 0; i < lootGroups->count(); ++i) {
+			const LootGroupEntry* entry = lootGroups->get(i);
+
+			tempChance += entry->getLootChance();
+
+			//Is this entry lower than the roll? If yes, then we want to try the next entry.
+			if (tempChance < roll)
+				continue;
+
+			createLoot(container, entry->getLootGroupName(), level);
+
+			break;
+		}
+	}
+
+	for (int i = 0; i < lootCollection->count(); ++i) {
+		const LootGroupCollectionEntry* entry = lootCollection->get(i);
+		int lootChance = entry->getLootChance();
+
+		if (lootChance <= 0)
+			continue;
+
+		int roll = System::random(10000000);
+
+		if (roll > lootChance)
+			continue;
+
+		int tempChance = 0; //Start at 0.
+
+		const LootGroups* lootGroups = entry->getLootGroups();
+
+		//Now we do the second roll to determine loot group.
+		roll = System::random(10000000);
+
+		//Select the loot group to use.
+		for (int i = 0; i < lootGroups->count(); ++i) {
+			const LootGroupEntry* entry = lootGroups->get(i);
+
+			tempChance += entry->getLootChance();
+
+			//Is this entry lower than the roll? If yes, then we want to try the next entry.
+			if (tempChance < roll)
+				continue;
+
+			createLoot(container, entry->getLootGroupName(), level);
+
+			break;
+		}
+	}
+
+	for (int i = 0; i < lootCollection->count(); ++i) {
+		const LootGroupCollectionEntry* entry = lootCollection->get(i);
+		int lootChance = entry->getLootChance();
+
+		if (lootChance <= 0)
+			continue;
+
+		int roll = System::random(10000000);
+
+		if (roll > lootChance)
+			continue;
+
+		int tempChance = 0; //Start at 0.
+
+		const LootGroups* lootGroups = entry->getLootGroups();
+
+		//Now we do the second roll to determine loot group.
+		roll = System::random(10000000);
+
+		//Select the loot group to use.
+		for (int i = 0; i < lootGroups->count(); ++i) {
+			const LootGroupEntry* entry = lootGroups->get(i);
+
+			tempChance += entry->getLootChance();
+
+			//Is this entry lower than the roll? If yes, then we want to try the next entry.
+			if (tempChance < roll)
+				continue;
+
+			createLoot(container, entry->getLootGroupName(), level);
+
+			break;
+		}
+	}
+
+	for (int i = 0; i < lootCollection->count(); ++i) {
+		const LootGroupCollectionEntry* entry = lootCollection->get(i);
+		int lootChance = entry->getLootChance();
+
+		if (lootChance <= 0)
+			continue;
+
+		int roll = System::random(10000000);
+
+		if (roll > lootChance)
+			continue;
+
+		int tempChance = 0; //Start at 0.
+
+		const LootGroups* lootGroups = entry->getLootGroups();
+
+		//Now we do the second roll to determine loot group.
+		roll = System::random(10000000);
+
+		//Select the loot group to use.
+		for (int i = 0; i < lootGroups->count(); ++i) {
+			const LootGroupEntry* entry = lootGroups->get(i);
+
+			tempChance += entry->getLootChance();
+
+			//Is this entry lower than the roll? If yes, then we want to try the next entry.
+			if (tempChance < roll)
+				continue;
+
+			createLoot(container, entry->getLootGroupName(), level);
+
+			break;
+		}
+	}
+
+	for (int i = 0; i < lootCollection->count(); ++i) {
+		const LootGroupCollectionEntry* entry = lootCollection->get(i);
+		int lootChance = entry->getLootChance();
+
+		if (lootChance <= 0)
+			continue;
+
+		int roll = System::random(10000000);
+
+		if (roll > lootChance)
+			continue;
+
+		int tempChance = 0; //Start at 0.
+
+		const LootGroups* lootGroups = entry->getLootGroups();
+
+		//Now we do the second roll to determine loot group.
+		roll = System::random(10000000);
+
+		//Select the loot group to use.
+		for (int i = 0; i < lootGroups->count(); ++i) {
+			const LootGroupEntry* entry = lootGroups->get(i);
+
+			tempChance += entry->getLootChance();
+
+			//Is this entry lower than the roll? If yes, then we want to try the next entry.
+			if (tempChance < roll)
+				continue;
+
+			createLoot(container, entry->getLootGroupName(), level);
+
+			break;
+		}
+	}
+
 	for (int i = 0; i < lootCollection->count(); ++i) {
 		const LootGroupCollectionEntry* entry = lootCollection->get(i);
 		int lootChance = entry->getLootChance();

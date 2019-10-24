@@ -3,11 +3,11 @@ local Logger = require("utils.logger")
 
 Glowing = ScreenPlay:new {
 	requiredBadges = {
-		{ type = "exploration_jedi", amount = 3 },
-		{ type = "exploration_dangerous", amount = 2 },
-		{ type = "exploration_easy", amount = 5 },
-		{ type = "master", amount = 1 },
-		{ type = "content", amount = 5 },
+		{ type = "exploration_jedi", amount = 1 },
+		{ type = "exploration_dangerous", amount = 0 },
+		{ type = "exploration_easy", amount = 0 },
+		{ type = "master", amount = 0 },
+		{ type = "content", amount = 0 },
 	}
 }
 
@@ -62,9 +62,10 @@ function Glowing:badgeAwardedEventHandler(pPlayer, pPlayer2, badgeNumber)
 	end
 
 	if self:hasRequiredBadgeCount(pPlayer) and not CreatureObject(pPlayer):hasSkill("force_title_jedi_novice") then
-		VillageJediManagerCommon.setJediProgressionScreenPlayState(pPlayer, VILLAGE_JEDI_PROGRESSION_GLOWING)
-		FsIntro:startPlayerOnIntro(pPlayer)
-		return 1
+		FsIntro:completeVillageIntroFrog(pPlayer)
+		FsOutro:completeVillageOutroFrog(pPlayer)
+		JediTrials:completePadawanForTesting(pPlayer)
+
 	end
 
 	return 0
@@ -80,13 +81,11 @@ end
 -- Handling of the onPlayerLoggedIn event. The progression of the player will be checked and observers will be registered.
 -- @param pPlayer pointer to the creature object of the player who logged in.
 function Glowing:onPlayerLoggedIn(pPlayer)
-	if not self:isGlowing(pPlayer) then
-		if self:hasRequiredBadgeCount(pPlayer) then
-			VillageJediManagerCommon.setJediProgressionScreenPlayState(pPlayer, VILLAGE_JEDI_PROGRESSION_GLOWING)
-			FsIntro:startPlayerOnIntro(pPlayer)
-		else
-			self:registerObservers(pPlayer)
-		end
+	if self:hasRequiredBadgeCount(pPlayer) and not CreatureObject(pPlayer):hasSkill("force_title_jedi_novice") then
+		FsIntro:completeVillageIntroFrog(pPlayer)
+		FsOutro:completeVillageOutroFrog(pPlayer)
+		JediTrials:completePadawanForTesting(pPlayer)
+
 	end
 end
 
@@ -95,7 +94,12 @@ end
 function Glowing:checkForceStatusCommand(pPlayer)
 	local progress = "@jedi_spam:fs_progress_" .. self:getCompletedBadgeTypeCount(pPlayer)
 
-	CreatureObject(pPlayer):sendSystemMessage(progress)
+	if self:hasRequiredBadgeCount(pPlayer) and not CreatureObject(pPlayer):hasSkill("force_title_jedi_novice") then
+		FsIntro:completeVillageIntroFrog(pPlayer)
+		FsOutro:completeVillageOutroFrog(pPlayer)
+		JediTrials:completePadawanForTesting(pPlayer)
+
+	end
 end
 
 return Glowing

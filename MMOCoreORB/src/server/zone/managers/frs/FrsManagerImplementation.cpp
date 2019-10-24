@@ -919,9 +919,7 @@ void FrsManagerImplementation::deductMaintenanceXp(CreatureObject* player) {
 	StringIdChatParameter mailBody("@force_rank:xp_maintenance_body"); // You have lost %DI Force Rank experience. All members of Rank 1 or higher must pay experience each day to remain in their current positions. (Note: This loss may not take effect until your next login.)
 	mailBody.setDI(maintXp);
 
-	chatManager->sendMail("Enclave Records", "@force_rank:xp_maintenace_sub", mailBody, player->getFirstName(), nullptr);
 
-	addExperienceDebt(player, maintXp);
 }
 
 void FrsManagerImplementation::addExperienceDebt(CreatureObject* player, int amount) {

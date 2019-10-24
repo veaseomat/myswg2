@@ -251,8 +251,8 @@ String WearableObjectImplementation::repairAttempt(int repairChance) {
 	String message = "@error_message:";
 
 	if(repairChance < 25) {
-		message += "sys_repair_failed";
-		setMaxCondition(1, true);
+		message += "sys_repair_imperfect";
+		setMaxCondition(getMaxCondition() * .65f, true);
 		setConditionDamage(0, true);
 	} else if(repairChance < 50) {
 		message += "sys_repair_imperfect";
